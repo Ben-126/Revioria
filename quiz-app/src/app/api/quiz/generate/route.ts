@@ -64,12 +64,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Chapitre introuvable." }, { status: 404 });
   }
 
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const apiKey = process.env.OPENAI_API_KEY;
 
   if (apiKey) {
     try {
-      const { default: Anthropic } = await import("@anthropic-ai/sdk");
-      const client = new Anthropic({ apiKey });
+      const { default: OpenAI } = await import("openai");
+      const client = new OpenAI({ apiKey });
 
       const matiere = getMatiereBySlug(matiereSlug)!;
       const { chapitre } = getChapitreBySlug(matiereSlug, chapitreSlug)!;
@@ -109,16 +109,16 @@ Réponds UNIQUEMENT avec un JSON valide, sans texte avant ou après :
   ]
 }`;
 
-      const message = await client.messages.create({
-        model: "claude-sonnet-4-6",
+      const completion = await client.chat.completions.create({
+        model: "gpt-4o-mini",
         max_tokens: 2048,
         messages: [{ role: "user", content: prompt }],
       });
 
-      const content = message.content[0];
-      if (content.type !== "text") throw new Error("Réponse inattendue de l'IA");
+      const text = completion.choices[0]?.message?.content;
+      if (!text) throw new Error("Réponse inattendue de l'IA");
 
-      const jsonMatch = content.text.match(/\{[\s\S]*\}/);
+      const jsonMatch = text.match(/\{[\s\S]*\}/);
       if (!jsonMatch) throw new Error("Format JSON introuvable dans la réponse");
 
       const rawParsed = JSON.parse(jsonMatch[0]);
@@ -133,7 +133,7 @@ Réponds UNIQUEMENT avec un JSON valide, sans texte avant ou après :
     } catch (err: unknown) {
       // Log serveur uniquement, jamais exposé au client
       if (process.env.NODE_ENV !== "production") {
-        console.error("[quiz/generate] Erreur Anthropic, fallback mock:", err);
+        console.error("[quiz/generate] Erreur OpenAI, fallback mock:", err);
       }
       const questions = genererQuizMock(matiereSlug, chapitreSlug);
       return NextResponse.json({ questions }, { headers: { "Cache-Control": "no-store" } });

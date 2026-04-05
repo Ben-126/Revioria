@@ -27,7 +27,7 @@ Une application web de révision pour les élèves de Seconde. L'IA génère des
 - **Framework** : Next.js 15 (App Router)
 - **Langage** : TypeScript
 - **Style** : Tailwind CSS
-- **IA** : Claude API (Anthropic)
+- **IA** : OpenAI API (GPT-4o mini)
 - **Validation** : Zod
 - **Tests E2E** : Playwright
 
@@ -86,5 +86,5 @@ L'application est disponible sur `http://localhost:3000`.
 
 | Variable | Description |
 |----------|-------------|
-| `ANTHROPIC_API_KEY` | Clé API Anthropic (requise en production) |
+| `OPENAI_API_KEY` | Clé API OpenAI (requise en production) |
 | `NEXT_PUBLIC_USE_MOCK` | `true` pour utiliser les données mock (dev) |
