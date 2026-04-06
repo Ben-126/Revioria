@@ -62,13 +62,20 @@ Créer une application mobile de révision basée sur des quiz générés par IA
 #  V1 — Version améliorée (produit utile)
 
 ##  Personnalisation
-- Adaptation de la difficulté selon les performances
+- Adaptation de la difficulté selon les performances (attention c est stocké sur le local storage donc si cache vidé, donnés perdus)
 - Révision ciblée sur les erreurs
+
+---
+
+## Timer
+- Timer par question adapté a la question
+- Le score en pourcentage est faits en fonction du temps passé
 
 ---
 
 ##  Suivi de progression
 - Statistiques par matière
+- Graphique par matière
 - Historique des quiz
 - Indicateur de maîtrise des chapitres
 
@@ -138,7 +145,7 @@ Créer une application mobile de révision basée sur des quiz générés par IA
 ##  Social
 - Défis entre amis
 - Classement
-- Quiz en multijoueur (live)
+- Jeu de vitesse contre-la-montre
 
 ---
 
@@ -165,13 +172,6 @@ Créer une application mobile de révision basée sur des quiz générés par IA
 ##  Analyse avancée
 - Prédiction de note
 - Analyse des points faibles
-
----
-
-##  Mode parent / professeur
-- Accès aux statistiques
-- Suivi de progression
-- Recommandations personnalisées
 
 ---
 
@@ -247,7 +247,7 @@ Créer une application mobile de révision basée sur des quiz générés par IA
 #  Hors champ (à compléter)
 
 ##  Fonctionnalités à exclure
-- 
+- Accès parental et proffesseur
 
 ##  Contraintes techniques
 - 
