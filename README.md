@@ -18,11 +18,20 @@ Quiz IA génère des questions personnalisées alignées sur le programme offici
 
 ## Fonctionnalités
 
+### V0 — MVP (disponible)
 - Quiz générés dynamiquement par l'IA (GPT-4o mini)
+- 3 types de questions : QCM, Vrai/Faux, Réponse courte
 - Correction immédiate avec explication détaillée pour chaque question
 - Toutes les matières et chapitres du programme officiel de Seconde
 - Interface responsive (mobile & desktop)
 - Mode mock intégré pour tester sans clé API
+
+### V1 — Version améliorée (disponible)
+- **Timer par question** : temps adapté selon le type et la difficulté
+- **Score basé sur le temps** : plus tu réponds vite, plus tu gagnes de points
+- **Adaptation de la difficulté** : les questions s'ajustent selon tes performances (stocké en localStorage)
+- **Révision ciblée** : les chapitres où tu as échoué sont prioritaires dans les prochains quiz
+- **Clavier mathématique** : saisie facilitée des symboles et expressions mathématiques
 
 ---
 
@@ -122,9 +131,9 @@ L'application est disponible sur **http://localhost:3000**.
 1. Ouvrir `http://localhost:3000`
 2. Choisir une **matière** (ex. Mathématiques)
 3. Choisir un **chapitre** (ex. Fonctions)
-4. Répondre aux questions générées par l'IA
+4. Répondre aux questions générées par l'IA avant que le timer expire
 5. Consulter la correction et l'explication après chaque réponse
-6. Voir le **score final** à la fin du quiz
+6. Voir le **score final** à la fin du quiz (calculé en fonction du temps de réponse)
 
 ---
 
