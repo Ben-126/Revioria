@@ -1,13 +1,15 @@
 import Link from "next/link";
 import type { Matiere } from "@/types";
+import IndicateurMaitrise from "@/components/progression/IndicateurMaitrise";
 
 interface ChapitreCardProps {
   matiere: Matiere;
   chapitre: Matiere["chapitres"][0];
   niveau: string;
+  progression?: { scoreMoyen: number; nombreQuiz: number } | null;
 }
 
-export default function ChapitreCard({ matiere, chapitre, niveau }: ChapitreCardProps) {
+export default function ChapitreCard({ matiere, chapitre, niveau, progression }: ChapitreCardProps) {
   return (
     <Link
       href={`/${niveau}/${matiere.slug}/${chapitre.slug}/quiz`}
@@ -24,6 +26,10 @@ export default function ChapitreCard({ matiere, chapitre, niveau }: ChapitreCard
         <p className="text-xs text-gray-400 mt-0.5">
           {chapitre.competences.length} compétences · 5 questions
         </p>
+        <IndicateurMaitrise
+          scoreMoyen={progression?.scoreMoyen ?? null}
+          nombreQuiz={progression?.nombreQuiz ?? 0}
+        />
       </div>
       <svg
         className="text-gray-300 group-hover:text-indigo-400 transition-colors shrink-0"

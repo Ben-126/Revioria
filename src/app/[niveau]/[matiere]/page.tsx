@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Header from "@/components/navigation/Header";
-import ChapitreCard from "@/components/navigation/ChapitreCard";
+import ChapitresAvecProgression from "@/components/navigation/ChapitresAvecProgression";
+import StatsMatiere from "@/components/progression/StatsMatiere";
 import { NIVEAUX, getMatiereBySlugAndNiveau, type Niveau } from "@/data/programmes";
 
 interface Props {
@@ -39,18 +40,13 @@ export default async function MatierePage({ params }: Props) {
           </div>
         </div>
 
-        <p className="text-sm text-gray-600 font-medium mb-3 mt-6">Choisir un chapitre :</p>
-
-        <div className="space-y-3" data-testid="liste-chapitres">
-          {matiere.chapitres.map((chapitre) => (
-            <ChapitreCard
-              key={chapitre.slug}
-              niveau={niveauSlug}
-              matiere={matiere}
-              chapitre={chapitre}
-            />
-          ))}
+        <div className="mt-6">
+          <StatsMatiere matiereSlug={matiereSlug} chapitres={matiere.chapitres} />
         </div>
+
+        <p className="text-sm text-gray-600 font-medium mb-3 mt-2">Choisir un chapitre :</p>
+
+        <ChapitresAvecProgression matiere={matiere} niveau={niveauSlug} />
       </main>
     </div>
   );
