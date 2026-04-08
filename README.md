@@ -1,6 +1,6 @@
-# Quiz IA — Programme Seconde
+# QuizLycée — Révise avec l'IA
 
-> Application web de révision scolaire propulsée par l'IA, conçue pour les élèves de Seconde.
+> Application web de révision scolaire propulsée par l'IA, conçue pour les élèves de Seconde, Première et Terminale.
 
 Collaboration entre **Ben** et **Dan**.
 
@@ -8,9 +8,13 @@ Collaboration entre **Ben** et **Dan**.
 
 ## Introduction
 
-Quiz IA génère des questions personnalisées alignées sur le programme officiel de la classe de Seconde en France. L'élève choisit une matière et un chapitre, et l'IA produit instantanément un quiz corrigé avec des explications pédagogiques.
+QuizLycée génère des questions personnalisées alignées sur les programmes officiels du lycée général et technologique en France. L'élève choisit son niveau, une matière et un chapitre, et l'IA produit instantanément un quiz corrigé avec des explications pédagogiques.
 
-**Matières couvertes :** Mathématiques, Français, Histoire-Géographie, SES, SVT, Physique-chimie, SNT, EMC, Anglais, Espagnol, Allemand.
+**Niveaux couverts :** Seconde, Première, Terminale.
+
+**Matières couvertes :** Mathématiques, Français, Histoire-Géographie, Philosophie, SES, SVT, Physique-chimie, NSI, SNT, EMC, Anglais, Espagnol, Allemand.
+
+*Contenus inspirés des programmes officiels du ministère de l'Éducation nationale.*
 
 **Types de questions :** QCM (4 options), Vrai/Faux, Réponse courte.
 
@@ -26,12 +30,18 @@ Quiz IA génère des questions personnalisées alignées sur le programme offici
 - Interface responsive (mobile & desktop)
 - Mode mock intégré pour tester sans clé API
 
-### V1 — Version améliorée (disponible)
+### V1 — Personnalisation (disponible)
 - **Timer par question** : temps adapté selon le type et la difficulté
 - **Score basé sur le temps** : plus tu réponds vite, plus tu gagnes de points
 - **Adaptation de la difficulté** : les questions s'ajustent selon tes performances (stocké en localStorage)
 - **Révision ciblée** : les chapitres où tu as échoué sont prioritaires dans les prochains quiz
 - **Clavier mathématique** : saisie facilitée des symboles et expressions mathématiques
+
+### V2 — Tout le lycée (disponible)
+- **Sélecteur de niveau** : Seconde, Première et Terminale
+- **Programmes Première** : Maths, Français, Histoire-Géo, spécialités (Physique-Chimie, SVT, SES, NSI), Anglais, EMC
+- **Programmes Terminale** : Maths, Philosophie, Histoire-Géo, spécialités (Physique-Chimie, SVT, SES, NSI), Anglais, EMC
+- **Source officielle** : contenus alignés sur les programmes du ministère de l'Éducation nationale
 
 ---
 
@@ -129,11 +139,12 @@ L'application est disponible sur **http://localhost:3000**.
 ## Utilisation
 
 1. Ouvrir `http://localhost:3000`
-2. Choisir une **matière** (ex. Mathématiques)
-3. Choisir un **chapitre** (ex. Fonctions)
-4. Répondre aux questions générées par l'IA avant que le timer expire
-5. Consulter la correction et l'explication après chaque réponse
-6. Voir le **score final** à la fin du quiz (calculé en fonction du temps de réponse)
+2. Choisir son **niveau** (Seconde, Première ou Terminale)
+3. Choisir une **matière** (ex. Mathématiques)
+4. Choisir un **chapitre** (ex. Fonctions)
+5. Répondre aux questions générées par l'IA avant que le timer expire
+6. Consulter la correction et l'explication après chaque réponse
+7. Voir le **score final** à la fin du quiz (calculé en fonction du temps de réponse)
 
 ---
 
@@ -184,32 +195,3 @@ Ouvrir une [issue GitHub](https://github.com/Ben-126/Quiz_2nd/issues) avec :
 - Les étapes pour reproduire
 - Le comportement attendu
 
----
-
-## Licence
-
-Ce projet est sous licence **MIT**.
-
-```
-MIT License
-
-Copyright (c) 2026 Ben & Dan
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```

@@ -3,12 +3,13 @@ import type { Matiere } from "@/types";
 
 interface MatiereCardProps {
   matiere: Matiere;
+  niveau: string;
 }
 
-export default function MatiereCard({ matiere }: MatiereCardProps) {
+export default function MatiereCard({ matiere, niveau }: MatiereCardProps) {
   return (
     <Link
-      href={`/${matiere.slug}`}
+      href={`/${niveau}/${matiere.slug}`}
       data-testid="matiere-card"
       className="group block rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 bg-white border border-gray-100"
     >

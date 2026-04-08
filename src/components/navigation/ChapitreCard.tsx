@@ -4,12 +4,13 @@ import type { Matiere } from "@/types";
 interface ChapitreCardProps {
   matiere: Matiere;
   chapitre: Matiere["chapitres"][0];
+  niveau: string;
 }
 
-export default function ChapitreCard({ matiere, chapitre }: ChapitreCardProps) {
+export default function ChapitreCard({ matiere, chapitre, niveau }: ChapitreCardProps) {
   return (
     <Link
-      href={`/${matiere.slug}/${chapitre.slug}/quiz`}
+      href={`/${niveau}/${matiere.slug}/${chapitre.slug}/quiz`}
       data-testid="chapitre-card"
       className="group flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-indigo-200 transition-all duration-200"
     >

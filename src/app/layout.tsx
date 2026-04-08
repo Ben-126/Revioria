@@ -5,8 +5,8 @@ import "./globals.css";
 const geist = Geist({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "QuizSeconde — Révise avec l'IA",
-  description: "Application de quiz IA pour réviser le programme de Seconde : Maths, Français, Histoire, SVT et plus.",
+  title: "QuizLycée — Révise avec l'IA",
+  description: "Application de quiz IA pour réviser les programmes du lycée général et technologique : Seconde, Première et Terminale.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

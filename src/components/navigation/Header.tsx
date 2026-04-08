@@ -34,7 +34,7 @@ export default function Header({ titre, showBack, backHref }: HeaderProps) {
           </button>
         )}
         <Link href="/" className="flex items-center gap-2 font-bold text-lg text-indigo-700 hover:text-indigo-900">
-          🎓 QuizSeconde
+          🎓 QuizLycée
         </Link>
         {titre && (
           <>
