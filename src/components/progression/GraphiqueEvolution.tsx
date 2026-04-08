@@ -37,7 +37,7 @@ export default function GraphiqueEvolution({ entrees }: GraphiqueEvolutionProps)
       <LineChart data={data} margin={{ top: 10, right: 16, left: 0, bottom: 0 }}>
         <XAxis dataKey="date" tick={{ fontSize: 10 }} />
         <YAxis domain={[0, 100]} tick={{ fontSize: 10 }} tickFormatter={(v) => `${v}%`} />
-        <Tooltip formatter={(value: number) => [`${value}%`, "Score"]} />
+        <Tooltip formatter={(value) => [`${value}%`, "Score"]} />
         <ReferenceLine
           y={80}
           stroke="#22c55e"

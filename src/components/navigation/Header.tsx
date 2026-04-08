@@ -42,6 +42,15 @@ export default function Header({ titre, showBack, backHref }: HeaderProps) {
             <span className="text-gray-700 font-medium text-sm truncate">{titre}</span>
           </>
         )}
+        <div className="ml-auto">
+          <Link
+            href="/progression"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-indigo-600 hover:bg-indigo-50 transition-colors"
+          >
+            <span>📊</span>
+            <span className="hidden sm:inline">Progression</span>
+          </Link>
+        </div>
       </div>
     </header>
   );

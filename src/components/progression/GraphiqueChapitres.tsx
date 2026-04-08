@@ -50,7 +50,8 @@ export default function GraphiqueChapitres({
         layout="vertical"
         data={data}
         margin={{ top: 0, right: 24, left: 0, bottom: 0 }}
-        onClick={(payload) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        onClick={(payload: any) => {
           if (payload?.activePayload?.[0]?.payload?.slug) {
             onSelectChapitre(payload.activePayload[0].payload.slug as string);
           }
@@ -58,7 +59,7 @@ export default function GraphiqueChapitres({
       >
         <XAxis type="number" domain={[0, 100]} tick={{ fontSize: 10 }} tickFormatter={(v) => `${v}%`} />
         <YAxis type="category" dataKey="nom" tick={{ fontSize: 10 }} width={90} />
-        <Tooltip formatter={(value: number) => [`${value}%`, "Score moyen"]} />
+        <Tooltip formatter={(value) => [`${value}%`, "Score moyen"]} />
         <Bar dataKey="score" radius={[0, 4, 4, 0]} cursor="pointer" isAnimationActive>
           {data.map((entry) => (
             <Cell
