@@ -262,6 +262,7 @@ export default function QuizRunner({ matiereSlug, chapitreSlug, titreChapitre, n
         maxScore={maxScore}
         matiereSlug={matiereSlug}
         chapitreSlug={chapitreSlug}
+        niveauLycee={niveauLycee}
         questionsRatees={questionsRateesQuiz}
         modeRevision={modeRevision.actif}
         onRecommencer={() => {

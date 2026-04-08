@@ -6,6 +6,7 @@ interface ScoreDisplayProps {
   maxScore: number;
   matiereSlug: string;
   chapitreSlug: string;
+  niveauLycee?: string;
   questionsRatees?: string[];
   modeRevision?: boolean;
   onRecommencer: () => void;
@@ -16,6 +17,7 @@ export default function ScoreDisplay({
   score,
   maxScore,
   matiereSlug,
+  niveauLycee = "seconde",
   questionsRatees = [],
   modeRevision = false,
   onRecommencer,
@@ -84,7 +86,7 @@ export default function ScoreDisplay({
             🔄 Refaire le quiz
           </button>
           <Link
-            href={`/${matiereSlug}`}
+            href={`/${niveauLycee}/${matiereSlug}`}
             data-testid="btn-retour-chapitres"
             className="flex-1 py-3 bg-white border-2 border-gray-200 hover:border-indigo-300 text-gray-700 hover:text-indigo-700 rounded-xl font-semibold transition-colors text-center"
           >
