@@ -1,6 +1,6 @@
 // src/app/parametres/page.tsx
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Header from "@/components/navigation/Header";
 import {
   getParametres,
@@ -16,6 +16,7 @@ export default function ParametresPage() {
   const [notifStatut, setNotifStatut] = useState<"defaut" | "accordee" | "refusee" | "non-supporte">("defaut");
   const [confirmEtape, setConfirmEtape] = useState<0 | 1 | 2>(0);
   const [sauvegarde, setSauvegarde] = useState(false);
+  const timerSauvegarde = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     setParams(getParametres());
@@ -27,6 +28,9 @@ export default function ParametresPage() {
     } else if (Notification.permission === "denied") {
       setNotifStatut("refusee");
     }
+    return () => {
+      if (timerSauvegarde.current) clearTimeout(timerSauvegarde.current);
+    };
   }, []);
 
   const handleChange = <K extends keyof Parametres>(key: K, value: Parametres[K]) => {
@@ -34,20 +38,26 @@ export default function ParametresPage() {
     setParams(updated);
     saveParametres(updated);
     setSauvegarde(true);
-    setTimeout(() => setSauvegarde(false), 1500);
+    if (timerSauvegarde.current) clearTimeout(timerSauvegarde.current);
+    timerSauvegarde.current = setTimeout(() => setSauvegarde(false), 1500);
   };
 
   const demanderPermissionNotifs = async () => {
     if (!("Notification" in window)) return;
-    const result = await Notification.requestPermission();
-    if (result === "granted") {
-      setNotifStatut("accordee");
-      handleChange("notificationsActivees", true);
-      if ("serviceWorker" in navigator) {
-        const reg = await navigator.serviceWorker.ready;
-        reg.active?.postMessage({ type: "NOTIFS_ACTIVEES" });
+    try {
+      const result = await Notification.requestPermission();
+      if (result === "granted") {
+        setNotifStatut("accordee");
+        handleChange("notificationsActivees", true);
+        if ("serviceWorker" in navigator) {
+          const reg = await navigator.serviceWorker.ready;
+          reg.active?.postMessage({ type: "NOTIFS_ACTIVEES" });
+        }
+      } else {
+        setNotifStatut("refusee");
+        handleChange("notificationsActivees", false);
       }
-    } else {
+    } catch {
       setNotifStatut("refusee");
       handleChange("notificationsActivees", false);
     }
