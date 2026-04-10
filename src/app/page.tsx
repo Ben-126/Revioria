@@ -4,9 +4,13 @@ import { useState } from "react";
 import Header from "@/components/navigation/Header";
 import MatiereCard from "@/components/navigation/MatiereCard";
 import { NIVEAUX, type Niveau } from "@/data/programmes";
+import BanniereObjectif from "@/components/engagement/BanniereObjectif";
+import { getParametres } from "@/lib/parametres";
 
 export default function HomePage() {
-  const [niveauActif, setNiveauActif] = useState<Niveau>("seconde");
+  const [niveauActif, setNiveauActif] = useState<Niveau>(
+    () => (typeof window !== "undefined" ? getParametres().niveauDefaut : "seconde")
+  );
 
   const niveauInfo = NIVEAUX.find((n) => n.slug === niveauActif)!;
 
@@ -14,6 +18,7 @@ export default function HomePage() {
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-6">
+        <BanniereObjectif />
         <div className="text-center mb-6">
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">
             Révise avec l&apos;IA 🎓
