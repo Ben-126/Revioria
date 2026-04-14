@@ -380,6 +380,12 @@ export default function QuizRunner({ matiereSlug, chapitreSlug, titreChapitre, n
       ? questionCourante.question
       : undefined;
 
+  // Données de la question débloquées pour le coach uniquement après correction
+  const coachExplication = etat === "correction" ? questionCourante?.explication : undefined;
+  const coachEtapes = etat === "correction" ? questionCourante?.explicationAvancee?.etapes : undefined;
+  const coachMethode = etat === "correction" ? questionCourante?.explicationAvancee?.methode : undefined;
+  const coachErreursFrequentes = etat === "correction" ? questionCourante?.explicationAvancee?.erreurs_frequentes : undefined;
+
   return (
     <div className="space-y-4">
       {/* Bandeau mode contrôle avec chronomètre global */}
@@ -472,6 +478,10 @@ export default function QuizRunner({ matiereSlug, chapitreSlug, titreChapitre, n
           chapitre={titreChapitre}
           niveauLycee={niveauLycee}
           questionCourante={questionCourtanteTexte}
+          explication={coachExplication}
+          etapes={coachEtapes}
+          methode={coachMethode}
+          erreursFrequentes={coachErreursFrequentes}
         />
       )}
     </div>

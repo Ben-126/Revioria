@@ -6,19 +6,34 @@ interface Message {
   content: string;
 }
 
-interface CoachIAProps {
+export interface CoachIAProps {
   matiere?: string;
   chapitre?: string;
   niveauLycee?: string;
   questionCourante?: string;
+  // Données de la question après correction (débloquées pour le coach)
+  explication?: string;
+  etapes?: string[];
+  methode?: string;
+  erreursFrequentes?: string[];
 }
 
-export default function CoachIA({ matiere, chapitre, niveauLycee, questionCourante }: CoachIAProps) {
+export default function CoachIA({
+  matiere,
+  chapitre,
+  niveauLycee,
+  questionCourante,
+  explication,
+  etapes,
+  methode,
+  erreursFrequentes,
+}: CoachIAProps) {
   const [ouvert, setOuvert] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [enCours, setEnCours] = useState(false);
   const [reponseEnCours, setReponseEnCours] = useState("");
+  const [modeLocal, setModeLocal] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -47,30 +62,56 @@ export default function CoachIA({ matiere, chapitre, niveauLycee, questionCouran
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           messages: nouveauxMessages,
-          context: { matiere, chapitre, niveauLycee, questionCourante },
+          context: {
+            matiere,
+            chapitre,
+            niveauLycee,
+            questionCourante,
+            explication,
+            etapes,
+            methode,
+            erreursFrequentes,
+          },
         }),
       });
 
-      if (!res.ok || !res.body) {
+      if (!res.ok) {
         const erreur = await res.text();
         setMessages((prev) => [...prev, { role: "assistant", content: erreur || "Une erreur est survenue." }]);
         return;
       }
 
-      const reader = res.body.getReader();
-      const decoder = new TextDecoder();
-      let reponse = "";
+      // Détecter si c'est une réponse locale (non-streaming) ou streaming OpenAI
+      const contentType = res.headers.get("Content-Type") ?? "";
+      const isStreaming = res.body && contentType.includes("text/plain");
 
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        const chunk = decoder.decode(value, { stream: true });
-        reponse += chunk;
-        setReponseEnCours(reponse);
+      if (isStreaming && res.body) {
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        let reponse = "";
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          const chunk = decoder.decode(value, { stream: true });
+          reponse += chunk;
+          setReponseEnCours(reponse);
+        }
+
+        // Détecter si c'est une réponse locale (contient le marqueur)
+        if (reponse.includes("Réponse générée localement")) {
+          setModeLocal(true);
+        }
+
+        setMessages((prev) => [...prev, { role: "assistant", content: reponse }]);
+        setReponseEnCours("");
+      } else {
+        const texteReponse = await res.text();
+        if (texteReponse.includes("Réponse générée localement")) {
+          setModeLocal(true);
+        }
+        setMessages((prev) => [...prev, { role: "assistant", content: texteReponse }]);
       }
-
-      setMessages((prev) => [...prev, { role: "assistant", content: reponse }]);
-      setReponseEnCours("");
     } catch {
       setMessages((prev) => [
         ...prev,
@@ -88,18 +129,29 @@ export default function CoachIA({ matiere, chapitre, niveauLycee, questionCouran
     }
   };
 
+  const contextueRiche = !!(explication || etapes?.length || erreursFrequentes?.length);
+
   return (
     <>
       {/* Panneau de chat */}
       {ouvert && (
-        <div className="fixed bottom-20 right-4 z-50 w-80 sm:w-96 bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden"
-          style={{ maxHeight: "70vh" }}>
+        <div
+          className="fixed bottom-20 right-4 z-50 w-80 sm:w-96 bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden"
+          style={{ maxHeight: "70vh" }}
+        >
           {/* En-tête */}
           <div className="flex items-center justify-between px-4 py-3 bg-indigo-600 text-white">
             <div className="flex items-center gap-2">
               <span className="text-lg" aria-hidden="true">🧠</span>
               <div>
-                <p className="font-semibold text-sm leading-tight">Coach IA</p>
+                <div className="flex items-center gap-1.5">
+                  <p className="font-semibold text-sm leading-tight">Coach IA</p>
+                  {modeLocal && (
+                    <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-indigo-500 text-indigo-100 font-medium leading-none">
+                      local
+                    </span>
+                  )}
+                </div>
                 {chapitre && (
                   <p className="text-indigo-200 text-xs truncate max-w-[180px]">{chapitre}</p>
                 )}
@@ -131,6 +183,34 @@ export default function CoachIA({ matiere, chapitre, niveauLycee, questionCouran
                     Aide-moi avec la question actuelle
                   </button>
                 )}
+                {contextueRiche && (
+                  <div className="flex flex-wrap gap-1 justify-center mt-2">
+                    {explication && (
+                      <button
+                        onClick={() => setInput("Explique-moi ce point du cours")}
+                        className="text-xs text-indigo-500 hover:text-indigo-700 underline"
+                      >
+                        Voir l'explication
+                      </button>
+                    )}
+                    {etapes && etapes.length > 0 && (
+                      <button
+                        onClick={() => setInput("Comment résoudre ce type de question ?")}
+                        className="text-xs text-indigo-500 hover:text-indigo-700 underline"
+                      >
+                        Voir les étapes
+                      </button>
+                    )}
+                    {erreursFrequentes && erreursFrequentes.length > 0 && (
+                      <button
+                        onClick={() => setInput("Quelles sont les erreurs à éviter ?")}
+                        className="text-xs text-indigo-500 hover:text-indigo-700 underline"
+                      >
+                        Erreurs fréquentes
+                      </button>
+                    )}
+                  </div>
+                )}
               </div>
             )}
 
@@ -158,7 +238,7 @@ export default function CoachIA({ matiere, chapitre, niveauLycee, questionCouran
               </div>
             )}
 
-            {/* Indicateur de chargement sans streaming visible */}
+            {/* Indicateur chargement */}
             {enCours && !reponseEnCours && (
               <div className="flex justify-start">
                 <div className="bg-gray-100 rounded-2xl rounded-bl-sm px-3 py-2">
@@ -205,9 +285,7 @@ export default function CoachIA({ matiere, chapitre, niveauLycee, questionCouran
       <button
         onClick={() => setOuvert((v) => !v)}
         className={`fixed bottom-4 right-4 z-50 w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 ${
-          ouvert
-            ? "bg-gray-600 hover:bg-gray-700"
-            : "bg-indigo-600 hover:bg-indigo-700"
+          ouvert ? "bg-gray-600 hover:bg-gray-700" : "bg-indigo-600 hover:bg-indigo-700"
         } text-white`}
         aria-label={ouvert ? "Fermer le coach IA" : "Ouvrir le coach IA"}
         title="Coach IA"

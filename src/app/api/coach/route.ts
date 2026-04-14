@@ -1,5 +1,6 @@
 import { NextRequest } from "next/server";
 import { z } from "zod";
+import { repondreLocalement } from "@/lib/coach-local";
 
 const MessageSchema = z.object({
   role: z.enum(["user", "assistant"]),
@@ -13,6 +14,11 @@ const RequestSchema = z.object({
     chapitre: z.string().max(200).optional(),
     niveauLycee: z.enum(["seconde", "premiere", "terminale"]).optional(),
     questionCourante: z.string().max(500).optional(),
+    // Données de la question (disponibles après correction)
+    explication: z.string().max(1000).optional(),
+    etapes: z.array(z.string().max(300)).max(6).optional(),
+    methode: z.string().max(200).optional(),
+    erreursFrequentes: z.array(z.string().max(300)).max(5).optional(),
   }),
 });
 
@@ -56,6 +62,16 @@ export async function POST(req: NextRequest) {
 
   const { messages, context } = parsed.data;
 
+  // Fallback local si pas de clé API
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    const reponse = repondreLocalement(messages, context);
+    return new Response(reponse, {
+      headers: { "Content-Type": "text/plain; charset=utf-8" },
+    });
+  }
+
+  // --- Mode OpenAI ---
   const niveauLabel =
     context.niveauLycee === "premiere"
       ? "Première"
@@ -66,7 +82,11 @@ export async function POST(req: NextRequest) {
   const contexteParts: string[] = [];
   if (context.matiere) contexteParts.push(`Matière : ${context.matiere}`);
   if (context.chapitre) contexteParts.push(`Chapitre : ${context.chapitre}`);
-  if (context.questionCourante) contexteParts.push(`Question actuelle : ${context.questionCourante}`);
+  if (context.questionCourante) contexteParts.push(`Question : ${context.questionCourante}`);
+  if (context.explication) contexteParts.push(`Explication officielle : ${context.explication}`);
+  if (context.etapes?.length) contexteParts.push(`Étapes de résolution : ${context.etapes.join(" → ")}`);
+  if (context.methode) contexteParts.push(`Méthode : ${context.methode}`);
+  if (context.erreursFrequentes?.length) contexteParts.push(`Erreurs fréquentes : ${context.erreursFrequentes.join(", ")}`);
 
   const contexteStr = contexteParts.length > 0
     ? `\nContexte de l'élève :\n${contexteParts.join("\n")}`
@@ -83,15 +103,6 @@ Règles :
 - Si la question porte sur un exercice, guide sans donner directement la réponse
 - Sois concis (3-5 phrases max sauf si une explication longue est vraiment nécessaire)
 - N'invente pas de faits scientifiques ou mathématiques`;
-
-  const apiKey = process.env.OPENAI_API_KEY;
-
-  if (!apiKey) {
-    const fallback = "Je suis le Coach IA, mais je ne suis pas encore configuré sur ce serveur. Demande à ton professeur de configurer la clé API.";
-    return new Response(fallback, {
-      headers: { "Content-Type": "text/plain; charset=utf-8" },
-    });
-  }
 
   try {
     const { default: OpenAI } = await import("openai");
@@ -125,9 +136,11 @@ Règles :
     });
   } catch (err: unknown) {
     if (process.env.NODE_ENV !== "production") {
-      console.error("[coach] Erreur OpenAI:", err);
+      console.error("[coach] Erreur OpenAI, fallback local:", err);
     }
-    return new Response("Désolé, le coach est momentanément indisponible. Réessaie dans quelques instants.", {
+    // Fallback local si OpenAI échoue
+    const reponse = repondreLocalement(messages, context);
+    return new Response(reponse, {
       headers: { "Content-Type": "text/plain; charset=utf-8" },
     });
   }
