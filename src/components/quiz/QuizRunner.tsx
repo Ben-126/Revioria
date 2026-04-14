@@ -17,7 +17,7 @@ type EtatQuiz = "selection_mode" | "chargement" | "question" | "verification" | 
 
 const MATIERES_AVEC_CLAVIER_MATH = new Set(["mathematiques", "physique-chimie", "svt", "snt"]);
 const QUESTIONS_PAR_CONTROLE = 10;
-const SECONDES_PAR_QUESTION_CONTROLE = 45;
+const SECONDES_PAR_QUESTION_CONTROLE = 20;
 
 interface QuizRunnerProps {
   matiereSlug: string;
