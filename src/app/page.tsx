@@ -19,12 +19,19 @@ export default function HomePage() {
       <Header />
       <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-6">
         <BanniereObjectif />
-        <div className="text-center mb-6">
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">
-            Révise avec l&apos;IA 🎓
+        <div className="text-center mb-8">
+          <div className="flex justify-center mb-3">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.png" alt="Révioria" className="w-20 h-20 sm:w-24 sm:h-24 object-contain" />
+          </div>
+          <h1 className="flex items-center justify-center gap-1 mb-1">
+            <svg width="220" height="52" viewBox="0 0 340 95" role="img" aria-label="Révioria" xmlns="http://www.w3.org/2000/svg">
+              <text x="162" y="70" fontFamily="Georgia, serif" fontSize="66" fontWeight="300" fill="#0F172A" textAnchor="middle" letterSpacing="6">Révioria</text>
+              <circle cx="299" cy="50" r="7" fill="#2563EB" />
+            </svg>
           </h1>
-          <p className="text-gray-500 text-sm sm:text-base">
-            Choisis ton niveau puis une matière pour commencer
+          <p className="text-gray-500 text-sm sm:text-base mt-1">
+            Révise avec l&apos;IA · Choisis ton niveau puis une matière pour commencer
           </p>
         </div>
 

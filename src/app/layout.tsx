@@ -6,7 +6,7 @@ import ServiceWorkerRegistrar from "@/components/engagement/ServiceWorkerRegistr
 const geist = Geist({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "QuizLycée — Révise avec l'IA",
+  title: "Révioria — Révise avec l'IA",
   description: "Application de quiz IA pour réviser les programmes du lycée général et technologique : Seconde, Première et Terminale.",
 };
 

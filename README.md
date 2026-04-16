@@ -1,4 +1,4 @@
-# QuizLycée — Révise avec l'IA
+# Révioria — Révise avec l'IA
 
 > Application web de révision scolaire propulsée par l'IA, conçue pour les élèves de Seconde, Première et Terminale.
 
@@ -8,7 +8,7 @@ Collaboration entre **Ben** et **Dan**.
 
 ## Introduction
 
-QuizLycée génère des questions personnalisées alignées sur les programmes officiels du lycée général et technologique en France. L'élève choisit son niveau, une matière et un chapitre, et l'IA produit instantanément un quiz corrigé avec des explications pédagogiques.
+Révioria génère des questions personnalisées alignées sur les programmes officiels du lycée général et technologique en France. L'élève choisit son niveau, une matière et un chapitre, et l'IA produit instantanément un quiz corrigé avec des explications pédagogiques.
 
 **Niveaux couverts :** Seconde, Première, Terminale.
 
@@ -43,13 +43,19 @@ QuizLycée génère des questions personnalisées alignées sur les programmes o
 - **Programmes Terminale** : Maths, Philosophie, Histoire-Géo, spécialités (Physique-Chimie, SVT, SES, NSI), Anglais, EMC
 - **Source officielle** : contenus alignés sur les programmes du ministère de l'Éducation nationale
 
+### V3 — Gamification (disponible)
+- **XP & niveaux** : chaque quiz rapporte des points d'expérience
+- **Badges** : récompenses débloquées selon les performances et l'assiduité
+- **XPBar discrète** dans le header pour suivre sa progression en temps réel
+- **Coach IA** : conseils personnalisés selon l'historique de révisions
+
 ---
 
 ## Stack technique
 
 | Technologie | Rôle |
 |-------------|------|
-| Next.js 15 (App Router) | Framework web |
+| Next.js (App Router) | Framework web |
 | TypeScript | Langage |
 | Tailwind CSS | Styles |
 | OpenAI API (GPT-4o mini) | Génération des quiz |
@@ -61,19 +67,23 @@ QuizLycée génère des questions personnalisées alignées sur les programmes o
 ## Structure du projet
 
 ```
-Quiz_2nd/
-└── quiz-app/               # Application Next.js
-    ├── src/
-    │   ├── app/            # Pages et routes API
-    │   │   └── api/quiz/   # Endpoint de génération
-    │   ├── components/     # Composants React
-    │   │   ├── navigation/ # Sélection matière/chapitre
-    │   │   └── quiz/       # Déroulement du quiz
-    │   ├── data/           # Programme scolaire (matières & chapitres)
-    │   ├── lib/            # Utilitaires, schémas Zod, constantes
-    │   └── types/          # Types TypeScript
-    └── tests/
-        └── e2e/            # Tests Playwright
+projet-Ben-Dan/
+├── src/
+│   ├── app/                # Pages et routes API
+│   │   └── api/            # Endpoints (quiz, coach)
+│   ├── components/
+│   │   ├── navigation/     # Header, sélection matière/chapitre
+│   │   ├── quiz/           # Déroulement du quiz
+│   │   ├── progression/    # Statistiques & historique
+│   │   ├── gamification/   # XP, badges, toasts
+│   │   ├── coach/          # Coach IA
+│   │   └── engagement/     # Objectifs, service worker
+│   ├── data/               # Programme scolaire (matières & chapitres)
+│   ├── lib/                # Utilitaires, schémas Zod, gamification
+│   └── types/              # Types TypeScript
+├── public/                 # Assets statiques (logo, icônes)
+└── tests/
+    └── e2e/                # Tests Playwright
 ```
 
 ---
@@ -97,17 +107,12 @@ cd Quiz_2nd
 **2. Installer les dépendances**
 
 ```bash
-cd quiz-app
 npm install
 ```
 
 **3. Configurer les variables d'environnement**
 
 ```bash
-# Windows
-copy .env.example .env.local
-
-# macOS / Linux
 cp .env.example .env.local
 ```
 
@@ -194,4 +199,3 @@ Ouvrir une [issue GitHub](https://github.com/Ben-126/Quiz_2nd/issues) avec :
 - La description du problème
 - Les étapes pour reproduire
 - Le comportement attendu
-
