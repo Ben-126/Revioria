@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
-import type { Competence, Question, ReponseUtilisateur } from "@/types";
+import type { Competence, Question, ReponseUtilisateur, ResultatGamification } from "@/types";
+import XPToast from "@/components/gamification/XPToast";
 
 interface ScoreDisplayProps {
   score: number;
@@ -17,6 +18,7 @@ interface ScoreDisplayProps {
   onRecommencer: () => void;
   onChoisirMode?: () => void;
   onReviserErreurs?: () => void;
+  resultatGamification?: ResultatGamification | null;
 }
 
 function getReponseTexte(reponse: string | boolean): string {
@@ -44,6 +46,7 @@ export default function ScoreDisplay({
   onRecommencer,
   onChoisirMode,
   onReviserErreurs,
+  resultatGamification = null,
 }: ScoreDisplayProps) {
   const pourcentage = Math.round((score / maxScore) * 100);
   const nbCorrectes = reponses.filter((r) => r.correcte).length;
@@ -77,7 +80,11 @@ export default function ScoreDisplay({
     notesur20 >= 8 ? "text-orange-500" : "text-red-600";
 
   return (
-    <div className="text-center space-y-6" data-testid="score-display">
+    <>
+      {resultatGamification && resultatGamification.xpGagne > 0 && (
+        <XPToast resultat={resultatGamification} matiereSlug={matiereSlug} />
+      )}
+      <div className="text-center space-y-6" data-testid="score-display">
       {/* En-tête mode contrôle */}
       {modeControle && (
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-100 border border-orange-200">
@@ -251,5 +258,6 @@ export default function ScoreDisplay({
         )}
       </div>
     </div>
+    </>
   );
 }
