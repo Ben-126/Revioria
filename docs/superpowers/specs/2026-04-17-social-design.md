@@ -181,3 +181,53 @@ src/
 - Auth Supabase (email/password)
 - Pas de temps réel (pas de websocket) — les notifications sont lues au chargement de la page
 - Le mode hors-ligne reste fonctionnel, les données sociales s'affichent avec les dernières valeurs connues
+
+---
+
+## Sécurité & Confidentialité (RGPD)
+
+### Row Level Security (RLS) — Supabase
+Toutes les tables Supabase auront RLS activé. Règles clés :
+- Un utilisateur ne peut lire/modifier que ses propres données (`auth.uid() = user_id`)
+- Les profils et classements sont lisibles publiquement (pseudo, XP, niveau uniquement)
+- Les notifications, sync_queue et badges ne sont accessibles qu'à leur propriétaire
+
+### Données collectées & finalité
+| Donnée | Finalité | Durée de conservation |
+|--------|----------|----------------------|
+| Email | Authentification | Jusqu'à suppression du compte |
+| Pseudo | Affichage social | Jusqu'à suppression du compte |
+| XP / niveau / badges | Classement et défis | Jusqu'à suppression du compte |
+| Historique quiz | Statistiques personnelles | localStorage uniquement (pas envoyé à Supabase) |
+
+### Droits des utilisateurs (RGPD)
+- **Droit d'accès** : l'utilisateur peut voir toutes ses données depuis son profil
+- **Droit à l'effacement** : bouton "Supprimer mon compte" qui efface toutes les entrées Supabase liées à l'utilisateur (cascade sur toutes les tables) et purge le localStorage
+- **Droit de rectification** : modification du pseudo possible depuis les paramètres
+
+### Cookies & consentement
+Révioria utilise des cookies techniques (session Supabase Auth) et aucun cookie publicitaire.
+Un bandeau de consentement sera affiché au premier accès, conforme au RGPD (directive ePrivacy) :
+- **Cookies nécessaires** (session auth) : toujours actifs, pas de consentement requis
+- **Cookies analytiques** : désactivés par défaut, opt-in explicite
+- Le consentement est stocké en localStorage (`cookie-consent`)
+
+Nouveaux fichiers associés :
+```
+src/
+├── components/
+│   └── legal/
+│       ├── BandeauCookies.tsx   bandeau RGPD au premier accès
+│       └── PolitiqueConfidentialite.tsx
+└── app/
+    ├── confidentialite/
+    │   └── page.tsx             page politique de confidentialité
+    └── mentions-legales/
+        └── page.tsx             page mentions légales
+```
+
+### Sécurité des mots de passe
+Gérée entièrement par Supabase Auth (bcrypt, pas de mot de passe stocké côté app).
+
+### Public cible mineur
+Révioria s'adresse à des lycéens (15-18 ans). Aucune donnée sensible n'est collectée. Le pseudo est le seul identifiant public visible.
