@@ -51,41 +51,21 @@ Règles :
 - Sois précis et pédagogue
 - Maximum 3 étapes et 2 conseils`;
 
-async function analyserAvecOCR(imageBase64: string): Promise<ScanResultat> {
-  const { createWorker } = await import("tesseract.js");
-
-  const worker = await createWorker("fra+eng");
-  try {
-    const imageBuffer = Buffer.from(imageBase64, "base64");
-    const { data } = await worker.recognize(imageBuffer);
-    const texte = data.text.trim();
-
-    if (!texte || texte.length < 10) {
-      return {
-        correction: "Aucun texte lisible détecté dans l'image.",
-        note: "Mode local — OCR uniquement",
-        explication: "L'OCR local n'a pas pu extraire de texte. Assurez-vous que l'image est nette, ou configurez OPENAI_API_KEY pour une correction complète.",
-        etapes: [],
-        conseils: [
-          "Assurez-vous que l'image est nette et bien éclairée",
-          "Configurez OPENAI_API_KEY dans .env.local pour activer la correction par IA",
-        ],
-      };
-    }
-
-    return {
-      correction: `Texte extrait de l'image :\n\n${texte}`,
-      note: "Mode local — OCR uniquement (sans IA)",
-      explication: "L'analyse locale extrait le texte de votre exercice sans correction intelligente. Configurez OPENAI_API_KEY dans .env.local pour obtenir une correction complète par IA.",
-      etapes: [],
-      conseils: [
-        "Configurez OPENAI_API_KEY dans .env.local pour activer la correction par IA",
-        "Obtenez une clé sur platform.openai.com",
-      ],
-    };
-  } finally {
-    await worker.terminate();
-  }
+function fallbackSansApiKey(): ScanResultat {
+  return {
+    correction: "Correction IA indisponible — aucune clé API configurée.",
+    note: "Mode hors ligne",
+    explication: "Pour corriger des exercices par IA, ajoutez OPENAI_API_KEY dans les variables d'environnement Vercel (ou dans .env.local en développement).",
+    etapes: [
+      "Aller sur platform.openai.com pour obtenir une clé API",
+      "Dans Vercel : Settings → Environment Variables → ajouter OPENAI_API_KEY",
+      "Redéployer le projet",
+    ],
+    conseils: [
+      "Le modèle utilisé est gpt-4o-mini, peu coûteux",
+      "En développement local, créez un fichier .env.local avec OPENAI_API_KEY=sk-...",
+    ],
+  };
 }
 
 export async function POST(req: NextRequest) {
@@ -114,21 +94,7 @@ export async function POST(req: NextRequest) {
 
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
-    try {
-      const resultat = await analyserAvecOCR(image);
-      return Response.json(resultat);
-    } catch (err: unknown) {
-      if (process.env.NODE_ENV !== "production") {
-        console.error("[scan] Erreur OCR:", err);
-      }
-      return Response.json({
-        correction: "Analyse impossible. Configurez OPENAI_API_KEY dans .env.local pour activer la correction par IA.",
-        note: "Mode hors ligne",
-        explication: "Ni l'API OpenAI ni l'OCR local n'ont pu analyser l'image.",
-        etapes: ["Créer un fichier .env.local", "Ajouter OPENAI_API_KEY=votre_clé"],
-        conseils: ["Obtenez une clé sur platform.openai.com"],
-      } satisfies ScanResultat);
-    }
+    return Response.json(fallbackSansApiKey());
   }
 
   const niveauLabel = niveau === "premiere" ? "Première" : niveau === "terminale" ? "Terminale" : "Seconde";
