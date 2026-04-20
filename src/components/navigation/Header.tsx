@@ -48,24 +48,27 @@ export default function Header() {
         <nav className="flex items-center gap-2">
           <Link
             href="/progression"
-            className="text-sm text-gray-600 hover:text-indigo-600 font-medium px-3 py-1.5 rounded-lg hover:bg-indigo-50 transition-colors"
+            className="text-sm text-gray-600 hover:text-indigo-600 font-medium px-3 py-1.5 rounded-lg hover:bg-indigo-50 transition-colors flex items-center gap-1.5"
           >
-            Progression
+            <span>📈</span>
+            <span className="hidden sm:inline">Progression</span>
           </Link>
 
           <Link
             href="/scan"
-            className="text-sm text-gray-600 hover:text-indigo-600 font-medium px-3 py-1.5 rounded-lg hover:bg-indigo-50 transition-colors"
+            className="text-sm text-gray-600 hover:text-indigo-600 font-medium px-3 py-1.5 rounded-lg hover:bg-indigo-50 transition-colors flex items-center gap-1.5"
           >
-            Scan
+            <span>📷</span>
+            <span className="hidden sm:inline">Scan</span>
           </Link>
 
           {user && (
             <Link
               href="/social"
-              className="text-sm text-gray-600 hover:text-indigo-600 font-medium px-3 py-1.5 rounded-lg hover:bg-indigo-50 transition-colors"
+              className="text-sm text-gray-600 hover:text-indigo-600 font-medium px-3 py-1.5 rounded-lg hover:bg-indigo-50 transition-colors flex items-center gap-1.5"
             >
-              Social
+              <span>👥</span>
+              <span className="hidden sm:inline">Social</span>
             </Link>
           )}
         </nav>
@@ -88,17 +91,19 @@ export default function Header() {
               <ClochNotif />
               <button
                 onClick={handleDeconnexion}
-                className="text-sm text-gray-500 hover:text-red-600 font-medium px-3 py-1.5 rounded-lg hover:bg-red-50 transition-colors"
+                className="text-sm text-gray-500 hover:text-red-600 font-medium px-3 py-1.5 rounded-lg hover:bg-red-50 transition-colors flex items-center gap-1.5"
               >
-                Déconnexion
+                <span>🚪</span>
+                <span className="hidden sm:inline">Déconnexion</span>
               </button>
             </>
           ) : (
             <button
               onClick={() => setShowAuth(true)}
-              className="text-sm bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-1.5 rounded-lg transition-colors"
+              className="text-sm bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-1.5 rounded-lg transition-colors flex items-center gap-1.5"
             >
-              Connexion
+              <span>🔑</span>
+              <span>Connexion</span>
             </button>
           )}
         </div>
