@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   getCartesAReviser,
   enregistrerRevision,
@@ -17,15 +17,13 @@ type EtatRevision = "accueil" | "question" | "reponse" | "terminee";
 // ─── Composant principal ───────────────────────────────────────────────────
 
 export default function RevisionIntelligente() {
-  const [stats, setStats] = useState<StatsRevision | null>(null);
+  const [stats, setStats] = useState<StatsRevision | null>(
+    () => (typeof window !== "undefined" ? getStatsRevision() : null)
+  );
   const [cartes, setCartes] = useState<CarteRevision[]>([]);
   const [index, setIndex] = useState(0);
   const [etat, setEtat] = useState<EtatRevision>("accueil");
   const [reponseVisible, setReponseVisible] = useState(false);
-
-  useEffect(() => {
-    setStats(getStatsRevision());
-  }, []);
 
   function demarrer() {
     const cartesAReviser = getCartesAReviser();
@@ -138,7 +136,7 @@ export default function RevisionIntelligente() {
       ) : (
         <div className="space-y-3">
           <p className="text-sm text-center text-gray-500 font-medium">
-            Comment ça s'est passé ?
+            Comment ça s&apos;est passé ?
           </p>
           <div className="grid grid-cols-2 gap-3">
             <BoutonQualite
@@ -229,9 +227,9 @@ function Accueil({ stats, onDemarrer }: AccueilProps) {
       {/* Message contextuel */}
       {aucuneCarte && (
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-800">
-          <p className="font-semibold mb-1">Aucune carte pour l'instant</p>
+          <p className="font-semibold mb-1">Aucune carte pour l&apos;instant</p>
           <p>
-            Fais des quiz d'entraînement — les questions ratées seront automatiquement
+            Fais des quiz d&apos;entraînement — les questions ratées seront automatiquement
             ajoutées ici pour révision espacée.
           </p>
         </div>
@@ -271,7 +269,7 @@ function SessionTerminee({ stats, totalRevise, onRecommencer }: SessionTermineeP
       <div className="text-5xl">🎉</div>
       <h2 className="text-2xl font-bold text-gray-900">Session terminée !</h2>
       <p className="text-gray-500">
-        Tu as révisé {totalRevise} carte{totalRevise > 1 ? "s" : ""} aujourd'hui.
+        Tu as révisé {totalRevise} carte{totalRevise > 1 ? "s" : ""} aujourd&apos;hui.
       </p>
 
       <div className="grid grid-cols-3 gap-3">

@@ -15,7 +15,9 @@ import type { User } from "@supabase/supabase-js";
 export default function Header() {
   const [user, setUser] = useState<User | null>(null);
   const [showAuth, setShowAuth] = useState(false);
-  const [cartesAReviser, setCartesAReviser] = useState(0);
+  const [cartesAReviser] = useState(
+    () => (typeof window !== "undefined" ? getStatsRevision().cartesAujourdhui : 0)
+  );
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => setUser(user));
@@ -25,9 +27,6 @@ export default function Header() {
     });
 
     const cleanup = setupOnlineListener();
-
-    // Charger le nombre de cartes à réviser
-    setCartesAReviser(getStatsRevision().cartesAujourdhui);
 
     return () => {
       subscription.unsubscribe();
