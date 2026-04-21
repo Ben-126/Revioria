@@ -50,9 +50,17 @@ export default function DialogueLangue() {
     if (ecouteVocale) arreterEcoute();
   };
 
-  const demarrerEcoute = () => {
+  const demarrerEcoute = async () => {
     const API = window.SpeechRecognition ?? window.webkitSpeechRecognition;
     if (!API) return;
+
+    // Demande explicite de permission micro → déclenche la popup navigateur
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      stream.getTracks().forEach((t) => t.stop());
+    } catch {
+      return; // permission refusée, on ne démarre pas
+    }
 
     // Nouvelle instance à chaque écoute
     const rec = new API();

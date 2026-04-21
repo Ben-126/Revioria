@@ -92,8 +92,9 @@ export default function CorrectionPrononciation() {
   const demarrerEnregistrement = async () => {
     setResultat(null);
     setErreur(null);
+    let stream: MediaStream;
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       const mr = new MediaRecorder(stream);
       chunksRef.current = [];
       mr.ondataavailable = (e) => { if (e.data.size > 0) chunksRef.current.push(e.data); };
@@ -102,7 +103,7 @@ export default function CorrectionPrononciation() {
       mediaRecorderRef.current = mr;
       setEnregistrement(true);
     } catch {
-      setErreur("Impossible d'accéder au microphone. Vérifiez les permissions.");
+      setErreur("Microphone refusé. Cliquez sur l'icône 🔒 dans la barre d'adresse → Microphone → Autoriser, puis rechargez.");
     }
   };
 

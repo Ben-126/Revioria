@@ -39,11 +39,20 @@ export default function ReconnaissanceVocale() {
     "aborted": "Reconnaissance annulée.",
   };
 
-  const demarrer = () => {
+  const demarrer = async () => {
     setErreur(null);
     const API = window.SpeechRecognition ?? window.webkitSpeechRecognition;
     if (!API) {
       setErreur("Navigateur non compatible. Utilisez Chrome ou Edge.");
+      return;
+    }
+
+    // Demande explicite de permission micro → déclenche la popup du navigateur
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      stream.getTracks().forEach((t) => t.stop()); // on n'en a plus besoin
+    } catch {
+      setErreur("Microphone refusé. Cliquez sur l'icône 🔒 dans la barre d'adresse → Microphone → Autoriser, puis rechargez.");
       return;
     }
 
