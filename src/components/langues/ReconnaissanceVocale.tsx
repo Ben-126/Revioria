@@ -1,5 +1,7 @@
 "use client";
 import { useState, useEffect, useRef, useCallback } from "react";
+import type { SpeechRecognitionInstance, SpeechRecognitionResultEvent, SpeechRecognitionErrorEvent } from "./speech-types";
+import "./speech-types";
 
 const LANGUES = [
   { code: "en-GB", nom: "Anglais", emoji: "🇬🇧" },
@@ -9,35 +11,13 @@ const LANGUES = [
   { code: "pt-PT", nom: "Portugais", emoji: "🇵🇹" },
 ];
 
-interface SpeechRecognitionEvent extends Event {
-  resultIndex: number;
-  results: SpeechRecognitionResultList;
-}
-
-interface SpeechRecognitionInstance extends EventTarget {
-  continuous: boolean;
-  interimResults: boolean;
-  lang: string;
-  start(): void;
-  stop(): void;
-  onresult: ((event: SpeechRecognitionEvent) => void) | null;
-  onerror: (() => void) | null;
-  onend: (() => void) | null;
-}
-
-declare global {
-  interface Window {
-    SpeechRecognition?: new () => SpeechRecognitionInstance;
-    webkitSpeechRecognition?: new () => SpeechRecognitionInstance;
-  }
-}
-
 export default function ReconnaissanceVocale() {
   const [langue, setLangue] = useState("en-GB");
   const [enCours, setEnCours] = useState(false);
   const [transcriptionFinale, setTranscriptionFinale] = useState("");
   const [transcriptionVive, setTranscriptionVive] = useState("");
   const [supporte, setSupporte] = useState(true);
+  const [erreur, setErreur] = useState<string | null>(null);
   const recognitionRef = useRef<SpeechRecognitionInstance | null>(null);
 
   useEffect(() => {
@@ -51,17 +31,29 @@ export default function ReconnaissanceVocale() {
     setEnCours(false);
   }, []);
 
-  const demarrer = () => {
-    const API = window.SpeechRecognition ?? window.webkitSpeechRecognition;
-    if (!API) return;
+  const MESSAGES_ERREUR: Record<string, string> = {
+    "not-allowed": "Microphone refusé. Autorisez l'accès dans les paramètres du navigateur.",
+    "no-speech": "Aucune voix détectée. Parlez plus fort ou vérifiez votre micro.",
+    "audio-capture": "Aucun microphone détecté.",
+    "network": "Erreur réseau. La reconnaissance vocale nécessite une connexion internet.",
+    "aborted": "Reconnaissance annulée.",
+  };
 
-    // Nouvelle instance à chaque démarrage
+  const demarrer = () => {
+    setErreur(null);
+    const API = window.SpeechRecognition ?? window.webkitSpeechRecognition;
+    if (!API) {
+      setErreur("Navigateur non compatible. Utilisez Chrome ou Edge.");
+      return;
+    }
+
     const rec = new API();
     rec.continuous = true;
     rec.interimResults = true;
     rec.lang = langue;
 
-    rec.onresult = (event: SpeechRecognitionEvent) => {
+    rec.onresult = (event: SpeechRecognitionResultEvent) => {
+      setErreur(null);
       let interim = "";
       let final = "";
       for (let i = event.resultIndex; i < event.results.length; i++) {
@@ -72,12 +64,25 @@ export default function ReconnaissanceVocale() {
       if (final) setTranscriptionFinale((prev) => prev + (prev ? " " : "") + final.trim());
       setTranscriptionVive(interim);
     };
-    rec.onerror = () => { recognitionRef.current = null; setEnCours(false); };
-    rec.onend = () => { recognitionRef.current = null; setEnCours(false); setTranscriptionVive(""); };
+    rec.onerror = (event: SpeechRecognitionErrorEvent) => {
+      const msg = MESSAGES_ERREUR[event.error] ?? `Erreur : ${event.error}`;
+      setErreur(msg);
+      recognitionRef.current = null;
+      setEnCours(false);
+    };
+    rec.onend = () => {
+      recognitionRef.current = null;
+      setEnCours(false);
+      setTranscriptionVive("");
+    };
 
     recognitionRef.current = rec;
-    rec.start();
-    setEnCours(true);
+    try {
+      rec.start();
+      setEnCours(true);
+    } catch (e) {
+      setErreur(`Impossible de démarrer : ${e instanceof Error ? e.message : String(e)}`);
+    }
   };
 
   const changerLangue = (code: string) => {
@@ -162,6 +167,13 @@ export default function ReconnaissanceVocale() {
           </p>
         )}
       </div>
+
+      {/* Erreur */}
+      {erreur && (
+        <div className="bg-red-50 border border-red-200 rounded-xl p-3 text-sm text-red-700 text-center">
+          {erreur}
+        </div>
+      )}
 
       {transcriptionFinale && (
         <div className="flex justify-end">

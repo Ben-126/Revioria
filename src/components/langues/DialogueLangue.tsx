@@ -1,5 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
+import type { SpeechRecognitionInstance, SpeechRecognitionResultEvent } from "./speech-types";
+import "./speech-types";
 
 const LANGUES = [
   { code: "en", bcp47: "en-GB", nom: "Anglais", emoji: "🇬🇧" },
@@ -20,28 +22,6 @@ interface Message {
   content: string;
 }
 
-interface SpeechRecognitionEvent extends Event {
-  resultIndex: number;
-  results: SpeechRecognitionResultList;
-}
-
-interface SpeechRecognitionInstance extends EventTarget {
-  continuous: boolean;
-  interimResults: boolean;
-  lang: string;
-  start(): void;
-  stop(): void;
-  onresult: ((event: SpeechRecognitionEvent) => void) | null;
-  onerror: (() => void) | null;
-  onend: (() => void) | null;
-}
-
-declare global {
-  interface Window {
-    SpeechRecognition?: new () => SpeechRecognitionInstance;
-    webkitSpeechRecognition?: new () => SpeechRecognitionInstance;
-  }
-}
 
 export default function DialogueLangue() {
   const [langue, setLangue] = useState("en");
@@ -80,7 +60,7 @@ export default function DialogueLangue() {
     rec.interimResults = false;
     rec.lang = langueInfo.bcp47;
 
-    rec.onresult = (event: SpeechRecognitionEvent) => {
+    rec.onresult = (event: SpeechRecognitionResultEvent) => {
       const texte = event.results[0]?.[0]?.transcript ?? "";
       if (texte) setInput((prev) => prev + (prev ? " " : "") + texte);
     };
