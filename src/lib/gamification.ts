@@ -44,6 +44,7 @@ export const BADGES_GENERAUX: BadgeInfo[] = [
   { id: "serie-3",          nom: "Série ×3",            description: "Jouer 3 jours de suite",          emoji: "🔥"  },
   { id: "serie-7",          nom: "Série ×7",            description: "Jouer 7 jours de suite",          emoji: "🔥🔥"},
   { id: "assidu",           nom: "Assidu",              description: "Jouer 30 jours de suite",         emoji: "🏆"  },
+  { id: "legende",          nom: "Légende",             description: "Jouer 100 jours de suite",        emoji: "👑"  },
   { id: "niveau-5",         nom: "Studieux Confirmé",   description: "Atteindre le niveau Studieux",    emoji: "🌟"  },
 ];
 
@@ -63,12 +64,17 @@ const BadgeDebloqueSchema = z.object({
 });
 
 const ProfilGamificationSchema = z.object({
-  xpTotal:          z.number().int().min(0),
-  dernierQuizDate:  z.string().nullable(),
-  streakJours:      z.number().int().min(0),
-  badgesDebloques:  z.array(BadgeDebloqueSchema),
-  xpDuJour:         z.number().int().min(0),
-  quizXpDuJour:     z.array(z.string()),
+  xpTotal:                    z.number().int().min(0),
+  dernierQuizDate:            z.string().nullable(),
+  streakJours:                z.number().int().min(0),
+  badgesDebloques:            z.array(BadgeDebloqueSchema),
+  xpDuJour:                   z.number().int().min(0),
+  quizXpDuJour:               z.array(z.string()),
+  gelsRestants:               z.number().int().min(0).max(3).default(3),
+  gelsUtilises:               z.number().int().min(0).default(0),
+  dateDerniereRechargeGels:   z.string().nullable().default(null),
+  joursJoues:                 z.array(z.string()).default([]),
+  joursGeles:                 z.array(z.string()).default([]),
 });
 
 const PROFIL_DEFAULT: ProfilGamification = {
@@ -78,6 +84,11 @@ const PROFIL_DEFAULT: ProfilGamification = {
   badgesDebloques: [],
   xpDuJour: 0,
   quizXpDuJour: [],
+  gelsRestants: 3,
+  gelsUtilises: 0,
+  dateDerniereRechargeGels: null,
+  joursJoues: [],
+  joursGeles: [],
 };
 
 const STORAGE_KEY = "gamification-profil";
@@ -116,6 +127,29 @@ function hierISO(aujourd: string): string {
   return d.toISOString().slice(0, 10);
 }
 
+function getMoisISO(date: string): string {
+  return date.slice(0, 7); // "YYYY-MM"
+}
+
+function rechargerGelsSiNouveauMois(
+  profil: ProfilGamification,
+  aujourd: string,
+): Pick<ProfilGamification, "gelsRestants" | "gelsUtilises" | "dateDerniereRechargeGels"> {
+  const moisActuel = getMoisISO(aujourd);
+  if (profil.dateDerniereRechargeGels === moisActuel) {
+    return {
+      gelsRestants: profil.gelsRestants,
+      gelsUtilises: profil.gelsUtilises,
+      dateDerniereRechargeGels: profil.dateDerniereRechargeGels,
+    };
+  }
+  return {
+    gelsRestants: 3,
+    gelsUtilises: 0,
+    dateDerniereRechargeGels: moisActuel,
+  };
+}
+
 // ─── Niveaux ───────────────────────────────────────────────────────────────────
 
 export function getNiveauFromXP(xp: number): NiveauGamification {
@@ -152,23 +186,71 @@ export function getProgressionNiveau(xp: number): {
 function calculerXPBrut(
   scorePourcentage: number,
   modeControle: boolean,
-  streakActif: boolean,
+  streakJours: number,
 ): number {
   const base = 10;
-  const bonusScore   = Math.floor(scorePourcentage / 10);       // 0–10
+  const bonusScore   = Math.floor(scorePourcentage / 10);
   const bonusParfait = scorePourcentage === 100 ? 15 : 0;
-  const bonusStreak  = streakActif ? 5 : 0;
-  const brut = base + bonusScore + bonusParfait + bonusStreak;
+  const bonusStreak  = streakJours > 1 ? 5 : 0;
+  const bonusStreak7 = streakJours >= 7 ? 10 : 0;
+  const brut = base + bonusScore + bonusParfait + bonusStreak + bonusStreak7;
   return modeControle ? Math.floor(brut * 1.5) : brut;
 }
 
 // ─── Streak ────────────────────────────────────────────────────────────────────
 
-function mettreAJourStreak(profil: ProfilGamification, aujourd: string): number {
-  if (!profil.dernierQuizDate) return 1;
-  if (profil.dernierQuizDate === aujourd) return profil.streakJours;   // même jour
-  if (profil.dernierQuizDate === hierISO(aujourd)) return profil.streakJours + 1; // lendemain
-  return 1; // cassé
+function mettreAJourStreak(
+  profil: ProfilGamification,
+  aujourd: string,
+): {
+  streakJours: number;
+  gelsRestants: number;
+  gelsUtilises: number;
+  joursGeles: string[];
+} {
+  if (!profil.dernierQuizDate) {
+    return {
+      streakJours: 1,
+      gelsRestants: profil.gelsRestants,
+      gelsUtilises: profil.gelsUtilises,
+      joursGeles: profil.joursGeles,
+    };
+  }
+  if (profil.dernierQuizDate === aujourd) {
+    return {
+      streakJours: profil.streakJours,
+      gelsRestants: profil.gelsRestants,
+      gelsUtilises: profil.gelsUtilises,
+      joursGeles: profil.joursGeles,
+    };
+  }
+  if (profil.dernierQuizDate === hierISO(aujourd)) {
+    return {
+      streakJours: profil.streakJours + 1,
+      gelsRestants: profil.gelsRestants,
+      gelsUtilises: profil.gelsUtilises,
+      joursGeles: profil.joursGeles,
+    };
+  }
+
+  // Jour manqué — vérifier si on peut utiliser un gel (exactement 1 jour manqué)
+  const avantHier = hierISO(hierISO(aujourd));
+  if (profil.gelsRestants > 0 && profil.dernierQuizDate === avantHier) {
+    return {
+      streakJours: profil.streakJours + 1,
+      gelsRestants: profil.gelsRestants - 1,
+      gelsUtilises: profil.gelsUtilises + 1,
+      joursGeles: [...profil.joursGeles, hierISO(aujourd)],
+    };
+  }
+
+  // Streak cassé
+  return {
+    streakJours: 1,
+    gelsRestants: profil.gelsRestants,
+    gelsUtilises: profil.gelsUtilises,
+    joursGeles: profil.joursGeles,
+  };
 }
 
 // ─── Badges ────────────────────────────────────────────────────────────────────
@@ -200,6 +282,7 @@ function verifierNouveauxBadges(
   check("serie-3",         profilCourant.streakJours >= 3);
   check("serie-7",         profilCourant.streakJours >= 7);
   check("assidu",          profilCourant.streakJours >= 30);
+  check("legende",         profilCourant.streakJours >= 100);
   check("niveau-5",        niveauActuel.numero >= 5);
 
   // Badges matière
@@ -237,17 +320,20 @@ export function enregistrerQuizGamification(params: {
   const aujourd  = getDateAujourdhuiISO();
   const cleQuiz  = `${matiereSlug}/${chapitreSlug}`;
 
-  // Streak
-  const nouveauStreak = mettreAJourStreak(profil, aujourd);
-  const streakActif   = nouveauStreak > 1; // bonus XP si streak actif (joué hier ou suite de jours)
+  // Recharge mensuelle des gels si nouveau mois
+  const gelsRecharges = rechargerGelsSiNouveauMois(profil, aujourd);
+  const profilAvecGels: ProfilGamification = { ...profil, ...gelsRecharges };
+
+  // Streak + gel automatique
+  const streakResult = mettreAJourStreak(profilAvecGels, aujourd);
 
   // Reset quotidien si nouveau jour
-  const estNouveauJour   = profil.dernierQuizDate !== aujourd;
-  const quizXpDuJour     = estNouveauJour ? [] : profil.quizXpDuJour;
-  const xpDuJour         = estNouveauJour ? 0  : profil.xpDuJour;
+  const estNouveauJour  = profil.dernierQuizDate !== aujourd;
+  const quizXpDuJour    = estNouveauJour ? [] : profil.quizXpDuJour;
+  const xpDuJour        = estNouveauJour ? 0  : profil.xpDuJour;
 
   // Déduplication et plafond
-  const dejaGagneXP   = quizXpDuJour.includes(cleQuiz);
+  const dejaGagneXP    = quizXpDuJour.includes(cleQuiz);
   const plafondAtteint = xpDuJour >= PLAFOND_XP_JOUR;
 
   let xpGagne           = 0;
@@ -255,10 +341,10 @@ export function enregistrerQuizGamification(params: {
   let xpDuJourFinal     = xpDuJour;
 
   if (!dejaGagneXP && !plafondAtteint) {
-    const xpCalcule  = calculerXPBrut(scorePourcentage, modeControle, streakActif);
-    xpGagne          = Math.min(xpCalcule, PLAFOND_XP_JOUR - xpDuJour);
+    const xpCalcule   = calculerXPBrut(scorePourcentage, modeControle, streakResult.streakJours);
+    xpGagne           = Math.min(xpCalcule, PLAFOND_XP_JOUR - xpDuJour);
     quizXpDuJourFinal = [...quizXpDuJour, cleQuiz];
-    xpDuJourFinal    = xpDuJour + xpGagne;
+    xpDuJourFinal     = xpDuJour + xpGagne;
   }
 
   const ancienNiveau   = getNiveauFromXP(profil.xpTotal).numero;
@@ -266,14 +352,22 @@ export function enregistrerQuizGamification(params: {
   const niveauApres    = getNiveauFromXP(nouveauXPTotal);
   const levelUp        = niveauApres.numero > ancienNiveau ? niveauApres.numero : null;
 
-  // Profil intermédiaire (streak à jour) pour la vérification des badges
+  // Profil intermédiaire (streak + gels à jour) pour la vérification des badges
+  const joursJouesFinal = profil.joursJoues.includes(aujourd)
+    ? profil.joursJoues
+    : [...profil.joursJoues, aujourd];
+
   const profilInter: ProfilGamification = {
-    ...profil,
-    xpTotal:       nouveauXPTotal,
+    ...profilAvecGels,
+    xpTotal:         nouveauXPTotal,
     dernierQuizDate: aujourd,
-    streakJours:   nouveauStreak,
-    xpDuJour:      xpDuJourFinal,
-    quizXpDuJour:  quizXpDuJourFinal,
+    streakJours:     streakResult.streakJours,
+    xpDuJour:        xpDuJourFinal,
+    quizXpDuJour:    quizXpDuJourFinal,
+    gelsRestants:    streakResult.gelsRestants,
+    gelsUtilises:    streakResult.gelsUtilises,
+    joursJoues:      joursJouesFinal,
+    joursGeles:      streakResult.joursGeles,
   };
 
   const nouveauxBadgeIds = verifierNouveauxBadges(profilInter, matiereSlug, nouveauXPTotal);
@@ -296,5 +390,19 @@ export function enregistrerQuizGamification(params: {
     nouveauxBadges: nouveauxBadgeIds,
     xpTotal:       nouveauXPTotal,
     niveauActuel:  niveauApres.numero,
+  };
+}
+
+export const GEL_PAR_MOIS = 3;
+
+export function getInfosGel(profil: ProfilGamification): {
+  gelsRestants: number;
+  gelsUtilises: number;
+  pourcentageUtilise: number;
+} {
+  return {
+    gelsRestants: profil.gelsRestants,
+    gelsUtilises: profil.gelsUtilises,
+    pourcentageUtilise: Math.round((profil.gelsUtilises / GEL_PAR_MOIS) * 100),
   };
 }
