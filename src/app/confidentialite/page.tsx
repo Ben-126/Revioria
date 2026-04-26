@@ -45,7 +45,7 @@ export default function PageConfidentialite() {
           <p>Pour toute question relative à tes données : contact via l&apos;application.</p>
         </section>
 
-        <Link href="/" className="inline-block text-indigo-600 hover:underline">
+        <Link href="/app" className="inline-block text-indigo-600 hover:underline">
           ← Retour à l&apos;accueil
         </Link>
       </main>

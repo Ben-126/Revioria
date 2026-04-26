@@ -43,7 +43,7 @@ export default function Header() {
     <header className="sticky top-0 z-40 bg-white border-b border-gray-100 shadow-sm">
       <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 shrink-0">
+        <Link href="/app" className="flex items-center gap-2 shrink-0">
           <Image src="/logo.png" alt="Révioria" width={32} height={32} className="object-contain mix-blend-multiply" />
           <span className="font-bold text-indigo-700 text-lg hidden sm:block">Révioria</span>
         </Link>

@@ -40,7 +40,7 @@ export default async function QuizPage({ params }: Props) {
         <nav aria-label="Fil d'ariane" className="mb-5">
           <ol className="flex flex-wrap items-center gap-x-1 gap-y-1 text-xs text-gray-400">
             <li>
-              <Link href="/" className="hover:text-indigo-600 transition-colors font-medium">
+              <Link href="/app" className="hover:text-indigo-600 transition-colors font-medium">
                 {niveauInfo.emoji} {niveauInfo.label}
               </Link>
             </li>
