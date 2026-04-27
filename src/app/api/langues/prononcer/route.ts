@@ -80,7 +80,7 @@ export async function POST(req: NextRequest) {
       similitude: 0,
       mots: comparerMots(texte, texte),
       feedback:
-        "Clé API Groq non configurée. Ajoutez GROQ_API_KEY dans votre fichier .env.local pour activer la correction de prononciation.",
+        "L'analyse de prononciation est temporairement indisponible. Réessayez dans quelques instants.",
       modeLocal: true,
     });
   }
@@ -155,7 +155,7 @@ Donne un feedback constructif (3-4 phrases en français), identifie les principa
       transcrit: "",
       similitude: 0,
       mots: [],
-      feedback: "L'analyse de prononciation nécessite une clé API OpenAI avec du crédit disponible. Enregistrez votre voix et comparez-la vous-même à la phrase affichée.",
+      feedback: "L'analyse de prononciation est temporairement indisponible. Réessayez dans quelques instants.",
       modeLocal: true,
     });
   }

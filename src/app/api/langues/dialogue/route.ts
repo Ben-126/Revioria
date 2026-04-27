@@ -73,7 +73,7 @@ function repondreLocalement(
   const index = Math.min(Math.floor(messages.length / 2), responses.length - 1);
   return (
     responses[Math.max(0, index)] +
-    "\n\n*(Mode hors ligne — configurez OPENAI_API_KEY pour un dialogue IA complet)*"
+    ""
   );
 }
 

@@ -316,7 +316,7 @@ export default function CorrectionPrononciation() {
 
           {resultat.modeLocal && (
             <p className="text-xs text-center" style={{ color: "var(--text3)" }}>
-              Mode hors ligne — configurez OPENAI_API_KEY pour une analyse réelle
+              Analyse indisponible — réessayez dans quelques instants
             </p>
           )}
         </div>

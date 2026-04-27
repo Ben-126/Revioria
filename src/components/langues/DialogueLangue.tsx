@@ -256,7 +256,7 @@ export default function DialogueLangue() {
             style={{ background: "rgba(245,200,64,0.1)", borderTop: "1px solid rgba(245,200,64,0.15)" }}
           >
             <p className="text-[10px] text-center" style={{ color: "var(--amber)" }}>
-              Mode hors ligne — configurez OPENAI_API_KEY pour un dialogue IA complet
+              Dialogue IA temporairement indisponible — réessayez dans quelques instants
             </p>
           </div>
         )}
