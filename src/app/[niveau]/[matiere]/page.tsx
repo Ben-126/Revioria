@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Header from "@/components/navigation/Header";
 import ChapitresAvecProgression from "@/components/navigation/ChapitresAvecProgression";
@@ -6,6 +7,17 @@ import { NIVEAUX, getMatiereBySlugAndNiveau, type Niveau } from "@/data/programm
 
 interface Props {
   params: Promise<{ niveau: string; matiere: string }>;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { niveau: niveauSlug, matiere: matiereSlug } = await params;
+  const niveauInfo = NIVEAUX.find((n) => n.slug === niveauSlug);
+  const matiere = getMatiereBySlugAndNiveau(niveauSlug as Niveau, matiereSlug);
+  if (!niveauInfo || !matiere) return {};
+  return {
+    title: `${matiere.nom} — ${niveauInfo.label} | Révioria`,
+    description: `Révise ${matiere.nom} en ${niveauInfo.label} avec des quiz IA. ${matiere.chapitres.length} chapitres disponibles.`,
+  };
 }
 
 export async function generateStaticParams() {
