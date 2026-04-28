@@ -3,11 +3,11 @@ import { useState, useRef, useEffect } from "react";
 import type { SpeechRecognitionInstance, SpeechRecognitionResultEvent, SpeechRecognitionErrorEvent } from "./speech-types";
 
 const LANGUES = [
-  { code: "en", bcp47: "en-GB", nom: "Anglais", emoji: "🇬🇧" },
-  { code: "es", bcp47: "es-ES", nom: "Espagnol", emoji: "🇪🇸" },
-  { code: "de", bcp47: "de-DE", nom: "Allemand", emoji: "🇩🇪" },
-  { code: "it", bcp47: "it-IT", nom: "Italien", emoji: "🇮🇹" },
-  { code: "pt", bcp47: "pt-PT", nom: "Portugais", emoji: "🇵🇹" },
+  { code: "en", bcp47: "en-GB", nom: "Anglais", emoji: "🔤" },
+  { code: "es", bcp47: "es-ES", nom: "Espagnol", emoji: "🌺" },
+  { code: "de", bcp47: "de-DE", nom: "Allemand", emoji: "📜" },
+  { code: "it", bcp47: "it-IT", nom: "Italien", emoji: "🍕" },
+  { code: "pt", bcp47: "pt-PT", nom: "Portugais", emoji: "🌊" },
 ];
 
 const NIVEAUX = [

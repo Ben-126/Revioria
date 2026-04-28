@@ -3,11 +3,11 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import type { SpeechRecognitionInstance, SpeechRecognitionResultEvent, SpeechRecognitionErrorEvent } from "./speech-types";
 
 const LANGUES = [
-  { code: "en-GB", nom: "Anglais", emoji: "🇬🇧" },
-  { code: "es-ES", nom: "Espagnol", emoji: "🇪🇸" },
-  { code: "de-DE", nom: "Allemand", emoji: "🇩🇪" },
-  { code: "it-IT", nom: "Italien", emoji: "🇮🇹" },
-  { code: "pt-PT", nom: "Portugais", emoji: "🇵🇹" },
+  { code: "en-GB", nom: "Anglais", emoji: "🔤" },
+  { code: "es-ES", nom: "Espagnol", emoji: "🌺" },
+  { code: "de-DE", nom: "Allemand", emoji: "📜" },
+  { code: "it-IT", nom: "Italien", emoji: "🍕" },
+  { code: "pt-PT", nom: "Portugais", emoji: "🌊" },
 ];
 
 export default function ReconnaissanceVocale() {
