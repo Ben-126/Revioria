@@ -24,17 +24,17 @@ export default function ExplicationAvancee({
   if (!aContenu) return null;
 
   return (
-    <div className="rounded-xl overflow-hidden" style={{ border: "1px solid rgba(77,94,232,0.2)" }}>
+    <div className="rounded-xl overflow-hidden" style={{ border: "1px solid rgba(245,200,64,0.2)" }}>
       <button
         onClick={() => setOuvert((v) => !v)}
         className="w-full flex items-center justify-between px-4 py-2.5 transition-colors text-left"
-        style={{ background: "rgba(77,94,232,0.08)" }}
+        style={{ background: "rgba(245,200,64,0.1)" }}
         aria-expanded={ouvert}
       >
-        <span style={{ fontSize: 12, fontWeight: 600, color: "var(--indigo-l)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+        <span style={{ fontSize: 12, fontWeight: 600, color: "var(--amber-l)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
           Explication détaillée
         </span>
-        <span style={{ color: "var(--indigo-l)", fontSize: 14 }}>{ouvert ? "▲" : "▼"}</span>
+        <span style={{ color: "var(--amber-l)", fontSize: 14 }}>{ouvert ? "▲" : "▼"}</span>
       </button>
 
       {ouvert && (
@@ -44,7 +44,7 @@ export default function ExplicationAvancee({
               <span style={{ fontSize: 12, fontWeight: 600, color: "var(--text3)", textTransform: "uppercase", letterSpacing: "0.05em", flexShrink: 0 }}>
                 Méthode
               </span>
-              <span className="inline-block text-xs font-semibold px-2.5 py-1 rounded-full" style={{ background: "rgba(77,94,232,0.1)", color: "var(--indigo-l)" }}>
+              <span className="inline-block text-xs font-semibold px-2.5 py-1 rounded-full" style={{ background: "rgba(245,200,64,0.1)", color: "var(--amber-l)" }}>
                 {methode}
               </span>
             </div>
@@ -58,7 +58,7 @@ export default function ExplicationAvancee({
               <ol className="space-y-2">
                 {etapes.map((etape, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <span className="shrink-0 w-6 h-6 rounded-full text-white text-xs font-bold flex items-center justify-center mt-0.5" style={{ background: "var(--indigo)" }}>
+                    <span className="shrink-0 w-6 h-6 rounded-full text-white text-xs font-bold flex items-center justify-center mt-0.5" style={{ background: "var(--coral)" }}>
                       {i + 1}
                     </span>
                     <span style={{ fontSize: 14, color: "var(--text2)", lineHeight: 1.6 }}>{etape}</span>

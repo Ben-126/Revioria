@@ -40,7 +40,7 @@ export default function XPToast({ resultat }: XPToastProps) {
     >
       <div
         className="flex items-center gap-2 px-4 py-2.5 rounded-2xl font-bold text-base"
-        style={{ background: "var(--indigo)", color: "#fff", boxShadow: "0 4px 16px rgba(0,0,0,0.3)" }}
+        style={{ background: "var(--amber)", color: "#000", boxShadow: "0 4px 16px rgba(0,0,0,0.3)" }}
       >
         <span>⚡</span>
         <span>+{resultat.xpGagne} XP</span>
@@ -60,7 +60,7 @@ export default function XPToast({ resultat }: XPToastProps) {
         <div
           key={id}
           className="flex items-center gap-2 px-3 py-1.5 rounded-xl font-medium text-sm"
-          style={{ background: "var(--card)", border: "1px solid rgba(77,94,232,0.2)", color: "var(--indigo-l)", boxShadow: "0 4px 16px rgba(0,0,0,0.3)" }}
+          style={{ background: "var(--card)", border: "1px solid rgba(245,200,64,0.2)", color: "var(--amber-l)", boxShadow: "0 4px 16px rgba(0,0,0,0.3)" }}
         >
           <span>🏅</span>
           <span>Badge : {getBadgeNom(id)}</span>

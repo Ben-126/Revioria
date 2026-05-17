@@ -29,7 +29,7 @@ export default function PageMentionsLegales() {
             <li><strong>Statut :</strong> Particulier</li>
             <li>
               <strong>Contact :</strong>{" "}
-              <a href="mailto:benpodrojsky@gmail.com" className="text-indigo-600 hover:underline">
+              <a href="mailto:benpodrojsky@gmail.com" className="hover:underline" style={{ color: "var(--coral-l)" }}>
                 benpodrojsky@gmail.com
               </a>
             </li>
@@ -48,7 +48,7 @@ export default function PageMentionsLegales() {
               <ul className="space-y-0.5 text-gray-600 ml-4">
                 <li>Vercel Inc.</li>
                 <li>340 Pine Street, Suite 900, San Francisco, CA 94104, États-Unis</li>
-                <li>Site : <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">vercel.com</a></li>
+                <li>Site : <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="hover:underline" style={{ color: "var(--coral-l)" }}>vercel.com</a></li>
               </ul>
             </div>
             <div>
@@ -56,7 +56,7 @@ export default function PageMentionsLegales() {
               <ul className="space-y-0.5 text-gray-600 ml-4">
                 <li>Supabase Inc.</li>
                 <li>Serveur : Union Européenne — Stockholm, Suède (aws-eu-north-1)</li>
-                <li>Site : <a href="https://supabase.com" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">supabase.com</a></li>
+                <li>Site : <a href="https://supabase.com" target="_blank" rel="noopener noreferrer" className="hover:underline" style={{ color: "var(--coral-l)" }}>supabase.com</a></li>
               </ul>
             </div>
             <div>
@@ -64,7 +64,7 @@ export default function PageMentionsLegales() {
               <ul className="space-y-0.5 text-gray-600 ml-4">
                 <li>Groq Inc.</li>
                 <li>101 Main Street, Floor 4, San Francisco, CA 94105, États-Unis</li>
-                <li>Site : <a href="https://groq.com" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">groq.com</a></li>
+                <li>Site : <a href="https://groq.com" target="_blank" rel="noopener noreferrer" className="hover:underline" style={{ color: "var(--coral-l)" }}>groq.com</a></li>
               </ul>
             </div>
             <div>
@@ -72,7 +72,7 @@ export default function PageMentionsLegales() {
               <ul className="space-y-0.5 text-gray-600 ml-4">
                 <li>Upstash Inc.</li>
                 <li>340 S Lemon Ave #1423, Walnut, CA 91789, États-Unis</li>
-                <li>Site : <a href="https://upstash.com" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">upstash.com</a></li>
+                <li>Site : <a href="https://upstash.com" target="_blank" rel="noopener noreferrer" className="hover:underline" style={{ color: "var(--coral-l)" }}>upstash.com</a></li>
               </ul>
             </div>
           </div>
@@ -86,7 +86,7 @@ export default function PageMentionsLegales() {
               href="https://www.education.gouv.fr/reussir-au-lycee/les-programmes-du-lycee-general-et-technologique-9812"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-indigo-600 hover:underline"
+              className="hover:underline" style={{ color: "var(--coral-l)" }}
             >
               programmes officiels du Ministère de l&apos;Éducation nationale
             </a>
@@ -110,13 +110,13 @@ export default function PageMentionsLegales() {
           <h2 className="font-semibold text-gray-800 text-base">5. Données personnelles</h2>
           <p>
             Pour toute information sur le traitement de tes données personnelles, consulte notre{" "}
-            <Link href="/confidentialite" className="text-indigo-600 hover:underline">
+            <Link href="/confidentialite" className="hover:underline" style={{ color: "var(--coral-l)" }}>
               politique de confidentialité
             </Link>.
           </p>
         </section>
 
-        <Link href="/" className="inline-block text-indigo-600 hover:underline">
+        <Link href="/" className="inline-block hover:underline" style={{ color: "var(--coral-l)" }}>
           ← Retour à l&apos;accueil
         </Link>
       </main>

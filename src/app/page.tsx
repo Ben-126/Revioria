@@ -135,7 +135,7 @@ function FAQItem({ question, answer, index }: { question: string; answer: string
 }
 
 /* ── Section label ───────────────────────────────────────── */
-function SectionLabel({ children, color = "var(--indigo-l)" }: { children: string; color?: string }) {
+function SectionLabel({ children, color = "var(--coral-l)" }: { children: string; color?: string }) {
   return (
     <span style={{
       fontFamily: "var(--f-head)",
@@ -153,7 +153,7 @@ function SectionLabel({ children, color = "var(--indigo-l)" }: { children: strin
 /* ── Feature card ────────────────────────────────────────── */
 type FeatureColor = "indigo" | "coral" | "amber" | "teal";
 const colorMap: Record<FeatureColor, { icon: string; iconBorder: string; text: string }> = {
-  indigo: { icon: "rgba(77,94,232,0.12)", iconBorder: "rgba(77,94,232,0.2)", text: "#4D5EE8" },
+  indigo: { icon: "rgba(239,110,90,0.10)", iconBorder: "rgba(239,110,90,0.2)", text: "#EF6E5A" },
   coral:  { icon: "rgba(239,110,90,0.10)", iconBorder: "rgba(239,110,90,0.2)", text: "#EF6E5A" },
   amber:  { icon: "rgba(245,200,64,0.10)", iconBorder: "rgba(245,200,64,0.2)", text: "#F5C840" },
   teal:   { icon: "rgba(61,214,191,0.10)", iconBorder: "rgba(61,214,191,0.2)", text: "#3DD6BF" },
@@ -177,7 +177,7 @@ function FeatureCard({ icon, title, desc, color = "indigo", delay = 0 }: { icon:
       }}
       onMouseEnter={(e) => {
         (e.currentTarget as HTMLDivElement).style.transform = "translateY(-3px)";
-        (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(77,94,232,0.28)";
+        (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(239,110,90,0.28)";
       }}
       onMouseLeave={(e) => {
         (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
@@ -208,9 +208,9 @@ function MatierePill({ children }: { children: string }) {
       fontSize: "0.82rem",
       padding: "6px 16px",
       borderRadius: "var(--r-pill)",
-      background: "rgba(77,94,232,0.08)",
-      border: "1px solid rgba(77,94,232,0.2)",
-      color: "var(--indigo-l)",
+      background: "rgba(245,200,64,0.1)",
+      border: "1px solid rgba(245,200,64,0.2)",
+      color: "var(--amber-l)",
       display: "inline-block",
     }}>{children}</span>
   );
@@ -392,7 +392,7 @@ export default function LandingPage() {
             color: "var(--text)",
             marginBottom: 24,
           }}>
-            Révise <em style={{ fontStyle: "italic", color: "var(--coral-l)" }}>mieux</em>,<br />réussis <em style={{ fontStyle: "italic", color: "var(--indigo-l)" }}>plus</em>.
+            Révise <em style={{ fontStyle: "italic", color: "var(--coral-l)" }}>mieux</em>,<br />réussis <em style={{ fontStyle: "italic", color: "var(--amber-l)" }}>plus</em>.
           </h1>
 
           {/* Sous-titre */}
@@ -477,7 +477,7 @@ export default function LandingPage() {
       {/* ── FEATURES ──────────────────────────────────────── */}
       <section id="features" style={{ padding: "88px 24px", maxWidth: 1100, margin: "0 auto" }}>
         <div className="reveal-scale" style={{ textAlign: "center", marginBottom: 48 }}>
-          <SectionLabel color="var(--indigo-l)">Fonctionnalités</SectionLabel>
+          <SectionLabel color="var(--coral-l)">Fonctionnalités</SectionLabel>
           <h2 style={{
             fontFamily: "var(--f-head)",
             fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)",
@@ -517,7 +517,7 @@ export default function LandingPage() {
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20 }}>
             {[
-              { num: "01", title: "Choisis ton niveau", desc: "Seconde, Première ou Terminale. Révioria adapte tout le contenu à ton programme.", color: "var(--indigo)" },
+              { num: "01", title: "Choisis ton niveau", desc: "Seconde, Première ou Terminale. Révioria adapte tout le contenu à ton programme.", color: "var(--coral)" },
               { num: "02", title: "Sélectionne une matière", desc: "Maths, Physique, Histoire, Français, SVT… Plus de 12 matières disponibles.", color: "var(--coral)" },
               { num: "03", title: "Lance un quiz", desc: "L'IA génère des questions sur le chapitre choisi. Réponds, découvre tes erreurs, progresse.", color: "var(--amber)" },
               { num: "04", title: "Suis ta progression", desc: "Tableau de bord, streaks, révision espacée — Révioria t'aide à maintenir le rythme.", color: "var(--teal)" },
@@ -571,7 +571,7 @@ export default function LandingPage() {
       <section style={{ padding: "88px 24px" }}>
         <div style={{ maxWidth: 700, margin: "0 auto", textAlign: "center" }}>
           <div className="fade-up">
-            <SectionLabel color="var(--indigo-l)">Communauté</SectionLabel>
+            <SectionLabel color="var(--coral-l)">Communauté</SectionLabel>
             <h2 style={{
               fontFamily: "var(--f-head)",
               fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)",
@@ -690,8 +690,8 @@ export default function LandingPage() {
                 position: "absolute", top: 16, right: 16,
                 fontFamily: "var(--f-head)", fontWeight: 800,
                 fontSize: "0.68rem", letterSpacing: "0.08em", textTransform: "uppercase",
-                background: "rgba(77,94,232,0.15)", border: "1px solid rgba(77,94,232,0.3)",
-                color: "var(--indigo-l)", padding: "3px 10px", borderRadius: "var(--r-pill)",
+                background: "rgba(245,200,64,0.15)", border: "1px solid rgba(245,200,64,0.3)",
+                color: "var(--amber-l)", padding: "3px 10px", borderRadius: "var(--r-pill)",
               }}>À venir</div>
 
               <div style={{ marginBottom: 8 }}>

@@ -50,27 +50,27 @@ export default function StatsMatiere({ matiereSlug, chapitres }: StatsMatierePro
       display: "flex",
       gap: 0,
       padding: "12px 16px",
-      background: "rgba(77,94,232,0.07)",
+      background: "rgba(239,110,90,0.07)",
       borderRadius: "var(--r-md)",
-      border: "1px solid rgba(77,94,232,0.15)",
+      border: "1px solid rgba(239,110,90,0.15)",
       marginBottom: 16,
     }}>
       <div style={{ flex: 1, textAlign: "center" }}>
-        <p style={{ fontFamily: "var(--f-head)", fontWeight: 900, fontSize: "1.1rem", color: "var(--indigo-l)" }}>
+        <p style={{ fontFamily: "var(--f-head)", fontWeight: 900, fontSize: "1.1rem", color: "var(--coral-l)" }}>
           {stats.totalQuiz}
         </p>
         <p style={{ fontFamily: "var(--f-body)", fontSize: "0.72rem", color: "var(--text3)" }}>quiz complétés</p>
       </div>
-      <div style={{ width: 1, background: "rgba(77,94,232,0.2)" }} />
+      <div style={{ width: 1, background: "rgba(239,110,90,0.2)" }} />
       <div style={{ flex: 1, textAlign: "center" }}>
-        <p style={{ fontFamily: "var(--f-head)", fontWeight: 900, fontSize: "1.1rem", color: "var(--indigo-l)" }}>
+        <p style={{ fontFamily: "var(--f-head)", fontWeight: 900, fontSize: "1.1rem", color: "var(--coral-l)" }}>
           {stats.scoreMoyen ?? "—"}%
         </p>
         <p style={{ fontFamily: "var(--f-body)", fontSize: "0.72rem", color: "var(--text3)" }}>score moyen</p>
       </div>
-      <div style={{ width: 1, background: "rgba(77,94,232,0.2)" }} />
+      <div style={{ width: 1, background: "rgba(239,110,90,0.2)" }} />
       <div style={{ flex: 1, textAlign: "center" }}>
-        <p style={{ fontFamily: "var(--f-head)", fontWeight: 900, fontSize: "1.1rem", color: "var(--indigo-l)" }}>
+        <p style={{ fontFamily: "var(--f-head)", fontWeight: 900, fontSize: "1.1rem", color: "var(--coral-l)" }}>
           {stats.chapitresMaitrises}/{chapitres.length}
         </p>
         <p style={{ fontFamily: "var(--f-body)", fontSize: "0.72rem", color: "var(--text3)" }}>maîtrisés</p>

@@ -81,8 +81,8 @@ export default async function QuizPage({ params }: Props) {
                 gap: 4,
                 padding: "2px 8px",
                 borderRadius: "var(--r-pill)",
-                background: "rgba(77,94,232,0.12)",
-                color: "var(--indigo-l)",
+                background: "rgba(239,110,90,0.12)",
+                color: "var(--coral-l)",
                 fontFamily: "var(--f-head)",
                 fontWeight: 700,
                 fontSize: "0.65rem",
@@ -107,9 +107,9 @@ export default async function QuizPage({ params }: Props) {
                     fontFamily: "var(--f-body)",
                     fontWeight: 500,
                     borderRadius: "var(--r-pill)",
-                    background: "rgba(77,94,232,0.1)",
-                    color: "var(--indigo-l)",
-                    border: "1px solid rgba(77,94,232,0.18)",
+                    background: "rgba(239,110,90,0.1)",
+                    color: "var(--coral-l)",
+                    border: "1px solid rgba(239,110,90,0.18)",
                     lineHeight: 1.6,
                   }}
                 >

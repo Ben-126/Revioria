@@ -125,7 +125,7 @@ export default function PageCGU() {
           <h2 className="font-semibold text-gray-800 text-base">9. Données personnelles</h2>
           <p>
             Le traitement des données personnelles est décrit dans notre{" "}
-            <Link href="/confidentialite" className="text-indigo-600 hover:underline">
+            <Link href="/confidentialite" className="hover:underline" style={{ color: "var(--coral-l)" }}>
               politique de confidentialité
             </Link>.
           </p>
@@ -161,13 +161,13 @@ export default function PageCGU() {
           <h2 className="font-semibold text-gray-800 text-base">13. Contact</h2>
           <p>
             Pour toute question relative aux présentes CGU :{" "}
-            <a href="mailto:benpodrojsky@gmail.com" className="text-indigo-600 hover:underline">
+            <a href="mailto:benpodrojsky@gmail.com" className="hover:underline" style={{ color: "var(--coral-l)" }}>
               benpodrojsky@gmail.com
             </a>
           </p>
         </section>
 
-        <Link href="/" className="inline-block text-indigo-600 hover:underline">
+        <Link href="/" className="inline-block hover:underline" style={{ color: "var(--coral-l)" }}>
           ← Retour à l&apos;accueil
         </Link>
       </main>

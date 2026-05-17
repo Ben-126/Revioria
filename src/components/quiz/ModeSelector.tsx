@@ -10,7 +10,7 @@ export default function ModeSelector({ titreChapitre, onSelectMode }: ModeSelect
   return (
     <div className="space-y-6" data-testid="mode-selector">
       <div className="text-center">
-        <p style={{ fontSize: 12, fontWeight: 600, color: "var(--indigo-l)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 }}>
+        <p style={{ fontSize: 12, fontWeight: 600, color: "var(--coral-l)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 }}>
           {titreChapitre}
         </p>
         <h2 style={{ fontSize: 20, fontWeight: 700, color: "var(--text)" }}>Choisir un mode</h2>
@@ -22,7 +22,7 @@ export default function ModeSelector({ titreChapitre, onSelectMode }: ModeSelect
           onClick={() => onSelectMode("entrainement")}
           data-testid="btn-mode-entrainement"
           className="group relative flex flex-col items-center text-center gap-3 p-6 rounded-2xl transition-all duration-200"
-          style={{ border: "2px solid rgba(77,94,232,0.3)", background: "var(--card)", boxShadow: "0 4px 16px rgba(0,0,0,0.3)", cursor: "pointer" }}
+          style={{ border: "2px solid rgba(239,110,90,0.3)", background: "var(--card)", boxShadow: "0 4px 16px rgba(0,0,0,0.3)", cursor: "pointer" }}
         >
           <span className="text-4xl">🎯</span>
           <div>
@@ -35,7 +35,7 @@ export default function ModeSelector({ titreChapitre, onSelectMode }: ModeSelect
             <span style={{ fontSize: 10, fontWeight: 500, padding: "2px 8px", borderRadius: "var(--r-pill)", background: "rgba(61,214,191,0.1)", color: "var(--teal)" }}>
               Correction immédiate
             </span>
-            <span style={{ fontSize: 10, fontWeight: 500, padding: "2px 8px", borderRadius: "var(--r-pill)", background: "rgba(77,94,232,0.1)", color: "var(--indigo-l)" }}>
+            <span style={{ fontSize: 10, fontWeight: 500, padding: "2px 8px", borderRadius: "var(--r-pill)", background: "rgba(245,200,64,0.1)", color: "var(--amber-l)" }}>
               Adaptatif
             </span>
           </div>

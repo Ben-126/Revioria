@@ -34,7 +34,7 @@ export default function BandeauCookies() {
             Révioria utilise le <strong>stockage local de ton navigateur</strong> (localStorage) pour sauvegarder
             ta progression, tes résultats et tes préférences. Ces données restent sur ton appareil et
             ne sont pas transmises à des tiers à des fins publicitaires.{" "}
-            <Link href="/confidentialite" className="text-indigo-600 hover:underline font-medium">
+            <Link href="/confidentialite" className="hover:underline font-medium" style={{ color: "var(--coral-l)" }}>
               Politique de confidentialité
             </Link>
           </p>
@@ -51,7 +51,7 @@ export default function BandeauCookies() {
           </button>
           <button
             onClick={accepter}
-            className="px-4 py-2 text-sm font-semibold bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+            className="px-4 py-2 text-sm font-semibold rounded-lg transition-colors" style={{ background: "var(--coral)", color: "#fff" }}
           >
             Accepter
           </button>

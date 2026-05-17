@@ -70,10 +70,10 @@ export default function GraphiqueChapitres({
               key={entry.slug}
               fill={
                 entry.slug === chapitreActifSlug
-                  ? "#4D5EE8"
+                  ? "#EF6E5A"
                   : entry.nonFait
                   ? "rgba(255,255,255,0.08)"
-                  : "rgba(77,94,232,0.45)"
+                  : "rgba(239,110,90,0.45)"
               }
             />
           ))}

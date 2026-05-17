@@ -77,7 +77,7 @@ export default function BanniereObjectif() {
           width: `${pourcentage}%`,
           background: atteint
             ? "var(--teal)"
-            : `linear-gradient(90deg, var(--indigo) 0%, ${barreColor} 100%)`,
+            : `linear-gradient(90deg, var(--coral) 0%, ${barreColor} 100%)`,
           transition: "width .5s ease",
         }} />
       </div>

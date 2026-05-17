@@ -34,7 +34,7 @@ export default function ChapitreCard({ matiere, chapitre, niveau, progression }:
       onMouseEnter={(e) => {
         const el = e.currentTarget as HTMLAnchorElement;
         el.style.transform = "translateY(-2px)";
-        el.style.borderColor = "rgba(77,94,232,0.28)";
+        el.style.borderColor = "rgba(239,110,90,0.28)";
         el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.25)";
       }}
       onMouseLeave={(e) => {
@@ -73,9 +73,9 @@ export default function ChapitreCard({ matiere, chapitre, niveau, progression }:
                 fontFamily: "var(--f-body)",
                 fontWeight: 500,
                 borderRadius: "var(--r-pill)",
-                background: "rgba(77,94,232,0.1)",
-                color: "var(--indigo-l)",
-                border: "1px solid rgba(77,94,232,0.18)",
+                background: "rgba(245,200,64,0.1)",
+                color: "var(--amber-l)",
+                border: "1px solid rgba(245,200,64,0.2)",
                 lineHeight: 1.6,
               }}
             >

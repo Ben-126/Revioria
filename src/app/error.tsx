@@ -25,7 +25,7 @@ export default function Error({ error, reset }: ErrorProps) {
       <div className="flex gap-3">
         <button
           onClick={reset}
-          className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold transition-colors"
+          className="px-6 py-3 text-white rounded-xl font-semibold transition-colors" style={{ background: "var(--coral)" }}
         >
           Réessayer
         </button>

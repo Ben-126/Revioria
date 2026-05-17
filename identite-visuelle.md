@@ -40,8 +40,9 @@
 
 | Token | Hex | Rôle |
 |-------|-----|------|
-| `--indigo` | `#4D5EE8` | Couleur principale — liens actifs, boutons secondaires, logo |
-| `--indigo-l` | `#7A8DF5` | Variante claire — labels, états hover de l'indigo |
+| `--coral` | `#EF6E5A` | **Couleur principale** — CTA, états actifs nav, hover interactif, progress bars |
+| `--indigo` | `#1A5FAF` | Couleur secondaire discrète — logo uniquement, usage rare |
+| `--indigo-l` | `#4A8FD4` | Variante claire — usage très secondaire |
 | `--coral` | `#EF6E5A` | Appel à l'action principal — CTA, boutons primaires, featured |
 | `--coral-l` | `#F79080` | Variante claire — hover coral, accents chauds |
 | `--amber` | `#F5C840` | Récompenses, streaks, nouveautés, badges |
@@ -51,8 +52,8 @@
 ### Glows (effets lumineux)
 
 ```css
---glow-i: rgba(77,  94,  232, 0.16)   /* halo indigo */
---glow-c: rgba(239, 110,  90, 0.14)   /* halo coral */
+--glow-i: rgba(26,  95,  175, 0.14)   /* halo bleu classique (secondaire) */
+--glow-c: rgba(239, 110,  90, 0.18)   /* halo coral (dominant) */
 --glow-a: rgba(245, 200,  64, 0.12)   /* halo amber */
 ```
 
@@ -66,11 +67,11 @@
 
 ### Règles d'utilisation couleurs
 
-- **Le coral est la couleur d'action** : tous les CTAs principaux sont en coral.
-- **L'indigo est la couleur d'identité** : logo, liens actifs, états sélectionnés.
-- **L'amber est réservé aux récompenses** : streaks, badges, nouveautés. Ne pas l'utiliser sur des éléments ordinaires.
-- **Le teal indique la réussite** : barres de progression complètes, checkmarks, confirmations.
-- **Jamais de violet pur** : le violet (`#7C5CFC` type) est exclu — il renvoie trop à l'imagerie "IA/startup tech".
+- **Le coral est la couleur d'action ET d'identité** : CTAs, états actifs de navigation, hover des cards, progress bars quiz, submit buttons.
+- **L'amber est la couleur de récompense ET d'information** : gamification (XP, niveaux, badges), tags de compétences, labels d'info secondaire, nouveautés.
+- **Le teal indique la réussite** : barres de progression complètes, checkmarks, confirmations, réponses correctes.
+- **L'indigo est réservé au logo** : couleur de marque pour le SVG logo uniquement. Ne pas utiliser pour les états interactifs.
+- **Jamais de violet pur** : le violet (`#7C5CFC` type) est exclu — renvoie à l'imagerie "IA/startup tech".
 
 ---
 

@@ -69,8 +69,8 @@ export default function Header() {
     alignItems: "center",
     gap: 6,
     position: "relative",
-    color: isActive(href) ? "var(--indigo-l)" : "var(--text2)",
-    background: isActive(href) ? "rgba(77,94,232,0.12)" : "transparent",
+    color: isActive(href) ? "var(--coral-l)" : "var(--text2)",
+    background: isActive(href) ? "rgba(239,110,90,0.12)" : "transparent",
   });
 
   return (
@@ -127,13 +127,13 @@ export default function Header() {
               style={getLinkStyle(href)}
               onMouseEnter={(e) => {
                 const active = isActive(href);
-                (e.currentTarget as HTMLAnchorElement).style.background = active ? "rgba(77,94,232,0.2)" : "rgba(255,255,255,0.06)";
+                (e.currentTarget as HTMLAnchorElement).style.background = active ? "rgba(239,110,90,0.2)" : "rgba(255,255,255,0.06)";
                 if (!active) (e.currentTarget as HTMLAnchorElement).style.color = "var(--text)";
               }}
               onMouseLeave={(e) => {
                 const active = isActive(href);
-                (e.currentTarget as HTMLAnchorElement).style.background = active ? "rgba(77,94,232,0.12)" : "transparent";
-                (e.currentTarget as HTMLAnchorElement).style.color = active ? "var(--indigo-l)" : "var(--text2)";
+                (e.currentTarget as HTMLAnchorElement).style.background = active ? "rgba(239,110,90,0.12)" : "transparent";
+                (e.currentTarget as HTMLAnchorElement).style.color = active ? "var(--coral-l)" : "var(--text2)";
               }}
             >
               <span>{icon}</span>
@@ -173,11 +173,11 @@ export default function Header() {
               width: 44,
               height: 44,
               borderRadius: "var(--r-sm)",
-              color: isActive("/parametres") ? "var(--indigo-l)" : "var(--text3)",
+              color: isActive("/parametres") ? "var(--coral-l)" : "var(--text3)",
               transition: "background .15s, color .15s",
             }}
             onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255,255,255,0.06)"; (e.currentTarget as HTMLAnchorElement).style.color = "var(--text2)"; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; (e.currentTarget as HTMLAnchorElement).style.color = isActive("/parametres") ? "var(--indigo-l)" : "var(--text3)"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; (e.currentTarget as HTMLAnchorElement).style.color = isActive("/parametres") ? "var(--coral-l)" : "var(--text3)"; }}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="3" />
@@ -253,7 +253,7 @@ export default function Header() {
               width: 44,
               height: 44,
               borderRadius: "var(--r-sm)",
-              background: menuOuvert ? "rgba(77,94,232,0.12)" : "transparent",
+              background: menuOuvert ? "rgba(239,110,90,0.12)" : "transparent",
               border: "none",
               cursor: "pointer",
               color: "var(--text2)",
@@ -314,9 +314,9 @@ export default function Header() {
                 fontFamily: "var(--f-body)",
                 fontWeight: 600,
                 fontSize: "1rem",
-                color: isActive(href) ? "var(--indigo-l)" : "var(--text)",
-                background: isActive(href) ? "rgba(77,94,232,0.12)" : "rgba(255,255,255,0.03)",
-                border: isActive(href) ? "1px solid rgba(77,94,232,0.25)" : "1px solid transparent",
+                color: isActive(href) ? "var(--coral-l)" : "var(--text)",
+                background: isActive(href) ? "rgba(239,110,90,0.12)" : "rgba(255,255,255,0.03)",
+                border: isActive(href) ? "1px solid rgba(239,110,90,0.25)" : "1px solid transparent",
                 position: "relative",
               }}
             >
@@ -334,7 +334,7 @@ export default function Header() {
                 }}>{badge}</span>
               )}
               {isActive(href) && (
-                <span style={{ marginLeft: "auto", fontSize: 12, color: "var(--indigo-l)" }}>●</span>
+                <span style={{ marginLeft: "auto", fontSize: 12, color: "var(--coral-l)" }}>●</span>
               )}
             </Link>
           ))}
@@ -353,9 +353,9 @@ export default function Header() {
               fontFamily: "var(--f-body)",
               fontWeight: 600,
               fontSize: "1rem",
-              color: isActive("/parametres") ? "var(--indigo-l)" : "var(--text2)",
-              background: isActive("/parametres") ? "rgba(77,94,232,0.12)" : "transparent",
-              border: isActive("/parametres") ? "1px solid rgba(77,94,232,0.25)" : "1px solid transparent",
+              color: isActive("/parametres") ? "var(--coral-l)" : "var(--text2)",
+              background: isActive("/parametres") ? "rgba(239,110,90,0.12)" : "transparent",
+              border: isActive("/parametres") ? "1px solid rgba(239,110,90,0.25)" : "1px solid transparent",
             }}
           >
             <span style={{ fontSize: 20 }}>⚙️</span>

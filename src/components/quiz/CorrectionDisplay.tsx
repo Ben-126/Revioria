@@ -212,9 +212,9 @@ export default function CorrectionDisplay({
           data-testid="btn-pas-compris"
           className="w-full py-3 rounded-xl font-semibold"
           style={{
-            background: "rgba(77,94,232,0.08)",
-            border: "1px solid rgba(77,94,232,0.25)",
-            color: "var(--indigo-l)",
+            background: "rgba(245,200,64,0.1)",
+            border: "1px solid rgba(245,200,64,0.25)",
+            color: "var(--amber-l)",
             cursor: chargementSimplify ? "wait" : "pointer",
             fontSize: 14,
           }}
@@ -227,10 +227,10 @@ export default function CorrectionDisplay({
       {explicationSimplifiee && (
         <div
           className="rounded-xl p-4 space-y-3"
-          style={{ background: "rgba(77,94,232,0.06)", border: "1px solid rgba(77,94,232,0.2)" }}
+          style={{ background: "rgba(245,200,64,0.08)", border: "1px solid rgba(245,200,64,0.2)" }}
           data-testid="explication-simplifiee"
         >
-          <p style={{ fontSize: 12, fontWeight: 700, color: "var(--indigo-l)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+          <p style={{ fontSize: 12, fontWeight: 700, color: "var(--amber-l)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
             🧩 Explication simplifiée
           </p>
           <p style={{ fontSize: 14, color: "var(--text)", lineHeight: 1.65 }}>{explicationSimplifiee}</p>
@@ -247,7 +247,7 @@ export default function CorrectionDisplay({
         onClick={onSuivant}
         data-testid="btn-suivant"
         className="w-full py-3 rounded-xl font-semibold transition-colors"
-        style={{ background: "var(--indigo)", color: "#fff", border: "none", cursor: "pointer" }}
+        style={{ background: "var(--coral)", color: "#fff", border: "none", cursor: "pointer" }}
       >
         {estDerniere ? "Voir mon score" : "Question suivante →"}
       </button>

@@ -64,10 +64,10 @@ export default function TopProgressBar() {
         style={{
           height: "100%",
           width: `${width}%`,
-          background: "linear-gradient(90deg, var(--indigo) 0%, var(--coral) 100%)",
+          background: "linear-gradient(90deg, var(--coral) 0%, var(--amber) 100%)",
           transition: fading ? "opacity 0.35s ease" : "width 0.38s ease",
           opacity: fading ? 0 : 1,
-          boxShadow: "0 0 10px rgba(77,94,232,0.65)",
+          boxShadow: "0 0 10px rgba(239,110,90,0.65)",
           borderRadius: "0 2px 2px 0",
         }}
       />

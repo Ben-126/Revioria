@@ -38,8 +38,8 @@ export default function Classement({ userId }: ClassementProps) {
             onClick={() => setOnglet(o)}
             className="px-4 py-2 rounded-full text-sm font-semibold transition-colors"
             style={onglet === o
-              ? { background: "var(--indigo)", color: "#fff", border: "none", cursor: "pointer" }
-              : { background: "transparent", color: "var(--indigo-l)", border: "1px solid rgba(77,94,232,0.4)", cursor: "pointer" }}
+              ? { background: "var(--coral)", color: "#fff", border: "none", cursor: "pointer" }
+              : { background: "transparent", color: "var(--amber-l)", border: "1px solid rgba(239,110,90,0.4)", cursor: "pointer" }}
           >
             {o === "global" ? "🌍 Global" : "👥 Amis"}
           </button>
@@ -48,7 +48,7 @@ export default function Classement({ userId }: ClassementProps) {
 
       {chargement ? (
         <div className="flex justify-center py-8">
-          <div className="w-8 h-8 border-4 rounded-full animate-spin" style={{ borderColor: "rgba(77,94,232,0.3)", borderTopColor: "var(--indigo)" }} />
+          <div className="w-8 h-8 border-4 rounded-full animate-spin" style={{ borderColor: "rgba(239,110,90,0.3)", borderTopColor: "var(--coral)" }} />
         </div>
       ) : entrees.length === 0 ? (
         <p className="text-center py-8 text-sm" style={{ color: "var(--text3)" }}>
@@ -64,7 +64,7 @@ export default function Classement({ userId }: ClassementProps) {
                 key={e.id}
                 className="flex items-center gap-3 px-4 py-3 rounded-xl"
                 style={estMoi
-                  ? { background: "rgba(77,94,232,0.1)", border: "1px solid rgba(77,94,232,0.3)", fontWeight: 600 }
+                  ? { background: "rgba(239,110,90,0.1)", border: "1px solid rgba(239,110,90,0.3)", fontWeight: 600 }
                   : { background: "var(--card)", border: "1px solid var(--border)" }}
               >
                 <span className="w-7 text-center font-bold text-sm" style={{ color: "var(--text3)" }}>
@@ -72,7 +72,7 @@ export default function Classement({ userId }: ClassementProps) {
                 </span>
                 <span className="text-lg">{niveau.emoji}</span>
                 <span className="flex-1 text-sm truncate" style={{ color: "var(--text)" }}>{e.pseudo}{estMoi ? " (moi)" : ""}</span>
-                <span style={{ color: "var(--indigo-l)", fontWeight: 700, fontSize: 14 }}>{e.xp_total} XP</span>
+                <span style={{ color: "var(--amber-l)", fontWeight: 700, fontSize: 14 }}>{e.xp_total} XP</span>
                 {e.streak_jours >= 3 && (
                   <span title={`Série de ${e.streak_jours} jours`} className="text-sm">🔥</span>
                 )}

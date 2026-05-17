@@ -119,7 +119,7 @@ export default function ReconnaissanceVocale() {
             className="px-3 py-1.5 text-sm font-medium transition-colors"
             style={
               langue === l.code
-                ? { background: "var(--indigo)", color: "#fff", borderRadius: "var(--r-pill)", border: "2px solid var(--indigo)" }
+                ? { background: "var(--coral)", color: "#fff", borderRadius: "var(--r-pill)", border: "2px solid var(--coral)" }
                 : { background: "transparent", color: "var(--text2)", borderRadius: "var(--r-pill)", border: "2px solid var(--border2)" }
             }
           >
@@ -134,7 +134,7 @@ export default function ReconnaissanceVocale() {
           onClick={enCours ? arreter : demarrer}
           className={`w-20 h-20 rounded-full flex items-center justify-center text-3xl transition-all duration-200 ${enCours ? "scale-110" : ""}`}
           style={{
-            background: enCours ? "rgba(239,110,90,0.9)" : "var(--indigo)",
+            background: enCours ? "rgba(239,110,90,0.9)" : "var(--coral)",
             color: "#fff",
             boxShadow: "0 4px 16px rgba(0,0,0,0.3)",
           }}

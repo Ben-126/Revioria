@@ -352,7 +352,7 @@ export const MATIERES: Matiere[] = [
     slug: "emc",
     nom: "Enseignement moral et civique",
     emoji: "⚖️",
-    couleur: "bg-indigo-500",
+    couleur: "bg-blue-600",
     chapitres: [
       {
         slug: "etat-de-droit",

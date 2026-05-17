@@ -51,9 +51,9 @@ export default function GraphiqueEvolution({ entrees }: GraphiqueEvolutionProps)
         <Line
           type="monotone"
           dataKey="score"
-          stroke="#4D5EE8"
+          stroke="#EF6E5A"
           strokeWidth={2}
-          dot={{ r: 4, fill: "#4D5EE8" }}
+          dot={{ r: 4, fill: "#EF6E5A" }}
           activeDot={{ r: 6 }}
           isAnimationActive
         />

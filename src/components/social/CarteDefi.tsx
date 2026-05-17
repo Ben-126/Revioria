@@ -17,7 +17,7 @@ export default function CarteDefi({ defi, resultats, userId }: CarteDefiProps) {
   return (
     <div className="rounded-xl p-4 space-y-3" style={expire
       ? { background: "rgba(255,255,255,0.03)", border: "1px solid var(--border)", opacity: 0.7 }
-      : { background: "var(--card)", border: "1px solid rgba(77,94,232,0.2)" }}>
+      : { background: "var(--card)", border: "1px solid rgba(239,110,90,0.2)" }}>
       <div className="flex items-center justify-between">
         <div>
           <p style={{ fontSize: 14, fontWeight: 600, color: "var(--text)" }}>
@@ -36,7 +36,7 @@ export default function CarteDefi({ defi, resultats, userId }: CarteDefiProps) {
           <Link
             href={lien}
             className="px-4 py-2 text-xs font-semibold rounded-lg transition-colors"
-            style={{ background: "var(--indigo)", color: "#fff" }}
+            style={{ background: "var(--coral)", color: "#fff" }}
           >
             Relever
           </Link>

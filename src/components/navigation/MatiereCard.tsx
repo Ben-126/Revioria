@@ -24,7 +24,7 @@ export default function MatiereCard({ matiere, niveau }: MatiereCardProps) {
       onMouseEnter={(e) => {
         const el = e.currentTarget as HTMLAnchorElement;
         el.style.transform = "translateY(-3px)";
-        el.style.borderColor = "rgba(77,94,232,0.28)";
+        el.style.borderColor = "rgba(239,110,90,0.28)";
         el.style.boxShadow = "0 8px 24px rgba(0,0,0,0.3)";
       }}
       onMouseLeave={(e) => {
@@ -40,7 +40,7 @@ export default function MatiereCard({ matiere, niveau }: MatiereCardProps) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "rgba(77,94,232,0.06)",
+        background: "rgba(239,110,90,0.06)",
         borderBottom: "1px solid var(--border)",
       }}>
         <span className="card-emoji" style={{ fontSize: "2rem" }} role="img" aria-label={matiere.nom}>

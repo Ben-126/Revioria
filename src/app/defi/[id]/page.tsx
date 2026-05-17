@@ -43,7 +43,7 @@ export default function PageDefi() {
       <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: "var(--bg)" }}>
         <Header />
         <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <div style={{ width: 40, height: 40, border: "4px solid rgba(77,94,232,0.3)", borderTopColor: "var(--indigo)", borderRadius: "50%" }} className="animate-spin" />
+          <div style={{ width: 40, height: 40, border: "4px solid rgba(239,110,90,0.3)", borderTopColor: "var(--coral)", borderRadius: "50%" }} className="animate-spin" />
         </div>
       </div>
     );
@@ -56,7 +56,7 @@ export default function PageDefi() {
         <main style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 16 }}>
           <p style={{ fontSize: 40 }}>😕</p>
           <p style={{ color: "var(--text2)", fontWeight: 500 }}>{erreur ?? "Défi introuvable"}</p>
-          <button onClick={() => router.push("/")} style={{ color: "var(--indigo-l)", fontSize: 14, background: "none", border: "none", cursor: "pointer" }}>
+          <button onClick={() => router.push("/")} style={{ color: "var(--coral-l)", fontSize: 14, background: "none", border: "none", cursor: "pointer" }}>
             Retour à l&apos;accueil
           </button>
         </main>
@@ -92,7 +92,7 @@ export default function PageDefi() {
         {!dejaFait && !expire && (
           <button
             onClick={() => router.push(`/${defi.niveau_scolaire}/${defi.matiere_slug}/${defi.chapitre_slug}/quiz?defi=${defi.id}&timer=${defi.time_limit_sec}`)}
-            style={{ width: "100%", padding: "14px", background: "var(--indigo)", color: "#fff", fontWeight: 600, borderRadius: 14, border: "none", cursor: "pointer", fontSize: 16 }}
+            style={{ width: "100%", padding: "14px", background: "var(--coral)", color: "#fff", fontWeight: 600, borderRadius: 14, border: "none", cursor: "pointer", fontSize: 16 }}
           >
             ⚡ Commencer le défi
           </button>

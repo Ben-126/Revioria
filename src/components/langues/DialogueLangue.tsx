@@ -162,7 +162,7 @@ export default function DialogueLangue() {
               className="px-3 py-1.5 text-sm font-medium transition-colors"
               style={
                 langue === l.code
-                  ? { background: "var(--indigo)", color: "#fff", borderRadius: "var(--r-pill)", border: "2px solid var(--indigo)" }
+                  ? { background: "var(--coral)", color: "#fff", borderRadius: "var(--r-pill)", border: "2px solid var(--coral)" }
                   : { background: "transparent", color: "var(--text2)", borderRadius: "var(--r-pill)", border: "2px solid var(--border2)" }
               }
             >
@@ -210,7 +210,7 @@ export default function DialogueLangue() {
                 className="max-w-[85%] px-3 py-2 text-sm leading-relaxed whitespace-pre-wrap"
                 style={
                   msg.role === "user"
-                    ? { background: "var(--indigo)", color: "#fff", borderRadius: "16px 16px 4px 16px" }
+                    ? { background: "var(--coral)", color: "#fff", borderRadius: "16px 16px 4px 16px" }
                     : { background: "var(--card)", color: "var(--text)", border: "1px solid var(--border)", borderRadius: "16px 16px 16px 4px" }
                 }
               >
@@ -297,7 +297,7 @@ export default function DialogueLangue() {
             disabled={!input.trim() || enCours}
             className="flex-shrink-0 w-9 h-9 transition-colors flex items-center justify-center"
             style={{
-              background: !input.trim() || enCours ? "rgba(255,255,255,0.07)" : "var(--indigo)",
+              background: !input.trim() || enCours ? "rgba(255,255,255,0.07)" : "var(--coral)",
               color: !input.trim() || enCours ? "var(--text3)" : "#fff",
               borderRadius: "var(--r-sm)",
             }}

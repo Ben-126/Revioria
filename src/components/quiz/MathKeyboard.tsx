@@ -160,7 +160,7 @@ export default function MathKeyboard({ onInsert }: MathKeyboardProps) {
   return (
     <div className="rounded-xl overflow-hidden" style={{ border: "1px solid var(--border)", background: "var(--card)", boxShadow: "0 4px 16px rgba(0,0,0,0.3)" }}>
       {/* Barre des onglets */}
-      <div className="flex overflow-x-auto scrollbar-hide" style={{ background: "var(--indigo)" }}>
+      <div className="flex overflow-x-auto scrollbar-hide" style={{ background: "var(--coral)" }}>
         {ONGLETS.map((onglet) => (
           <button
             key={onglet.id}

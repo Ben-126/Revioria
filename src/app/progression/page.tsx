@@ -113,7 +113,7 @@ export default function ProgressionPage() {
       <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: "var(--bg)" }}>
         <Header />
         <main style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <div style={{ width: 32, height: 32, border: "4px solid rgba(77,94,232,0.3)", borderTopColor: "var(--indigo)", borderRadius: "50%" }} className="animate-spin" />
+          <div style={{ width: 32, height: 32, border: "4px solid rgba(239,110,90,0.3)", borderTopColor: "var(--coral)", borderRadius: "50%" }} className="animate-spin" />
         </main>
       </div>
     );
@@ -131,7 +131,7 @@ export default function ProgressionPage() {
           </p>
           <Link
             href="/app"
-            style={{ padding: "12px 24px", background: "var(--indigo)", color: "#fff", borderRadius: "var(--r-md)", fontWeight: 600, textDecoration: "none" }}
+            style={{ padding: "12px 24px", background: "var(--coral)", color: "#fff", borderRadius: "var(--r-md)", fontWeight: 600, textDecoration: "none" }}
           >
             Choisir une matière
           </Link>
@@ -146,17 +146,17 @@ export default function ProgressionPage() {
       <main style={{ maxWidth: 896, margin: "0 auto", width: "100%", padding: "24px 16px 48px", display: "flex", flexDirection: "column", gap: 24 }}>
 
         {totalQuiz > 0 && (
-          <div style={{ display: "flex", gap: 12, padding: 16, background: "rgba(77,94,232,0.08)", borderRadius: "var(--r-lg)", border: "1px solid rgba(77,94,232,0.18)" }}>
+          <div style={{ display: "flex", gap: 12, padding: 16, background: "rgba(239,110,90,0.08)", borderRadius: "var(--r-lg)", border: "1px solid rgba(239,110,90,0.18)" }}>
             <div style={{ flex: 1, textAlign: "center" }}>
-              <p style={{ fontSize: 24, fontWeight: 700, color: "var(--indigo-l)" }}>{totalQuiz}</p>
-              <p style={{ fontSize: 12, color: "var(--indigo-l)", opacity: 0.7 }}>quiz complétés</p>
+              <p style={{ fontSize: 24, fontWeight: 700, color: "var(--coral-l)" }}>{totalQuiz}</p>
+              <p style={{ fontSize: 12, color: "var(--coral-l)", opacity: 0.7 }}>quiz complétés</p>
             </div>
-            <div style={{ width: 1, background: "rgba(77,94,232,0.3)" }} />
+            <div style={{ width: 1, background: "rgba(239,110,90,0.3)" }} />
             <div style={{ flex: 1, textAlign: "center" }}>
-              <p style={{ fontSize: 24, fontWeight: 700, color: "var(--indigo-l)" }}>
+              <p style={{ fontSize: 24, fontWeight: 700, color: "var(--coral-l)" }}>
                 {scoreMoyenGlobal !== null ? `${scoreMoyenGlobal}%` : "—"}
               </p>
-              <p style={{ fontSize: 12, color: "var(--indigo-l)", opacity: 0.7 }}>score moyen global</p>
+              <p style={{ fontSize: 12, color: "var(--coral-l)", opacity: 0.7 }}>score moyen global</p>
             </div>
           </div>
         )}
@@ -168,20 +168,20 @@ export default function ProgressionPage() {
             <div style={{ background: "var(--card)", borderRadius: "var(--r-lg)", border: "1px solid var(--border)", padding: 20, display: "flex", flexDirection: "column", gap: 16 }}>
               {/* Niveau actuel */}
               <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", width: 64, height: 64, borderRadius: "var(--r-md)", background: "rgba(77,94,232,0.08)", border: "2px solid rgba(77,94,232,0.3)", flexShrink: 0 }}>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", width: 64, height: 64, borderRadius: "var(--r-md)", background: "rgba(239,110,90,0.08)", border: "2px solid rgba(239,110,90,0.3)", flexShrink: 0 }}>
                   <span style={{ fontSize: 24 }}>{niveau.emoji}</span>
-                  <span style={{ fontSize: 11, fontWeight: 700, color: "var(--indigo-l)" }}>Niv. {niveau.numero}</span>
+                  <span style={{ fontSize: 11, fontWeight: 700, color: "var(--coral-l)" }}>Niv. {niveau.numero}</span>
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 4 }}>
                     <p style={{ fontSize: 18, fontWeight: 700, color: "var(--text)" }}>{niveau.nom}</p>
-                    <p style={{ fontSize: 14, color: "var(--indigo-l)", fontWeight: 500 }}>{profilGami.xpTotal} XP</p>
+                    <p style={{ fontSize: 14, color: "var(--coral-l)", fontWeight: 500 }}>{profilGami.xpTotal} XP</p>
                   </div>
                   {progression.xpPourMonter > 0 ? (
                     <>
-                      <div style={{ width: "100%", height: 10, background: "rgba(77,94,232,0.15)", borderRadius: 999, overflow: "hidden" }}>
+                      <div style={{ width: "100%", height: 10, background: "rgba(239,110,90,0.15)", borderRadius: 999, overflow: "hidden" }}>
                         <div
-                          style={{ height: "100%", background: "var(--indigo)", borderRadius: 999, transition: "width 0.7s", width: `${progression.pourcentage}%` }}
+                          style={{ height: "100%", background: "var(--coral)", borderRadius: 999, transition: "width 0.7s", width: `${progression.pourcentage}%` }}
                         />
                       </div>
                       <p style={{ fontSize: 11, color: "var(--text3)", marginTop: 4 }}>
@@ -252,8 +252,8 @@ export default function ProgressionPage() {
                 cursor: "pointer",
                 transition: "all 0.15s",
                 ...(niveauActif === n.slug
-                  ? { background: "var(--indigo)", color: "#fff", borderColor: "var(--indigo)" }
-                  : { background: "transparent", color: "var(--indigo-l)", borderColor: "rgba(77,94,232,0.4)" })
+                  ? { background: "var(--coral)", color: "#fff", borderColor: "var(--coral)" }
+                  : { background: "transparent", color: "var(--coral-l)", borderColor: "rgba(239,110,90,0.4)" })
               }}
             >
               {n.emoji} {n.label}
@@ -275,7 +275,7 @@ export default function ProgressionPage() {
                 border: "none",
                 transition: "all 0.15s",
                 ...(matiereActiveSlug === m.slug
-                  ? { background: "var(--indigo)", color: "#fff" }
+                  ? { background: "var(--coral)", color: "#fff" }
                   : { background: "rgba(255,255,255,0.06)", color: "var(--text2)" })
               }}
             >

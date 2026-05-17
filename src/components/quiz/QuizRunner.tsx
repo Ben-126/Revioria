@@ -385,7 +385,7 @@ export default function QuizRunner({ matiereSlug, chapitreSlug, titreChapitre, n
 
         {/* Fausse barre de progression */}
         <div style={{ height: 3, borderRadius: 999, background: "rgba(255,255,255,0.07)", overflow: "hidden", marginBottom: 20 }}>
-          <div className="quiz-loader-bar" style={{ height: "100%", borderRadius: 999, background: "linear-gradient(90deg, var(--indigo), var(--indigo-l))" }} />
+          <div className="quiz-loader-bar" style={{ height: "100%", borderRadius: 999, background: "linear-gradient(90deg, var(--coral), var(--coral-l))" }} />
         </div>
 
         {/* Skeleton question cards */}
@@ -425,7 +425,7 @@ export default function QuizRunner({ matiereSlug, chapitreSlug, titreChapitre, n
         <p style={{ color: "var(--text2)", fontSize: 14 }}>{erreur}</p>
         <button
           onClick={() => chargerQuiz()}
-          style={{ padding: "12px 24px", background: "var(--indigo)", color: "#fff", borderRadius: "var(--r-md)", fontWeight: 600, border: "none", cursor: "pointer" }}
+          style={{ padding: "12px 24px", background: "var(--coral)", color: "#fff", borderRadius: "var(--r-md)", fontWeight: 600, border: "none", cursor: "pointer" }}
         >
           Réessayer
         </button>
@@ -520,8 +520,8 @@ export default function QuizRunner({ matiereSlug, chapitreSlug, titreChapitre, n
               fontWeight: 600,
               padding: "4px 8px",
               borderRadius: "var(--r-pill)",
-              background: niveau === "debutant" ? "rgba(61,214,191,0.1)" : "rgba(77,94,232,0.1)",
-              color: niveau === "debutant" ? "var(--teal)" : "var(--indigo-l)",
+              background: niveau === "debutant" ? "rgba(61,214,191,0.1)" : "rgba(239,110,90,0.1)",
+              color: niveau === "debutant" ? "var(--teal)" : "var(--coral-l)",
             }}>
               {niveau === "debutant" ? "Niveau débutant" : "Niveau avancé"}
             </span>
@@ -541,7 +541,7 @@ export default function QuizRunner({ matiereSlug, chapitreSlug, titreChapitre, n
 
       {etat === "verification" && (
         <div className="flex flex-col items-center justify-center py-8 gap-3" data-testid="verification">
-          <div className="w-8 h-8 border-4 rounded-full animate-spin" style={{ borderColor: "rgba(77,94,232,0.3)", borderTopColor: "var(--indigo)" }} />
+          <div className="w-8 h-8 border-4 rounded-full animate-spin" style={{ borderColor: "rgba(239,110,90,0.3)", borderTopColor: "var(--coral)" }} />
           <p style={{ color: "var(--text2)", fontSize: 14 }}>Correction en cours...</p>
         </div>
       )}

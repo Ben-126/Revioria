@@ -25,9 +25,9 @@ export default function BoutonHautDePage() {
         width: 44,
         height: 44,
         borderRadius: "var(--r-pill)",
-        background: "rgba(77,94,232,0.15)",
-        border: "1px solid rgba(77,94,232,0.3)",
-        color: "var(--indigo-l)",
+        background: "rgba(239,110,90,0.15)",
+        border: "1px solid rgba(239,110,90,0.3)",
+        color: "var(--coral-l)",
         cursor: "pointer",
         display: "flex",
         alignItems: "center",
@@ -39,11 +39,11 @@ export default function BoutonHautDePage() {
         lineHeight: 1,
       }}
       onMouseEnter={(e) => {
-        (e.currentTarget as HTMLButtonElement).style.background = "rgba(77,94,232,0.28)";
+        (e.currentTarget as HTMLButtonElement).style.background = "rgba(239,110,90,0.28)";
         (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-2px)";
       }}
       onMouseLeave={(e) => {
-        (e.currentTarget as HTMLButtonElement).style.background = "rgba(77,94,232,0.15)";
+        (e.currentTarget as HTMLButtonElement).style.background = "rgba(239,110,90,0.15)";
         (e.currentTarget as HTMLButtonElement).style.transform = "translateY(0)";
       }}
     >

@@ -81,7 +81,7 @@ export default function ScoreDisplay({
           particleCount: pourcentage >= 80 ? 150 : 80,
           spread: 70,
           origin: { y: 0.55 },
-          colors: ["#4D5EE8", "#EF6E5A", "#F5C840", "#3DD6BF"],
+          colors: ["#EF6E5A", "#EF6E5A", "#F5C840", "#3DD6BF"],
         });
       });
     }
@@ -210,15 +210,15 @@ export default function ScoreDisplay({
 
       {/* Compétences travaillées (mode entraînement) */}
       {!modeControle && competences.length > 0 && (
-        <div className="seq-fade-up seq-5 text-left rounded-xl p-4" style={{ background: "rgba(77,94,232,0.08)", border: "1px solid rgba(77,94,232,0.2)" }}>
-          <p style={{ fontSize: 12, fontWeight: 600, color: "var(--indigo-l)", marginBottom: 8, display: "flex", alignItems: "center", gap: 6 }}>
+        <div className="seq-fade-up seq-5 text-left rounded-xl p-4" style={{ background: "rgba(245,200,64,0.1)", border: "1px solid rgba(245,200,64,0.2)" }}>
+          <p style={{ fontSize: 12, fontWeight: 600, color: "var(--amber-l)", marginBottom: 8, display: "flex", alignItems: "center", gap: 6 }}>
             <span aria-hidden="true">📋</span>
             Compétences travaillées
           </p>
           <ul className="space-y-1.5">
             {competences.map((comp) => (
-              <li key={comp.id} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14, color: "var(--indigo-l)" }}>
-                <span style={{ color: "var(--indigo-l)", fontSize: 12 }} aria-hidden="true">✓</span>
+              <li key={comp.id} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14, color: "var(--amber-l)" }}>
+                <span style={{ color: "var(--amber-l)", fontSize: 12 }} aria-hidden="true">✓</span>
                 {comp.titre}
               </li>
             ))}
@@ -250,7 +250,7 @@ export default function ScoreDisplay({
                   onClick={onChoisirMode}
                   data-testid="btn-choisir-mode"
                   className="btn-action flex-1 py-3 rounded-xl font-semibold"
-                  style={{ background: "var(--indigo)", color: "#fff", border: "none", cursor: "pointer" }}
+                  style={{ background: "var(--coral)", color: "#fff", border: "none", cursor: "pointer" }}
                 >
                   🎯 Mode entraînement
                 </button>
@@ -282,7 +282,7 @@ export default function ScoreDisplay({
                 onClick={onRecommencer}
                 data-testid="btn-recommencer"
                 className="btn-action flex-1 py-3 rounded-xl font-semibold"
-                style={{ background: "var(--indigo)", color: "#fff", border: "none", cursor: "pointer" }}
+                style={{ background: "var(--coral)", color: "#fff", border: "none", cursor: "pointer" }}
               >
                 🔄 Refaire le quiz
               </button>

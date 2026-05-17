@@ -29,7 +29,7 @@ const STYLE_PAR_ETAT: Record<EtatJour, React.CSSProperties> = {
   gele:    { background: "rgba(96,165,250,0.2)", color: "#93c5fd", fontWeight: 500 },
   manque:  { background: "rgba(255,255,255,0.04)", color: "var(--text3)" },
   futur:   { background: "transparent", color: "var(--text3)", opacity: 0.3 },
-  aujourd: { background: "var(--indigo)", color: "#fff", fontWeight: 700, boxShadow: "0 0 0 2px rgba(122,141,245,0.4)" },
+  aujourd: { background: "var(--coral)", color: "#fff", fontWeight: 700, boxShadow: "0 0 0 2px rgba(239,110,90,0.4)" },
 };
 
 const TITRE_PAR_ETAT: Record<EtatJour, string> = {
@@ -106,7 +106,7 @@ export default function CalendrierStreak({ profil }: CalendrierStreakProps) {
         <LegendItem bgStyle={{ background: "#f97316" }} label="Quiz fait" />
         <LegendItem bgStyle={{ background: "rgba(96,165,250,0.2)" }} label="Gel utilisé" />
         <LegendItem bgStyle={{ background: "rgba(255,255,255,0.04)", border: "1px solid var(--border)" }} label="Manqué" />
-        <LegendItem bgStyle={{ background: "var(--indigo)" }} label="Aujourd'hui" />
+        <LegendItem bgStyle={{ background: "var(--coral)" }} label="Aujourd'hui" />
       </div>
     </div>
   );

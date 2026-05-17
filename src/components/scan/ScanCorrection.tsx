@@ -94,7 +94,7 @@ export default function ScanCorrection() {
       {(etat === "idle" || etat === "erreur") && (
         <div
           className="rounded-2xl p-8 text-center transition-colors cursor-pointer"
-          style={{ border: "2px dashed rgba(77,94,232,0.4)", background: "rgba(77,94,232,0.06)" }}
+          style={{ border: "2px dashed rgba(239,110,90,0.4)", background: "rgba(239,110,90,0.06)" }}
           onClick={() => inputRef.current?.click()}
           onDrop={handleDrop}
           onDragOver={(e) => e.preventDefault()}
@@ -104,7 +104,7 @@ export default function ScanCorrection() {
           aria-label="Zone de dépôt ou clic pour choisir une image"
         >
           <div className="text-5xl mb-4">📷</div>
-          <p style={{ color: "var(--indigo-l)", fontWeight: 600, fontSize: 18, marginBottom: 4 }}>
+          <p style={{ color: "var(--coral-l)", fontWeight: 600, fontSize: 18, marginBottom: 4 }}>
             Prends en photo ton exercice
           </p>
           <p style={{ color: "var(--text3)", fontSize: 14, marginBottom: 16 }}>
@@ -115,7 +115,7 @@ export default function ScanCorrection() {
               type="button"
               onClick={(e) => { e.stopPropagation(); inputRef.current?.click(); }}
               className="px-5 py-2.5 rounded-xl font-semibold text-sm transition-colors"
-              style={{ background: "var(--indigo)", color: "#fff", border: "none", cursor: "pointer" }}
+              style={{ background: "var(--coral)", color: "#fff", border: "none", cursor: "pointer" }}
             >
               📷 Appareil photo / Galerie
             </button>
@@ -166,7 +166,7 @@ export default function ScanCorrection() {
               onClick={analyser}
               disabled={etat === "chargement"}
               className="flex-[2] py-3 rounded-xl font-semibold text-sm transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
-              style={{ background: "var(--indigo)", color: "#fff", border: "none", cursor: "pointer" }}
+              style={{ background: "var(--coral)", color: "#fff", border: "none", cursor: "pointer" }}
             >
               {etat === "chargement" ? (
                 <>
@@ -195,8 +195,8 @@ export default function ScanCorrection() {
 
           {/* Explication */}
           {resultat.explication && (
-            <div className="rounded-2xl p-5" style={{ background: "var(--card)", border: "1px solid rgba(77,94,232,0.2)" }}>
-              <p style={{ fontSize: 12, fontWeight: 600, color: "var(--indigo-l)", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8 }}>Explication</p>
+            <div className="rounded-2xl p-5" style={{ background: "var(--card)", border: "1px solid rgba(239,110,90,0.2)" }}>
+              <p style={{ fontSize: 12, fontWeight: 600, color: "var(--coral-l)", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8 }}>Explication</p>
               <p style={{ color: "var(--text2)", fontSize: 14, lineHeight: 1.6 }}>{resultat.explication}</p>
             </div>
           )}
@@ -208,7 +208,7 @@ export default function ScanCorrection() {
               <ol className="space-y-2">
                 {resultat.etapes.map((etape, i) => (
                   <li key={i} className="flex gap-3 text-sm" style={{ color: "var(--text2)" }}>
-                    <span className="flex-shrink-0 w-6 h-6 rounded-full font-bold text-xs flex items-center justify-center mt-0.5" style={{ background: "rgba(77,94,232,0.1)", color: "var(--indigo-l)" }}>
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full font-bold text-xs flex items-center justify-center mt-0.5" style={{ background: "rgba(239,110,90,0.1)", color: "var(--coral-l)" }}>
                       {i + 1}
                     </span>
                     <span>{etape}</span>
@@ -247,7 +247,7 @@ export default function ScanCorrection() {
               type="button"
               onClick={() => { setEtat("preview"); setResultat(null); }}
               className="flex-1 py-3 rounded-xl font-semibold text-sm transition-colors"
-              style={{ background: "rgba(77,94,232,0.1)", color: "var(--indigo-l)", border: "1px solid rgba(77,94,232,0.2)", cursor: "pointer" }}
+              style={{ background: "rgba(239,110,90,0.1)", color: "var(--coral-l)", border: "1px solid rgba(239,110,90,0.2)", cursor: "pointer" }}
             >
               Réanalyser
             </button>

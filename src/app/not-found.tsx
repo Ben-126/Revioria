@@ -11,7 +11,7 @@ export default function NotFound() {
         <p className="text-gray-500 mb-6">Cette matière ou ce chapitre n&apos;existe pas dans le programme.</p>
         <Link
           href="/app"
-          className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold transition-colors"
+          className="px-6 py-3 text-white rounded-xl font-semibold transition-colors" style={{ background: "var(--coral)" }}
         >
           Retour à l&apos;accueil
         </Link>

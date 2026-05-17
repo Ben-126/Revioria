@@ -42,15 +42,15 @@ export default function XPBar() {
       <span className="text-sm">{niveau.emoji}</span>
       <div className="hidden sm:flex flex-col gap-0.5 min-w-[80px]">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-semibold leading-none" style={{ color: "var(--indigo-l)" }}>
+          <span className="text-xs font-semibold leading-none" style={{ color: "var(--amber-l)" }}>
             Niv. {niveau.numero}
           </span>
           <span className="text-xs leading-none" style={{ color: "var(--text3)" }}>{xpTotal} XP</span>
         </div>
-        <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(77,94,232,0.2)" }}>
+        <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(245,200,64,0.2)" }}>
           <div
             className="h-full rounded-full transition-all duration-500"
-            style={{ width: `${progression.pourcentage}%`, background: "var(--indigo-l)" }}
+            style={{ width: `${progression.pourcentage}%`, background: "var(--amber-l)" }}
           />
         </div>
       </div>

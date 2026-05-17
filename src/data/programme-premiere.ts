@@ -293,7 +293,7 @@ export const MATIERES_PREMIERE: Matiere[] = [
     slug: "emc",
     nom: "EMC",
     emoji: "⚖️",
-    couleur: "bg-indigo-500",
+    couleur: "bg-blue-600",
     chapitres: [
       {
         slug: "engagement-et-democratie",

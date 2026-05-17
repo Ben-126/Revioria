@@ -62,7 +62,7 @@ export default function LanguesPage() {
                 cursor: "pointer",
                 transition: "all 0.15s",
                 ...(onglet === o.id
-                  ? { background: "var(--indigo)", color: "#fff", borderColor: "var(--indigo)" }
+                  ? { background: "var(--coral)", color: "#fff", borderColor: "var(--coral)" }
                   : { background: "transparent", color: "var(--text2)", borderColor: "var(--border2)" })
               }}
             >

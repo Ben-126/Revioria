@@ -23,7 +23,7 @@ export default function PageConfidentialite() {
           <p>
             Le responsable du traitement des données personnelles collectées sur Révioria est l&apos;éditeur du site,
             Ben Podrojsky, joignable à l&apos;adresse :{" "}
-            <a href="mailto:benpodrojsky@gmail.com" className="text-indigo-600 hover:underline">
+            <a href="mailto:benpodrojsky@gmail.com" className="hover:underline" style={{ color: "var(--coral-l)" }}>
               benpodrojsky@gmail.com
             </a>.
           </p>
@@ -204,13 +204,13 @@ export default function PageConfidentialite() {
               <strong>Droit à la portabilité</strong> — exporter une copie de tes données via l&apos;API{" "}
               <code className="text-xs bg-gray-100 px-1 rounded">/api/user/export-data</code>{" "}
               (format JSON) ou en contactant{" "}
-              <a href="mailto:benpodrojsky@gmail.com" className="text-indigo-600 hover:underline">benpodrojsky@gmail.com</a>
+              <a href="mailto:benpodrojsky@gmail.com" className="hover:underline" style={{ color: "var(--coral-l)" }}>benpodrojsky@gmail.com</a>
             </li>
             <li><strong>Droit à la limitation</strong> — demander la suspension d&apos;un traitement</li>
           </ul>
           <p>
             Pour exercer tes droits, contacte-nous à :{" "}
-            <a href="mailto:benpodrojsky@gmail.com" className="text-indigo-600 hover:underline">
+            <a href="mailto:benpodrojsky@gmail.com" className="hover:underline" style={{ color: "var(--coral-l)" }}>
               benpodrojsky@gmail.com
             </a>.
             Nous répondons sous <strong>30 jours</strong>.
@@ -248,7 +248,7 @@ export default function PageConfidentialite() {
             Nous ne collectons pas sciemment de données sur des enfants de moins de 13 ans.
             Si tu es parent et penses que ton enfant a créé un compte sans autorisation, contacte-nous pour
             suppression immédiate à{" "}
-            <a href="mailto:benpodrojsky@gmail.com" className="text-indigo-600 hover:underline">
+            <a href="mailto:benpodrojsky@gmail.com" className="hover:underline" style={{ color: "var(--coral-l)" }}>
               benpodrojsky@gmail.com
             </a>.
           </p>
@@ -298,14 +298,14 @@ export default function PageConfidentialite() {
               href="https://www.cnil.fr/fr/plaintes"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-indigo-600 hover:underline"
+              className="hover:underline" style={{ color: "var(--coral-l)" }}
             >
               CNIL (Commission Nationale de l&apos;Informatique et des Libertés)
             </a>.
           </p>
         </section>
 
-        <Link href="/" className="inline-block text-indigo-600 hover:underline">
+        <Link href="/" className="inline-block hover:underline" style={{ color: "var(--coral-l)" }}>
           ← Retour à l&apos;accueil
         </Link>
       </main>

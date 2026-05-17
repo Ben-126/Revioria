@@ -130,7 +130,7 @@ export default function CoachIA({
           {/* En-tête */}
           <div
             className="flex items-center justify-between px-4 py-3"
-            style={{ background: "var(--indigo)", color: "#fff" }}
+            style={{ background: "var(--coral)", color: "#fff" }}
           >
             <div className="flex items-center gap-2">
               <span className="text-lg" aria-hidden="true">🧠</span>
@@ -174,7 +174,7 @@ export default function CoachIA({
                   <button
                     onClick={() => setInput(`Explique-moi cette question : "${questionCourante}"`)}
                     className="mt-2 text-xs underline"
-                    style={{ color: "var(--indigo-l)" }}
+                    style={{ color: "var(--coral-l)" }}
                   >
                     Aide-moi avec la question actuelle
                   </button>
@@ -185,7 +185,7 @@ export default function CoachIA({
                       <button
                         onClick={() => setInput("Explique-moi ce point du cours")}
                         className="text-xs underline"
-                        style={{ color: "var(--indigo-l)" }}
+                        style={{ color: "var(--coral-l)" }}
                       >
                         Voir l&apos;explication
                       </button>
@@ -194,7 +194,7 @@ export default function CoachIA({
                       <button
                         onClick={() => setInput("Comment résoudre ce type de question ?")}
                         className="text-xs underline"
-                        style={{ color: "var(--indigo-l)" }}
+                        style={{ color: "var(--coral-l)" }}
                       >
                         Voir les étapes
                       </button>
@@ -203,7 +203,7 @@ export default function CoachIA({
                       <button
                         onClick={() => setInput("Quelles sont les erreurs à éviter ?")}
                         className="text-xs underline"
-                        style={{ color: "var(--indigo-l)" }}
+                        style={{ color: "var(--coral-l)" }}
                       >
                         Erreurs fréquentes
                       </button>
@@ -219,7 +219,7 @@ export default function CoachIA({
                   className="max-w-[85%] px-3 py-2 text-sm leading-relaxed whitespace-pre-wrap"
                   style={
                     msg.role === "user"
-                      ? { background: "var(--indigo)", color: "#fff", borderRadius: "16px 16px 4px 16px" }
+                      ? { background: "var(--coral)", color: "#fff", borderRadius: "16px 16px 4px 16px" }
                       : { background: "rgba(255,255,255,0.06)", color: "var(--text)", borderRadius: "16px 16px 16px 4px" }
                   }
                 >
@@ -290,7 +290,7 @@ export default function CoachIA({
               disabled={!input.trim() || enCours}
               className="flex-shrink-0 w-9 h-9 transition-colors flex items-center justify-center"
               style={{
-                background: !input.trim() || enCours ? "rgba(255,255,255,0.07)" : "var(--indigo)",
+                background: !input.trim() || enCours ? "rgba(255,255,255,0.07)" : "var(--coral)",
                 color: !input.trim() || enCours ? "var(--text3)" : "#fff",
                 borderRadius: "var(--r-sm)",
               }}
@@ -309,7 +309,7 @@ export default function CoachIA({
         onClick={() => setOuvert((v) => !v)}
         className="fixed bottom-4 right-4 z-50 w-14 h-14 rounded-full flex items-center justify-center transition-all duration-200 text-white"
         style={{
-          background: ouvert ? "rgba(255,255,255,0.15)" : "var(--indigo)",
+          background: ouvert ? "rgba(255,255,255,0.15)" : "var(--coral)",
           boxShadow: "0 4px 16px rgba(0,0,0,0.3)",
         }}
         aria-label={ouvert ? "Fermer le coach IA" : "Ouvrir le coach IA"}

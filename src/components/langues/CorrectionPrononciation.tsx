@@ -175,7 +175,7 @@ export default function CorrectionPrononciation() {
     return (
       <div
         className="p-5 space-y-4 rounded-xl"
-        style={{ background: "rgba(77,94,232,0.06)", border: "1px solid rgba(77,94,232,0.25)" }}
+        style={{ background: "rgba(239,110,90,0.06)", border: "1px solid rgba(239,110,90,0.25)" }}
       >
         <p className="font-semibold text-sm" style={{ color: "var(--text)" }}>
           Analyse de prononciation — information RGPD
@@ -201,7 +201,7 @@ export default function CorrectionPrononciation() {
           <button
             onClick={accepterConsentementAudio}
             className="flex-1 py-2 text-sm font-semibold rounded-lg"
-            style={{ background: "var(--indigo)", color: "#fff" }}
+            style={{ background: "var(--coral)", color: "#fff" }}
           >
             Accepter et continuer
           </button>
@@ -226,7 +226,7 @@ export default function CorrectionPrononciation() {
             setConsentementAudio(null);
           }}
           className="text-xs underline"
-          style={{ color: "var(--indigo-l)" }}
+          style={{ color: "var(--coral-l)" }}
         >
           Modifier mon choix
         </button>
@@ -249,7 +249,7 @@ export default function CorrectionPrononciation() {
             className="px-3 py-1.5 text-sm font-medium transition-colors"
             style={
               langue === l.code
-                ? { background: "var(--indigo)", color: "#fff", borderRadius: "var(--r-pill)", border: "2px solid var(--indigo)" }
+                ? { background: "var(--coral)", color: "#fff", borderRadius: "var(--r-pill)", border: "2px solid var(--coral)" }
                 : { background: "transparent", color: "var(--text2)", borderRadius: "var(--r-pill)", border: "2px solid var(--border2)" }
             }
           >
@@ -261,16 +261,16 @@ export default function CorrectionPrononciation() {
       {/* Phrase à prononcer */}
       <div
         className="p-5 text-center space-y-3"
-        style={{ background: "rgba(77,94,232,0.08)", border: "1px solid rgba(77,94,232,0.2)", borderRadius: "var(--r-md)" }}
+        style={{ background: "rgba(239,110,90,0.08)", border: "1px solid rgba(239,110,90,0.2)", borderRadius: "var(--r-md)" }}
       >
-        <p className="text-xs font-medium uppercase tracking-wide" style={{ color: "var(--indigo-l)" }}>
+        <p className="text-xs font-medium uppercase tracking-wide" style={{ color: "var(--coral-l)" }}>
           Phrase à prononcer
         </p>
         <p className="text-xl font-semibold" style={{ color: "var(--text)" }}>&ldquo;{phrase}&rdquo;</p>
         <button
           onClick={phraseAleatoire}
           className="text-xs underline transition-colors"
-          style={{ color: "var(--indigo-l)" }}
+          style={{ color: "var(--coral-l)" }}
         >
           Autre phrase →
         </button>
@@ -284,7 +284,7 @@ export default function CorrectionPrononciation() {
               onClick={enregistrement ? arreterEnregistrement : demarrerEnregistrement}
               className={`w-20 h-20 rounded-full flex items-center justify-center text-3xl transition-all duration-200 ${enregistrement ? "scale-110" : ""}`}
               style={{
-                background: enregistrement ? "rgba(239,110,90,0.9)" : "var(--indigo)",
+                background: enregistrement ? "rgba(239,110,90,0.9)" : "var(--coral)",
                 color: "#fff",
                 boxShadow: "0 4px 16px rgba(0,0,0,0.3)",
               }}
@@ -307,7 +307,7 @@ export default function CorrectionPrononciation() {
           <div className="flex flex-col items-center gap-2">
             <div
               className="w-10 h-10 rounded-full animate-spin"
-              style={{ border: "4px solid rgba(77,94,232,0.2)", borderTopColor: "var(--indigo)" }}
+              style={{ border: "4px solid rgba(239,110,90,0.2)", borderTopColor: "var(--coral)" }}
             />
             <p className="text-sm" style={{ color: "var(--text3)" }}>Analyse en cours…</p>
           </div>
@@ -391,9 +391,9 @@ export default function CorrectionPrononciation() {
           {/* Feedback */}
           <div
             className="p-4 space-y-1 rounded-xl"
-            style={{ background: "rgba(77,94,232,0.08)", border: "1px solid rgba(77,94,232,0.2)" }}
+            style={{ background: "rgba(239,110,90,0.08)", border: "1px solid rgba(239,110,90,0.2)" }}
           >
-            <p className="text-xs font-medium uppercase tracking-wide" style={{ color: "var(--indigo-l)" }}>
+            <p className="text-xs font-medium uppercase tracking-wide" style={{ color: "var(--coral-l)" }}>
               Feedback du coach
             </p>
             <p className="text-sm leading-relaxed" style={{ color: "var(--text2)" }}>{resultat.feedback}</p>

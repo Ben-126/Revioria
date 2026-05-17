@@ -97,7 +97,7 @@ export default function AuthModal({ onFermer, onConnecte }: AuthModalProps) {
               className="flex-1 py-2 text-sm font-semibold capitalize transition-colors"
               style={
                 onglet === o
-                  ? { borderBottom: "2px solid var(--indigo)", color: "var(--indigo-l)", marginBottom: -1 }
+                  ? { borderBottom: "2px solid var(--coral)", color: "var(--coral-l)", marginBottom: -1 }
                   : { color: "var(--text3)" }
               }
             >
@@ -206,7 +206,7 @@ export default function AuthModal({ onFermer, onConnecte }: AuthModalProps) {
                     name="age"
                     checked={ageMoinsQuinze === false}
                     onChange={() => { setAgeMoinsQuinze(false); setEmailParent(""); }}
-                    className="h-4 w-4 accent-indigo-500"
+                    className="h-4 w-4" style={{ accentColor: "var(--coral)" }}
                   />
                   <span className="text-xs" style={{ color: "var(--text3)" }}>
                     J&apos;ai <strong>15 ans ou plus</strong>
@@ -218,7 +218,7 @@ export default function AuthModal({ onFermer, onConnecte }: AuthModalProps) {
                     name="age"
                     checked={ageMoinsQuinze === true}
                     onChange={() => setAgeMoinsQuinze(true)}
-                    className="h-4 w-4 accent-indigo-500"
+                    className="h-4 w-4" style={{ accentColor: "var(--coral)" }}
                   />
                   <span className="text-xs" style={{ color: "var(--text3)" }}>
                     J&apos;ai <strong>moins de 15 ans</strong>
@@ -248,9 +248,9 @@ export default function AuthModal({ onFermer, onConnecte }: AuthModalProps) {
 
               <p className="text-xs" style={{ color: "var(--text3)", lineHeight: 1.5 }}>
                 En créant un compte, j&apos;accepte les{" "}
-                <a href="/cgu" target="_blank" rel="noopener noreferrer" style={{ color: "var(--indigo-l)" }}>CGU</a>
+                <a href="/cgu" target="_blank" rel="noopener noreferrer" style={{ color: "var(--coral-l)" }}>CGU</a>
                 {" "}et la{" "}
-                <a href="/confidentialite" target="_blank" rel="noopener noreferrer" style={{ color: "var(--indigo-l)" }}>politique de confidentialité</a>.
+                <a href="/confidentialite" target="_blank" rel="noopener noreferrer" style={{ color: "var(--coral-l)" }}>politique de confidentialité</a>.
               </p>
             </div>
           )}
@@ -268,7 +268,7 @@ export default function AuthModal({ onFermer, onConnecte }: AuthModalProps) {
             type="submit"
             disabled={chargement}
             className="w-full py-3 font-semibold rounded-xl transition-colors"
-            style={{ background: chargement ? "rgba(77,94,232,0.4)" : "var(--indigo)", color: "#fff" }}
+            style={{ background: chargement ? "rgba(239,110,90,0.4)" : "var(--coral)", color: "#fff" }}
           >
             {chargement ? "Chargement..." : onglet === "connexion" ? "Se connecter" : "Créer le compte"}
           </button>

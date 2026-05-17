@@ -75,7 +75,7 @@ export default function RevisionIntelligente() {
       <div className="w-full rounded-full h-2" style={{ background: "rgba(255,255,255,0.08)" }}>
         <div
           className="h-2 rounded-full transition-all duration-300"
-          style={{ width: `${((index) / cartes.length) * 100}%`, background: "var(--indigo)" }}
+          style={{ width: `${((index) / cartes.length) * 100}%`, background: "var(--coral)" }}
         />
       </div>
 
@@ -117,8 +117,8 @@ export default function RevisionIntelligente() {
                   : carte.reponseCorrecte}
               </p>
             </div>
-            <div className="rounded-xl px-4 py-3" style={{ background: "rgba(77,94,232,0.08)", border: "1px solid rgba(77,94,232,0.15)" }}>
-              <p style={{ fontSize: 12, fontWeight: 600, color: "var(--indigo-l)", marginBottom: 4 }}>Explication</p>
+            <div className="rounded-xl px-4 py-3" style={{ background: "rgba(239,110,90,0.08)", border: "1px solid rgba(239,110,90,0.15)" }}>
+              <p style={{ fontSize: 12, fontWeight: 600, color: "var(--coral-l)", marginBottom: 4 }}>Explication</p>
               <p style={{ fontSize: 14, color: "var(--text2)" }}>{carte.explication}</p>
             </div>
           </div>
@@ -130,7 +130,7 @@ export default function RevisionIntelligente() {
         <button
           onClick={() => setReponseVisible(true)}
           className="w-full font-semibold py-3 rounded-xl transition-colors"
-          style={{ background: "var(--indigo)", color: "#fff", border: "none", cursor: "pointer" }}
+          style={{ background: "var(--coral)", color: "#fff", border: "none", cursor: "pointer" }}
         >
           Voir la réponse
         </button>
@@ -162,9 +162,9 @@ export default function RevisionIntelligente() {
               qualite="bien"
               label="Bien"
               emoji="🙂"
-              bgColor="rgba(77,94,232,0.1)"
-              hoverBg="rgba(77,94,232,0.18)"
-              textColor="var(--indigo-l)"
+              bgColor="rgba(239,110,90,0.1)"
+              hoverBg="rgba(239,110,90,0.18)"
+              textColor="var(--coral-l)"
               onClick={evaluerCarte}
             />
             <BoutonQualite
@@ -260,7 +260,7 @@ function Accueil({ stats, onDemarrer }: AccueilProps) {
         onClick={onDemarrer}
         disabled={aucuneCarte || (aJour ?? false)}
         className="w-full font-semibold py-3 rounded-xl transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-        style={{ background: "var(--indigo)", color: "#fff", border: "none", cursor: "pointer" }}
+        style={{ background: "var(--coral)", color: "#fff", border: "none", cursor: "pointer" }}
       >
         {stats && stats.cartesAujourdhui > 0
           ? `Commencer (${stats.cartesAujourdhui} carte${stats.cartesAujourdhui > 1 ? "s" : ""})`
@@ -301,7 +301,7 @@ function SessionTerminee({ stats, totalRevise, onRecommencer }: SessionTermineeP
         <button
           onClick={onRecommencer}
           className="w-full font-semibold py-3 rounded-xl transition-colors"
-          style={{ background: "var(--indigo)", color: "#fff", border: "none", cursor: "pointer" }}
+          style={{ background: "var(--coral)", color: "#fff", border: "none", cursor: "pointer" }}
         >
           Continuer ({stats.cartesAujourdhui} restante{stats.cartesAujourdhui > 1 ? "s" : ""})
         </button>
@@ -324,10 +324,10 @@ interface StatCardProps {
 function StatCard({ valeur, label, emoji, accent }: StatCardProps) {
   return (
     <div className="rounded-xl p-3 text-center" style={accent
-      ? { background: "rgba(77,94,232,0.1)", border: "1px solid rgba(77,94,232,0.2)" }
+      ? { background: "rgba(239,110,90,0.1)", border: "1px solid rgba(239,110,90,0.2)" }
       : { background: "rgba(255,255,255,0.04)", border: "1px solid var(--border)" }}>
       <div className="text-lg">{emoji}</div>
-      <div style={{ fontSize: 20, fontWeight: 700, color: accent ? "var(--indigo-l)" : "var(--text)" }}>{valeur}</div>
+      <div style={{ fontSize: 20, fontWeight: 700, color: accent ? "var(--coral-l)" : "var(--text)" }}>{valeur}</div>
       <div style={{ fontSize: 12, color: "var(--text3)" }}>{label}</div>
     </div>
   );

@@ -125,7 +125,7 @@ export default function ParametresPage() {
       <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: "var(--bg)" }}>
         <Header />
         <main style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <div style={{ width: 32, height: 32, border: "4px solid rgba(77,94,232,0.3)", borderTopColor: "var(--indigo)", borderRadius: "50%" }} className="animate-spin" />
+          <div style={{ width: 32, height: 32, border: "4px solid rgba(239,110,90,0.3)", borderTopColor: "var(--coral)", borderRadius: "50%" }} className="animate-spin" />
         </main>
       </div>
     );
@@ -163,7 +163,7 @@ export default function ParametresPage() {
                 name="objectifType"
                 checked={params.objectifType === "minimum"}
                 onChange={() => handleChange("objectifType", "minimum")}
-                className="accent-indigo-600"
+                style={{ accentColor: "var(--coral)" }}
               />
               <span style={{ fontSize: 14, color: "var(--text2)" }}>1 quiz minimum par jour</span>
             </label>
@@ -173,7 +173,7 @@ export default function ParametresPage() {
                 name="objectifType"
                 checked={params.objectifType === "personnalise"}
                 onChange={() => handleChange("objectifType", "personnalise")}
-                className="accent-indigo-600"
+                style={{ accentColor: "var(--coral)" }}
               />
               <span style={{ fontSize: 14, color: "var(--text2)" }}>Nombre personnalisé</span>
             </label>
@@ -227,7 +227,7 @@ export default function ParametresPage() {
           {notifStatut === "defaut" && (
             <button
               onClick={demanderPermissionNotifs}
-              style={{ padding: "8px 16px", background: "var(--indigo)", color: "#fff", fontSize: 14, fontWeight: 600, borderRadius: "var(--r-md)", border: "none", cursor: "pointer", alignSelf: "flex-start" }}
+              style={{ padding: "8px 16px", background: "var(--coral)", color: "#fff", fontSize: 14, fontWeight: 600, borderRadius: "var(--r-md)", border: "none", cursor: "pointer", alignSelf: "flex-start" }}
             >
               Activer les notifications
             </button>
@@ -251,10 +251,9 @@ export default function ParametresPage() {
                 step={5}
                 value={params.seuilReussite}
                 onChange={(e) => handleChange("seuilReussite", Number(e.target.value))}
-                style={{ flex: 1 }}
-                className="accent-indigo-600"
+                style={{ flex: 1, accentColor: "var(--coral)" }}
               />
-              <span style={{ fontSize: 14, fontWeight: 700, color: "var(--indigo-l)", width: 40, textAlign: "right" }}>
+              <span style={{ fontSize: 14, fontWeight: 700, color: "var(--coral-l)", width: 40, textAlign: "right" }}>
                 {params.seuilReussite}%
               </span>
             </div>
@@ -282,8 +281,8 @@ export default function ParametresPage() {
                     cursor: "pointer",
                     transition: "all 0.15s",
                     ...(params.questionsParQuiz === n
-                      ? { background: "var(--indigo)", color: "#fff", borderColor: "var(--indigo)" }
-                      : { background: "transparent", color: "var(--indigo-l)", borderColor: "rgba(77,94,232,0.4)" })
+                      ? { background: "var(--coral)", color: "#fff", borderColor: "var(--coral)" }
+                      : { background: "transparent", color: "var(--coral-l)", borderColor: "rgba(239,110,90,0.4)" })
                   }}
                 >
                   {n}
@@ -309,8 +308,8 @@ export default function ParametresPage() {
                     cursor: "pointer",
                     transition: "all 0.15s",
                     ...(params.niveauDefaut === n
-                      ? { background: "var(--indigo)", color: "#fff", borderColor: "var(--indigo)" }
-                      : { background: "transparent", color: "var(--indigo-l)", borderColor: "rgba(77,94,232,0.4)" })
+                      ? { background: "var(--coral)", color: "#fff", borderColor: "var(--coral)" }
+                      : { background: "transparent", color: "var(--coral-l)", borderColor: "rgba(239,110,90,0.4)" })
                   }}
                 >
                   {n === "premiere" ? "Première" : n.charAt(0).toUpperCase() + n.slice(1)}
@@ -339,7 +338,7 @@ export default function ParametresPage() {
                 border: "none",
                 cursor: "pointer",
                 transition: "background 0.2s",
-                background: params.explicationsAvanceesOuvertes ? "var(--indigo)" : "rgba(255,255,255,0.15)",
+                background: params.explicationsAvanceesOuvertes ? "var(--coral)" : "rgba(255,255,255,0.15)",
               }}
             >
               <span
@@ -399,7 +398,7 @@ export default function ParametresPage() {
                 ajouterObjectifNote(formMatiereSlug, matiere.nom, formNote);
                 rafraichirObjectifs();
               }}
-              style={{ padding: "8px 16px", background: "var(--indigo)", color: "#fff", fontSize: 13, fontWeight: 600, borderRadius: "var(--r-md)", border: "none", cursor: "pointer", whiteSpace: "nowrap" }}
+              style={{ padding: "8px 16px", background: "var(--coral)", color: "#fff", fontSize: 13, fontWeight: 600, borderRadius: "var(--r-md)", border: "none", cursor: "pointer", whiteSpace: "nowrap" }}
             >
               + Ajouter
             </button>
@@ -438,7 +437,7 @@ export default function ParametresPage() {
                       </div>
                     </div>
                     <div style={{ height: 4, background: "rgba(255,255,255,0.07)", borderRadius: 4, overflow: "hidden" }}>
-                      <div style={{ height: "100%", borderRadius: 4, width: `${pourcentage}%`, background: atteint ? "var(--teal)" : `linear-gradient(90deg, var(--indigo) 0%, ${couleur} 100%)`, transition: "width .5s ease" }} />
+                      <div style={{ height: "100%", borderRadius: 4, width: `${pourcentage}%`, background: atteint ? "var(--teal)" : `linear-gradient(90deg, var(--coral) 0%, ${couleur} 100%)`, transition: "width .5s ease" }} />
                     </div>
                     <p style={{ fontSize: 11, color: "var(--text3)", marginTop: 6 }}>
                       {nombreQuiz === 0 ? "Aucun quiz effectué dans cette matière" : atteint ? "✓ Objectif atteint !" : `Basé sur ${Math.min(nombreQuiz, 10)} quiz`}
@@ -528,7 +527,7 @@ export default function ParametresPage() {
                 href="/confidentialite"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ fontSize: 12, color: "var(--indigo-l)", textDecoration: "underline", alignSelf: "flex-start" }}
+                style={{ fontSize: 12, color: "var(--coral-l)", textDecoration: "underline", alignSelf: "flex-start" }}
               >
                 Consulter la politique de confidentialité →
               </a>

@@ -81,11 +81,11 @@ export default function QuestionCard({
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-2 mb-2">
-        <span style={{ fontSize: 14, fontWeight: 500, color: "var(--indigo-l)" }}>Question {index + 1}/{total}</span>
+        <span style={{ fontSize: 14, fontWeight: 500, color: "var(--coral-l)" }}>Question {index + 1}/{total}</span>
         <div className="flex-1 h-2 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.08)" }}>
           <div
             className="h-full rounded-full transition-all duration-500"
-            style={{ width: `${((index + 1) / total) * 100}%`, background: "var(--indigo)" }}
+            style={{ width: `${((index + 1) / total) * 100}%`, background: "var(--coral)" }}
           />
         </div>
         {!disabled && !sansMinuterie && (
@@ -108,7 +108,7 @@ export default function QuestionCard({
         <div className="flex items-center gap-1.5">
           <span
             className="inline-block px-2.5 py-1 text-xs font-semibold rounded-full leading-tight"
-            style={{ background: "rgba(77,94,232,0.08)", color: "var(--indigo-l)", border: "1px solid rgba(77,94,232,0.2)" }}
+            style={{ background: "rgba(245,200,64,0.1)", color: "var(--amber-l)", border: "1px solid rgba(245,200,64,0.25)" }}
             aria-label={`Compétence visée : ${competenceLabel}`}
           >
             🎯 {competenceLabel}
@@ -129,10 +129,10 @@ export default function QuestionCard({
               disabled={disabled}
               className="option-qcm text-left px-4 py-3 rounded-xl text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
               style={{ border: "2px solid var(--border2)", color: "var(--text2)", background: "transparent" }}
-              onMouseEnter={(e) => { if (!disabled) { (e.currentTarget).style.borderColor = "var(--indigo)"; (e.currentTarget).style.background = "rgba(77,94,232,0.08)"; (e.currentTarget).style.color = "var(--text)"; } }}
+              onMouseEnter={(e) => { if (!disabled) { (e.currentTarget).style.borderColor = "var(--coral)"; (e.currentTarget).style.background = "rgba(239,110,90,0.1)"; (e.currentTarget).style.color = "var(--text)"; } }}
               onMouseLeave={(e) => { if (!disabled) { (e.currentTarget).style.borderColor = "var(--border2)"; (e.currentTarget).style.background = "transparent"; (e.currentTarget).style.color = "var(--text2)"; } }}
             >
-              <span style={{ fontWeight: 700, color: "var(--indigo-l)", marginRight: 8 }}>{String.fromCharCode(65 + i)}.</span>
+              <span style={{ fontWeight: 700, color: "var(--coral-l)", marginRight: 8 }}>{String.fromCharCode(65 + i)}.</span>
               {option}
             </button>
           ))}
@@ -194,7 +194,7 @@ export default function QuestionCard({
                 title="Clavier mathématique"
                 className="px-3 py-2 rounded-xl transition-colors"
                 style={clavierOuvert
-                  ? { border: "2px solid var(--indigo)", background: "rgba(77,94,232,0.15)", color: "var(--indigo-l)" }
+                  ? { border: "2px solid var(--coral)", background: "rgba(239,110,90,0.15)", color: "var(--coral-l)" }
                   : { border: "2px solid var(--border2)", background: "rgba(255,255,255,0.05)", color: "var(--text2)" }}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -212,7 +212,7 @@ export default function QuestionCard({
             type="submit"
             disabled={disabled}
             className="w-full py-3 rounded-xl font-semibold text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            style={{ background: "var(--indigo)", color: "#fff", border: "none", cursor: "pointer" }}
+            style={{ background: "var(--coral)", color: "#fff", border: "none", cursor: "pointer" }}
           >
             Valider ma réponse
           </button>

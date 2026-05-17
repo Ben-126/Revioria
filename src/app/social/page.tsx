@@ -32,7 +32,7 @@ export default function PageSocial() {
       <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: "var(--bg)" }}>
         <Header />
         <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <div style={{ width: 40, height: 40, border: "4px solid rgba(77,94,232,0.3)", borderTopColor: "var(--indigo)", borderRadius: "50%" }} className="animate-spin" />
+          <div style={{ width: 40, height: 40, border: "4px solid rgba(239,110,90,0.3)", borderTopColor: "var(--coral)", borderRadius: "50%" }} className="animate-spin" />
         </div>
       </div>
     );
@@ -64,7 +64,7 @@ export default function PageSocial() {
                 cursor: "pointer",
                 transition: "all 0.15s",
                 ...(onglet === o.id
-                  ? { background: "var(--indigo)", color: "#fff" }
+                  ? { background: "var(--coral)", color: "#fff" }
                   : { background: "transparent", color: "var(--text3)" })
               }}
             >

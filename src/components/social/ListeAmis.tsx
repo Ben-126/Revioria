@@ -73,8 +73,8 @@ export default function ListeAmis({ userId }: ListeAmisProps) {
   return (
     <div className="space-y-6">
       {/* Lien d'invitation */}
-      <div className="rounded-xl p-4 space-y-2" style={{ background: "rgba(77,94,232,0.08)", border: "1px solid rgba(77,94,232,0.2)" }}>
-        <p style={{ fontSize: 14, fontWeight: 600, color: "var(--indigo-l)" }}>Inviter un ami</p>
+      <div className="rounded-xl p-4 space-y-2" style={{ background: "rgba(239,110,90,0.08)", border: "1px solid rgba(239,110,90,0.2)" }}>
+        <p style={{ fontSize: 14, fontWeight: 600, color: "var(--coral-l)" }}>Inviter un ami</p>
         <p style={{ fontSize: 12, color: "var(--text2)" }}>Partage ce lien pour qu&apos;un ami te rejoigne :</p>
         <div className="flex gap-2">
           <input
@@ -86,7 +86,7 @@ export default function ListeAmis({ userId }: ListeAmisProps) {
           <button
             onClick={() => navigator.clipboard.writeText(lienInvitation)}
             className="px-3 py-2 text-xs font-semibold rounded-lg transition-colors"
-            style={{ background: "var(--indigo)", color: "#fff", border: "none", cursor: "pointer" }}
+            style={{ background: "var(--coral)", color: "#fff", border: "none", cursor: "pointer" }}
           >
             Copier
           </button>
@@ -106,14 +106,14 @@ export default function ListeAmis({ userId }: ListeAmisProps) {
         <button
           type="submit"
           className="px-4 py-2 text-sm font-semibold rounded-xl transition-colors"
-          style={{ background: "var(--indigo)", color: "#fff", border: "none", cursor: "pointer" }}
+          style={{ background: "var(--coral)", color: "#fff", border: "none", cursor: "pointer" }}
         >
           Chercher
         </button>
       </form>
 
       {message && (
-        <p className="text-sm text-center font-medium" style={{ color: "var(--indigo-l)" }}>{message}</p>
+        <p className="text-sm text-center font-medium" style={{ color: "var(--coral-l)" }}>{message}</p>
       )}
 
       {resultatsRecherche.length > 0 && (
@@ -124,7 +124,7 @@ export default function ListeAmis({ userId }: ListeAmisProps) {
               <button
                 onClick={() => handleEnvoyerDemande(p.id)}
                 className="text-xs px-3 py-1.5 rounded-lg transition-colors"
-                style={{ background: "var(--indigo)", color: "#fff", border: "none", cursor: "pointer" }}
+                style={{ background: "var(--coral)", color: "#fff", border: "none", cursor: "pointer" }}
               >
                 + Ajouter
               </button>

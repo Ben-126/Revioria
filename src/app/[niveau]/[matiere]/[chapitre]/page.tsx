@@ -149,7 +149,7 @@ export default async function ChapitreDetailPage({ params }: Props) {
               gap: 6,
             }}
           >
-            <span style={{ color: "var(--indigo-l)" }} aria-hidden="true">📋</span>
+            <span style={{ color: "var(--amber-l)" }} aria-hidden="true">📋</span>
             Compétences au programme
           </h2>
           <ul style={{ display: "flex", flexDirection: "column", gap: 8, padding: 0, margin: 0, listStyle: "none" }}>
@@ -161,9 +161,9 @@ export default async function ChapitreDetailPage({ params }: Props) {
                   alignItems: "flex-start",
                   gap: 12,
                   padding: "10px 14px",
-                  background: "rgba(77,94,232,0.07)",
+                  background: "rgba(245,200,64,0.07)",
                   borderRadius: "var(--r-md)",
-                  border: "1px solid rgba(77,94,232,0.15)",
+                  border: "1px solid rgba(245,200,64,0.15)",
                 }}
               >
                 <span
@@ -172,8 +172,8 @@ export default async function ChapitreDetailPage({ params }: Props) {
                     flexShrink: 0,
                     width: 22,
                     height: 22,
-                    background: "rgba(77,94,232,0.18)",
-                    color: "var(--indigo-l)",
+                    background: "rgba(245,200,64,0.15)",
+                    color: "var(--amber-l)",
                     borderRadius: "50%",
                     display: "flex",
                     alignItems: "center",

@@ -87,9 +87,9 @@ export default function HomePage() {
                   </div>
                 )}
                 {nbCartesAReviser > 0 && (
-                  <Link href="/revision" style={{ display: "flex", alignItems: "center", gap: 5, background: "rgba(77,94,232,0.12)", border: "1px solid rgba(77,94,232,0.25)", borderRadius: 20, padding: "4px 12px", textDecoration: "none" }}>
+                  <Link href="/revision" style={{ display: "flex", alignItems: "center", gap: 5, background: "rgba(239,110,90,0.12)", border: "1px solid rgba(239,110,90,0.25)", borderRadius: 20, padding: "4px 12px", textDecoration: "none" }}>
                     <span>📚</span>
-                    <span style={{ fontSize: 13, fontWeight: 700, color: "var(--indigo-l)" }}>{nbCartesAReviser} à réviser</span>
+                    <span style={{ fontSize: 13, fontWeight: 700, color: "var(--coral-l)" }}>{nbCartesAReviser} à réviser</span>
                   </Link>
                 )}
               </div>
@@ -103,7 +103,7 @@ export default function HomePage() {
               </div>
               <div style={{ background: "var(--card)", border: "1px solid var(--border)", borderRadius: "var(--r-md)", padding: "12px 16px" }}>
                 <p style={{ fontSize: 11, color: "var(--text3)", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 4 }}>XP · 7j</p>
-                <p style={{ fontSize: 24, fontWeight: 800, color: "var(--indigo-l)" }}>+{xpSemaine}</p>
+                <p style={{ fontSize: 24, fontWeight: 800, color: "var(--amber-l)" }}>+{xpSemaine}</p>
               </div>
               <div style={{ background: "var(--card)", border: "1px solid var(--border)", borderRadius: "var(--r-md)", padding: "12px 16px" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
@@ -111,7 +111,7 @@ export default function HomePage() {
                   <p style={{ fontSize: 11, color: "var(--text3)" }}>{profil.xpTotal} XP</p>
                 </div>
                 <div style={{ width: "100%", height: 6, background: "rgba(255,255,255,0.07)", borderRadius: 999, overflow: "hidden" }}>
-                  <div style={{ height: "100%", width: `${progression.pourcentage}%`, background: "var(--indigo)", borderRadius: 999, transition: "width 1s ease" }} />
+                  <div style={{ height: "100%", width: `${progression.pourcentage}%`, background: "var(--coral)", borderRadius: 999, transition: "width 1s ease" }} />
                 </div>
               </div>
             </div>
@@ -141,7 +141,7 @@ export default function HomePage() {
             color: "var(--text)",
             marginBottom: 10,
           }}>
-            Choisis ta <em style={{ fontStyle: "italic", color: "var(--indigo-l)" }}>matière</em>
+            Choisis ta <em style={{ fontStyle: "italic", color: "var(--coral-l)" }}>matière</em>
           </h1>
           <p style={{
             fontFamily: "var(--f-body)",
@@ -177,10 +177,10 @@ export default function HomePage() {
                   cursor: "pointer",
                   transition: "background .15s, color .15s, box-shadow .15s",
                   background: actif
-                    ? "linear-gradient(135deg, #4D5EE8 0%, #3A4DD4 100%)"
+                    ? "linear-gradient(135deg, #EF6E5A 0%, #D4553A 100%)"
                     : "transparent",
                   color: actif ? "#fff" : "var(--text2)",
-                  boxShadow: actif ? "0 4px 14px rgba(77,94,232,0.3)" : "none",
+                  boxShadow: actif ? "0 4px 14px rgba(239,110,90,0.3)" : "none",
                 }}
                 onMouseEnter={(e) => {
                   if (!actif) {
@@ -228,7 +228,7 @@ export default function HomePage() {
             href="https://www.education.gouv.fr/reussir-au-lycee/les-programmes-du-lycee-general-et-technologique-9812"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: "var(--indigo-l)", textDecoration: "underline" }}
+            style={{ color: "var(--coral-l)", textDecoration: "underline" }}
           >
             programmes officiels du ministère de l&apos;Éducation nationale
           </a>
