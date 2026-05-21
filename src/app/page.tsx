@@ -297,7 +297,7 @@ export default function LandingPage() {
             { label: "Fonctionnalités", href: "#features" },
             { label: "Matières", href: "#matieres" },
             { label: "Tarifs", href: "#pricing" },
-            { label: "Discord", href: "https://discord.gg/8JavmWyV" },
+            { label: "Discord", href: "https://discord.gg/KmFMwZ2dvr" },
           ].map(({ label, href }) => (
             <a
               key={href}
@@ -585,7 +585,7 @@ export default function LandingPage() {
               Pose tes questions, partage tes astuces et suis l&apos;évolution de Révioria en temps réel sur notre Discord.
             </p>
             <a
-              href="https://discord.gg/8JavmWyV"
+              href="https://discord.gg/KmFMwZ2dvr"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -714,7 +714,7 @@ export default function LandingPage() {
                 <PricingItem included>Support prioritaire</PricingItem>
               </div>
               <a
-                href="https://discord.gg/8JavmWyV"
+                href="https://discord.gg/KmFMwZ2dvr"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -807,7 +807,7 @@ export default function LandingPage() {
               { label: "CGU", href: "/cgu" },
               { label: "Confidentialité", href: "/confidentialite" },
               { label: "Mentions légales", href: "/mentions-legales" },
-              { label: "Discord", href: "https://discord.gg/8JavmWyV" },
+              { label: "Discord", href: "https://discord.gg/KmFMwZ2dvr" },
               { label: "Programmes officiels", href: "https://www.education.gouv.fr/reussir-au-lycee/les-programmes-du-lycee-general-et-technologique-9812" },
             ].map(({ label, href }) => (
               <Link key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noopener noreferrer" : undefined} style={{
