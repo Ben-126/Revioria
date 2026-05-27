@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { checkRateLimit } from "@/lib/ratelimit";
+import { getGroqClient, hasGroqKey } from "@/lib/groq";
 
 const VerifySchema = z.object({
   question: z.string().min(1).max(500),
@@ -72,9 +73,7 @@ export async function POST(req: NextRequest) {
 
   const { question, reponseCorrecte, reponseUser, explication } = parsed.data;
 
-  const apiKey = process.env.GROQ_API_KEY;
-
-  if (!apiKey) {
+  if (!hasGroqKey()) {
     const niveau = verifierLocalReponse(reponseUser, reponseCorrecte);
     return NextResponse.json(
       {
@@ -89,8 +88,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const { default: OpenAI } = await import("openai");
-    const client = new OpenAI({ apiKey, baseURL: "https://api.groq.com/openai/v1" });
+    const client = getGroqClient();
 
     const safeQuestion = sanitizeForPrompt(question);
     const safeReponseCorrecte = sanitizeForPrompt(reponseCorrecte);

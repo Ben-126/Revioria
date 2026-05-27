@@ -5,6 +5,7 @@ import { checkRateLimit } from "@/lib/ratelimit";
 import { getMatiereBySlugAndNiveau, type Niveau } from "@/data/programmes";
 import { QuizSchema } from "@/lib/quiz-schema";
 import { MAX_TOKENS_GENERATION } from "@/lib/constants";
+import { getGroqClient, hasGroqKey } from "@/lib/groq";
 
 const RequestSchema = z.object({
   matiereSlug: z.string().min(1).max(100),
@@ -56,12 +57,9 @@ export async function POST(req: NextRequest) {
 
   const niveauLabel = niveauLycee === "premiere" ? "Première" : niveauLycee === "terminale" ? "Terminale" : "Seconde";
 
-  const apiKey = process.env.GROQ_API_KEY;
-
-  if (apiKey) {
+  if (hasGroqKey()) {
     try {
-      const { default: OpenAI } = await import("openai");
-      const client = new OpenAI({ apiKey, baseURL: "https://api.groq.com/openai/v1" });
+      const client = getGroqClient();
       const competences = chapitre.competences.map((c) => c.titre).join(", ");
 
       const niveauInstruction = niveau === "debutant"

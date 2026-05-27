@@ -70,3 +70,6 @@ yarn-error.log*
 .vercel
 .gstack/
 .aider*
+
+# Graphify — cache AST/sémantique (régénéré automatiquement)
+graphify-out/cache/

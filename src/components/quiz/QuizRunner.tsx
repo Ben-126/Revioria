@@ -9,7 +9,8 @@ import CorrectionDisplay from "./CorrectionDisplay";
 import ScoreDisplay from "./ScoreDisplay";
 import ModeSelector from "./ModeSelector";
 import TimerBar from "./TimerBar";
-import CoachIA from "@/components/coach/CoachIA";
+import TimerControle from "./TimerControle";
+const CoachIA = dynamic(() => import("@/components/coach/CoachIA"), { ssr: false });
 import {
   getPerformance,
   getNiveau,
@@ -65,11 +66,6 @@ function verifierReponseLocale(question: Question, reponseUser: string | boolean
   return u === c || u.includes(c) || c.includes(u);
 }
 
-function formatTemps(secondes: number): string {
-  const m = Math.floor(secondes / 60);
-  const s = secondes % 60;
-  return `${m}:${s.toString().padStart(2, "0")}`;
-}
 
 export default function QuizRunner({ matiereSlug, chapitreSlug, titreChapitre, niveauLycee = "seconde", matiereName = "", competences = [] }: QuizRunnerProps) {
   const [etat, setEtat] = useState<EtatQuiz>("selection_mode");
@@ -87,7 +83,7 @@ export default function QuizRunner({ matiereSlug, chapitreSlug, titreChapitre, n
   const [erreur, setErreur] = useState<string | null>(null);
   const [niveau, setNiveau] = useState<NiveauDifficulte>("intermediaire");
   const [modeRevision, setModeRevision] = useState<ModeRevision>({ actif: false, questionsRatees: [] });
-  const [tempsControle, setTempsControle] = useState(0);
+  const [dureeControle, setDureeControle] = useState(0);
   const [resultatGamification, setResultatGamification] = useState<ResultatGamification | null>(null);
   const debutQuestionRef = useRef<number>(0);
   const [transitioning, setTransitioning] = useState(false);
@@ -98,15 +94,6 @@ export default function QuizRunner({ matiereSlug, chapitreSlug, titreChapitre, n
       if (transitionTimer.current) clearTimeout(transitionTimer.current);
     };
   }, []);
-
-  // Countdown timer for contrôle mode
-  useEffect(() => {
-    if (modeQuiz !== "controle" || etat !== "question" || tempsControle <= 0) return;
-    const id = setTimeout(() => {
-      setTempsControle((prev) => prev - 1);
-    }, 1000);
-    return () => clearTimeout(id);
-  }, [modeQuiz, etat, tempsControle]);
 
   const chargerQuiz = useCallback(async (revisionConfig?: ModeRevision, forceMode?: ModeQuiz) => {
     setEtat("chargement");
@@ -145,7 +132,7 @@ export default function QuizRunner({ matiereSlug, chapitreSlug, titreChapitre, n
       debutQuestionRef.current = Date.now();
 
       if (mode === "controle") {
-        setTempsControle(questionsParQuiz * SECONDES_PAR_QUESTION_CONTROLE);
+        setDureeControle(questionsParQuiz * SECONDES_PAR_QUESTION_CONTROLE);
       }
 
       setEtat("question");
@@ -197,9 +184,9 @@ export default function QuizRunner({ matiereSlug, chapitreSlug, titreChapitre, n
     setEtat("termine");
   }, [questions, matiereSlug, chapitreSlug, niveauLycee, matiereName, titreChapitre, modeQuiz]);
 
-  // Handle contrôle timer expiry
-  useEffect(() => {
-    if (modeQuiz !== "controle" || tempsControle !== 0 || etat !== "question" || questions.length === 0) return;
+  // Appelé par TimerControle quand le chrono contrôle atteint 0
+  const handleControleExpire = useCallback(() => {
+    if (etat !== "question" || questions.length === 0) return;
     const remaining: ReponseUtilisateur[] = [];
     for (let i = reponses.length; i < questions.length; i++) {
       remaining.push({
@@ -212,7 +199,7 @@ export default function QuizRunner({ matiereSlug, chapitreSlug, titreChapitre, n
       });
     }
     handleTerminer([...reponses, ...remaining]);
-  }, [modeQuiz, tempsControle, etat, reponses, questions, handleTerminer]);
+  }, [etat, questions, reponses, handleTerminer]);
 
   const avancerQuestion = useCallback((callback: () => void) => {
     setTransitioning(true);
@@ -490,26 +477,13 @@ export default function QuizRunner({ matiereSlug, chapitreSlug, titreChapitre, n
 
   return (
     <div className="space-y-4">
-      {/* Bandeau mode contrôle avec chronomètre global */}
+      {/* Bandeau mode contrôle avec chronomètre global — composant isolé pour éviter les re-renders */}
       {modeQuiz === "controle" && etat === "question" && (
-        <div style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "10px 16px",
-          borderRadius: "var(--r-md)",
-          border: "2px solid",
-          borderColor: tempsControle <= 60 ? "rgba(239,110,90,0.5)" : "rgba(245,200,64,0.4)",
-          background: tempsControle <= 60 ? "rgba(239,110,90,0.1)" : "rgba(245,200,64,0.08)",
-        }}>
-          <div className="flex items-center gap-2">
-            <span style={{ fontSize: 14, fontWeight: 700, color: tempsControle <= 60 ? "var(--coral-l)" : "var(--amber)" }}>📝 Mode Contrôle</span>
-          </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 6, fontFamily: "monospace", fontWeight: 700, fontSize: 18, color: tempsControle <= 60 ? "var(--coral-l)" : "var(--amber)" }}>
-            <span aria-label="Temps restant">⏱</span>
-            <span data-testid="timer-controle">{formatTemps(tempsControle)}</span>
-          </div>
-        </div>
+        <TimerControle
+          dureeInitiale={dureeControle}
+          onExpire={handleControleExpire}
+          actif={etat === "question"}
+        />
       )}
 
       {(etiquetteNiveau || modeRevision.actif || modeQuiz === "rapide") && (modeQuiz === "entrainement" || modeQuiz === "rapide") && (
