@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useCallback, useRef } from "react";
+import posthog from "posthog-js";
 import dynamic from "next/dynamic";
 import type { Question, ReponseUtilisateur, NiveauCorrection, FeedbackDetaille, Competence, ModeQuiz } from "@/types";
 import thinkingAnimation from "@/../public/animations/thinking.json";
@@ -181,6 +182,28 @@ export default function QuizRunner({ matiereSlug, chapitreSlug, titreChapitre, n
       modeControle: modeQuiz === "controle",
     });
     setResultatGamification(resultatGami);
+
+    posthog.capture("quiz_completed", {
+      score_pourcentage: pourcentage,
+      mode_quiz: modeQuiz,
+      matiere_slug: matiereSlug,
+      chapitre_slug: chapitreSlug,
+      niveau_lycee: niveauLycee,
+      nb_questions: questions.length,
+      xp_gagne: resultatGami.xpGagne,
+    });
+
+    for (const badgeId of resultatGami.nouveauxBadges) {
+      posthog.capture("badge_unlocked", { badge_id: badgeId });
+    }
+
+    if (resultatGami.nouveauNiveau !== null) {
+      posthog.capture("level_up", {
+        nouveau_niveau: resultatGami.nouveauNiveau,
+        xp_total: resultatGami.xpTotal,
+      });
+    }
+
     setEtat("termine");
   }, [questions, matiereSlug, chapitreSlug, niveauLycee, matiereName, titreChapitre, modeQuiz]);
 
@@ -210,6 +233,12 @@ export default function QuizRunner({ matiereSlug, chapitreSlug, titreChapitre, n
   }, []);
 
   const handleSelectMode = (mode: ModeQuiz) => {
+    posthog.capture("quiz_started", {
+      mode_quiz: mode,
+      matiere_slug: matiereSlug,
+      chapitre_slug: chapitreSlug,
+      niveau_lycee: niveauLycee,
+    });
     setModeQuiz(mode);
     setModeRevision({ actif: false, questionsRatees: [] });
     chargerQuiz(undefined, mode);

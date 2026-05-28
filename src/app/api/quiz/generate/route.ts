@@ -6,6 +6,7 @@ import { getMatiereBySlugAndNiveau, type Niveau } from "@/data/programmes";
 import { QuizSchema } from "@/lib/quiz-schema";
 import { MAX_TOKENS_GENERATION } from "@/lib/constants";
 import { getGroqClient, hasGroqKey } from "@/lib/groq";
+import { getPostHogClient } from "@/lib/posthog-server";
 
 const RequestSchema = z.object({
   matiereSlug: z.string().min(1).max(100),
@@ -166,6 +167,17 @@ Réponds UNIQUEMENT avec un JSON valide, sans texte avant ou après :
         throw new Error("Réponse IA non conforme au schéma attendu");
       }
 
+      getPostHogClient().capture({
+        distinctId: ip,
+        event: "quiz_generated",
+        properties: {
+          matiere_slug: matiereSlug,
+          chapitre_slug: chapitreSlug,
+          niveau_lycee: niveauLycee,
+          nb_questions: questionsParQuiz,
+          source: "groq",
+        },
+      });
       return NextResponse.json(validated.data, { headers: { "Cache-Control": "no-store" } });
     } catch (err: unknown) {
       // Log serveur uniquement, jamais exposé au client
@@ -173,10 +185,32 @@ Réponds UNIQUEMENT avec un JSON valide, sans texte avant ou après :
         console.error("[quiz/generate] Erreur OpenAI, fallback mock:", err);
       }
       const questions = genererQuizMock(matiereSlug, chapitreSlug);
+      getPostHogClient().capture({
+        distinctId: ip,
+        event: "quiz_generated",
+        properties: {
+          matiere_slug: matiereSlug,
+          chapitre_slug: chapitreSlug,
+          niveau_lycee: niveauLycee,
+          nb_questions: questionsParQuiz,
+          source: "mock",
+        },
+      });
       return NextResponse.json({ questions }, { headers: { "Cache-Control": "no-store" } });
     }
   }
 
   const questions = genererQuizMock(matiereSlug, chapitreSlug);
+  getPostHogClient().capture({
+    distinctId: ip,
+    event: "quiz_generated",
+    properties: {
+      matiere_slug: matiereSlug,
+      chapitre_slug: chapitreSlug,
+      niveau_lycee: niveauLycee,
+      nb_questions: questionsParQuiz,
+      source: "mock",
+    },
+  });
   return NextResponse.json({ questions }, { headers: { "Cache-Control": "no-store" } });
 }

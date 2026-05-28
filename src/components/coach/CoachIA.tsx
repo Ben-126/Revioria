@@ -1,5 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
+import posthog from "posthog-js";
 
 interface Message {
   role: "user" | "assistant";
@@ -48,6 +49,12 @@ export default function CoachIA({
   const envoyerMessage = async () => {
     const texte = input.trim();
     if (!texte || enCours) return;
+
+    posthog.capture("coach_ia_message_sent", {
+      matiere,
+      chapitre,
+      niveau_lycee: niveauLycee,
+    });
 
     const nouveauMessage: Message = { role: "user", content: texte };
     const nouveauxMessages = [...messages, nouveauMessage];

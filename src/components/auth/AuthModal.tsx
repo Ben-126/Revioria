@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { inscrire, connecter, connexionGoogle } from "@/lib/auth";
+import { supabase } from "@/lib/supabase";
+import posthog from "posthog-js";
 
 interface AuthModalProps {
   onFermer: () => void;
@@ -44,6 +46,11 @@ export default function AuthModal({ onFermer, onConnecte }: AuthModalProps) {
       if (err) {
         setErreur(err);
       } else {
+        const { data: { user: authUser } } = await supabase.auth.getUser();
+        if (authUser) {
+          posthog.identify(authUser.id, { email: authUser.email });
+        }
+        posthog.capture("user_logged_in", { method: "email" });
         onConnecte();
         onFermer();
         router.push("/app");
@@ -69,6 +76,11 @@ export default function AuthModal({ onFermer, onConnecte }: AuthModalProps) {
       if (err) {
         setErreur(err);
       } else {
+        const { data: { user: authUser } } = await supabase.auth.getUser();
+        if (authUser) {
+          posthog.identify(authUser.id, { email: authUser.email, pseudo: pseudo.trim() });
+        }
+        posthog.capture("user_signed_up", { method: "email" });
         onConnecte();
         onFermer();
         router.push("/app");

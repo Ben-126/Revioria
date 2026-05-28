@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import posthog from "posthog-js";
 import {
   getCartesAReviser,
   enregistrerRevision,
@@ -30,7 +31,12 @@ export default function RevisionIntelligente() {
     setCartes(cartesAReviser);
     setIndex(0);
     setReponseVisible(false);
-    setEtat(cartesAReviser.length > 0 ? "question" : "terminee");
+    if (cartesAReviser.length > 0) {
+      posthog.capture("revision_session_started", { nb_cartes: cartesAReviser.length });
+      setEtat("question");
+    } else {
+      setEtat("terminee");
+    }
   }
 
   function evaluerCarte(qualite: QualiteRevision) {
@@ -39,6 +45,7 @@ export default function RevisionIntelligente() {
 
     const suivant = index + 1;
     if (suivant >= cartes.length) {
+      posthog.capture("revision_session_completed", { nb_cartes_revisees: cartes.length });
       setStats(getStatsRevision());
       setEtat("terminee");
     } else {

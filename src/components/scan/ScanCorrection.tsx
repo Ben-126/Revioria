@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import type { ScanResultat } from "@/app/api/scan/route";
+import posthog from "posthog-js";
 
 type Etat = "idle" | "preview" | "chargement" | "resultat" | "erreur";
 
@@ -63,6 +64,7 @@ export default function ScanCorrection() {
     if (!imageBase64) return;
     setEtat("chargement");
     setErreur("");
+    posthog.capture("scan_submitted");
 
     try {
       const res = await fetch("/api/scan", {

@@ -76,3 +76,6 @@ graphify-out/cache/
 
 # Sentry Config File
 .env.sentry-build-plugin
+
+# MCP config (contient des tokens secrets)
+.mcp.json
