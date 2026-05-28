@@ -79,3 +79,6 @@ graphify-out/cache/
 
 # MCP config (contient des tokens secrets)
 .mcp.json
+
+# Rapports générés automatiquement
+posthog-setup-report.md
