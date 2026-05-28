@@ -73,3 +73,6 @@ yarn-error.log*
 
 # Graphify — cache AST/sémantique (régénéré automatiquement)
 graphify-out/cache/
+
+# Sentry Config File
+.env.sentry-build-plugin
