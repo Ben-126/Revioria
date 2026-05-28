@@ -30,12 +30,41 @@ function LogoImg({ size = 28 }: { size?: number }) {
 /* ── Scroll-reveal hook (fade-up + directional reveals) ──── */
 function useReveal() {
   useEffect(() => {
+    const selector = ".fade-up, .reveal-left, .reveal-right, .reveal-scale";
+    const elements = document.querySelectorAll<Element>(selector);
+
+    // Révèle immédiatement les éléments déjà dans le viewport au chargement
+    elements.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) {
+        el.classList.add("visible");
+      }
+    });
+
     const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("visible"); }),
-      { threshold: 0.1 }
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("visible");
+            observer.unobserve(e.target);
+          }
+        }),
+      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
     );
-    document.querySelectorAll(".fade-up, .reveal-left, .reveal-right, .reveal-scale").forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+
+    elements.forEach((el) => {
+      if (!el.classList.contains("visible")) observer.observe(el);
+    });
+
+    // Fallback : tout révéler après 1.5s au cas où l'observer échoue
+    const fallback = setTimeout(() => {
+      elements.forEach((el) => el.classList.add("visible"));
+    }, 1500);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(fallback);
+    };
   }, []);
 }
 
