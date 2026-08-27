@@ -222,8 +222,8 @@ projet-Révioria/
 **1. Cloner le dépôt**
 
 ```bash
-git clone https://github.com/Ben-126/Quiz_lycee.git
-cd Quiz_lycee
+git clone https://github.com/Ben-126/Revioria.git
+cd Revioria
 ```
 
 **2. Installer les dépendances**
@@ -396,7 +396,7 @@ npm run test:e2e
 
 ### Signaler un bug
 
-Ouvrir une [issue GitHub](https://github.com/Ben-126/Quiz_lycee/issues) avec :
+Ouvrir une [issue GitHub](https://github.com/Ben-126/Revioria/issues) avec :
 - Description du problème
 - Étapes pour reproduire
 - Comportement attendu vs observé
