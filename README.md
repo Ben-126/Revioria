@@ -163,6 +163,7 @@ projet-Révioria/
 │   │       ├── scan                      # OCR & correction de copies (Vision IA)
 │   │       └── user/export-data          # Export RGPD des données
 │   ├── components/
+│   │   ├── auth/                         # AuthModal (connexion/inscription)
 │   │   ├── navigation/                   # Header, MatiereCard, ChapitreCard
 │   │   ├── quiz/                         # QuizRunner, QuestionCard, ModeSelector, TimerBar, ScoreDisplay
 │   │   ├── progression/                  # Graphiques, historique, statistiques
@@ -172,7 +173,8 @@ projet-Révioria/
 │   │   ├── scan/                         # ScanCorrection
 │   │   ├── social/                       # Classement, ListeAmis, CarteDefi, Notifications
 │   │   ├── engagement/                   # BanniereObjectif, ServiceWorkerRegistrar
-│   │   └── legal/                        # BandeauCookies
+│   │   ├── legal/                        # BandeauCookies
+│   │   └── ui/                           # Composants UI génériques réutilisables
 │   ├── data/
 │   │   ├── programme-seconde.ts          # Matières & chapitres Seconde
 │   │   ├── programme-premiere.ts         # Matières & chapitres Première
@@ -186,6 +188,7 @@ projet-Révioria/
 │   │   ├── revision-espacee.ts           # Algorithme SM-2
 │   │   ├── coach-local.ts                # Fallback coach offline
 │   │   ├── objectifs-personnalises.ts    # Objectifs de note
+│   │   ├── objectif.ts                   # Progression de l'objectif quotidien
 │   │   ├── consent.ts                    # Consentement RGPD
 │   │   ├── parametres.ts                 # Préférences utilisateur
 │   │   ├── social.ts                     # Amis, défis, classement
@@ -194,9 +197,15 @@ projet-Révioria/
 │   │   ├── ratelimit.ts                  # Rate limiting Upstash
 │   │   ├── quiz-schema.ts                # Schéma Zod de validation
 │   │   ├── mock-quiz.ts                  # Questions pré-générées (fallback)
+│   │   ├── groq.ts                       # Client Groq (SDK OpenAI-compatible)
+│   │   ├── posthog-server.ts             # Client PostHog côté serveur
+│   │   ├── constants.ts                  # Constantes partagées
 │   │   └── supabase.ts                   # Client Supabase
-│   └── types/
-│       └── index.ts                      # Tous les types TypeScript
+│   ├── types/
+│   │   └── index.ts                      # Tous les types TypeScript
+│   └── instrumentation-client.ts         # Init Sentry côté client
+├── sentry.server.config.ts               # Init Sentry côté serveur
+├── sentry.edge.config.ts                 # Init Sentry côté edge
 ├── public/
 │   ├── manifest.json                     # PWA manifest
 │   └── sw.js                             # Service Worker
@@ -252,8 +261,6 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGci...
 UPSTASH_REDIS_REST_URL=https://...
 UPSTASH_REDIS_REST_TOKEN=...
 
-# Optionnel — force le mode mock (sans appel API)
-NEXT_PUBLIC_USE_MOCK=true
 ```
 
 **4. Lancer l'application**
@@ -273,9 +280,8 @@ L'application est disponible sur **http://localhost:3000**.
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Clé publique Supabase | Oui |
 | `UPSTASH_REDIS_REST_URL` | URL Redis Upstash | Recommandé en prod |
 | `UPSTASH_REDIS_REST_TOKEN` | Token Redis Upstash | Recommandé en prod |
-| `NEXT_PUBLIC_USE_MOCK` | `true` pour désactiver l'IA et utiliser les questions pré-générées | Non |
 
-> Sans clé API, l'application bascule automatiquement en **mode mock** avec des questions prédéfinies.
+> Sans `GROQ_API_KEY` valide, ou en cas d'échec de l'appel IA, l'application bascule automatiquement en **mode mock** avec des questions prédéfinies.
 
 ---
 
@@ -298,10 +304,11 @@ Protection contre les abus via Upstash Redis :
 
 | Endpoint | Limite |
 |----------|--------|
-| Génération quiz | 10 req/min par IP |
-| Correction réponse | 30 req/min par IP |
+| Génération quiz | 20 req/min par IP |
+| Correction réponse | 20 req/min par IP |
+| Simplification de question | 20 req/min par IP |
 | Coach IA | 20 req/min par IP |
-| Scan copie | 5 req/min par IP |
+| Scan copie | 10 req/min par IP |
 | Prononciation | 15 req/min par IP |
 | Dialogue langues | 20 req/min par IP |
 
@@ -313,6 +320,7 @@ Headers HTTP configurés dans `next.config.ts` :
 
 - `X-Frame-Options: DENY` — protection clickjacking
 - `X-Content-Type-Options: nosniff` — protection MIME sniffing
+- `Referrer-Policy: strict-origin-when-cross-origin` — limite les infos envoyées au referrer
 - `Strict-Transport-Security: max-age=63072000` — HSTS 2 ans
 - `Content-Security-Policy` — contrôle des ressources autorisées
 - `Permissions-Policy` — désactivation caméra, géolocalisation
