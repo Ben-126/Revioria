@@ -128,6 +128,8 @@ Révioria génère des quiz personnalisés alignés sur les programmes officiels
 | **Zod** | Validation des schémas de données |
 | **Recharts** | Graphiques de progression |
 | **Playwright** | Tests End-to-End |
+| **Sentry** | Monitoring d'erreurs et de performance |
+| **PostHog** | Analytics produit et suivi d'usage |
 
 ---
 
@@ -220,8 +222,8 @@ projet-Révioria/
 **1. Cloner le dépôt**
 
 ```bash
-git clone https://github.com/Ben-126/Quiz_2nd.git
-cd Quiz_2nd
+git clone https://github.com/Ben-126/Quiz_lycee.git
+cd Quiz_lycee
 ```
 
 **2. Installer les dépendances**
@@ -317,6 +319,13 @@ Headers HTTP configurés dans `next.config.ts` :
 
 ---
 
+## Monitoring & Analytics
+
+- **Sentry** : capture des erreurs et suivi de performance (client, serveur, edge)
+- **PostHog** : analytics produit (usage, funnels) côté client et serveur
+
+---
+
 ## Tests
 
 ```bash
@@ -387,7 +396,7 @@ npm run test:e2e
 
 ### Signaler un bug
 
-Ouvrir une [issue GitHub](https://github.com/Ben-126/Quiz_2nd/issues) avec :
+Ouvrir une [issue GitHub](https://github.com/Ben-126/Quiz_lycee/issues) avec :
 - Description du problème
 - Étapes pour reproduire
 - Comportement attendu vs observé
